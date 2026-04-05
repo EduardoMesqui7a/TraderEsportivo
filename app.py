@@ -13,6 +13,8 @@ from engine.stats_engine import build_feature_frame
 
 st.set_page_config(page_title="Quant-Bet Under 2.5", layout="wide")
 
+DATA_PATH = BASE_PATH
+
 
 @st.cache_data(show_spinner=False)
 def cached_leagues(base_path: str) -> pd.DataFrame:
@@ -42,6 +44,13 @@ def render_backtesting(base_path: str) -> None:
     leagues = cached_leagues(base_path)
     scored = cached_feature_frame(base_path)
 
+    if leagues.empty or scored.empty:
+        st.info(
+            "Nenhum CSV historico encontrado neste deploy. "
+            "No Streamlit Cloud, inclua `data/football-data` no repo ou aponte a base historica para uma fonte acessivel."
+        )
+        return
+
     selected_leagues = st.multiselect(
         "Ligas",
         options=leagues["league_key"].tolist(),
@@ -49,7 +58,7 @@ def render_backtesting(base_path: str) -> None:
     )
     min_date = pd.to_datetime(scored["match_datetime"]).min().date()
     max_date = pd.to_datetime(scored["match_datetime"]).max().date()
-    period = st.date_input("Período", value=(min_date, max_date), min_value=min_date, max_value=max_date)
+    period = st.date_input("Periodo", value=(min_date, max_date), min_value=min_date, max_value=max_date)
 
     filtered = scored[scored["league_key"].isin(selected_leagues)].copy()
     if len(period) == 2:
@@ -104,7 +113,7 @@ def render_live_dashboard() -> None:
     daily_matches["Hora"] = pd.to_datetime(daily_matches["start_timestamp"], unit="s", errors="coerce")
     daily_matches["Hora"] = daily_matches["Hora"].dt.strftime("%H:%M")
     daily_matches["Jogo"] = daily_matches["home_team"].fillna("") + " vs " + daily_matches["away_team"].fillna("")
-    daily_matches["xG médio"] = (
+    daily_matches["xG medio"] = (
         pd.to_numeric(daily_matches["home_xg"], errors="coerce").fillna(0)
         + pd.to_numeric(daily_matches["away_xg"], errors="coerce").fillna(0)
     ) / 2
@@ -115,7 +124,7 @@ def render_live_dashboard() -> None:
 
     st.dataframe(
         daily_matches.rename(columns={"league_name": "Liga"})[
-            ["Hora", "Liga", "Jogo", "Odd Justa", "Odd Casa", "Edge %", "Stake Sugerida", "xG médio"]
+            ["Hora", "Liga", "Jogo", "Odd Justa", "Odd Casa", "Edge %", "Stake Sugerida", "xG medio"]
         ],
         use_container_width=True,
         hide_index=True,
@@ -124,7 +133,7 @@ def render_live_dashboard() -> None:
 
 def main() -> None:
     st.title("Quant-Bet Under 2.5")
-    base_path = st.sidebar.text_input("Base histórica", value=str(BASE_PATH))
+    base_path = st.sidebar.text_input("Base historica", value=str(DATA_PATH))
     tab_backtest, tab_live = st.tabs(["Backtesting", "Dashboard Live"])
 
     with tab_backtest:

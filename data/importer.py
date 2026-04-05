@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 
 
-BASE_PATH = Path(r"C:\Users\eduar\OneDrive\Codex\Trader2\data\football-data")
+BASE_PATH = Path(__file__).resolve().parent / "football-data"
 
 REQUIRED_ALIASES = {
     "home_team": ("HomeTeam", "Home"),
@@ -51,6 +51,8 @@ def _iter_league_folders(base_path: Path) -> Iterable[LeagueFolder]:
 
 def list_available_leagues(base_path: str | Path = BASE_PATH) -> pd.DataFrame:
     base = Path(base_path)
+    if not base.exists():
+        return pd.DataFrame(columns=["country", "division", "league_key", "csv_count", "path"])
     rows = []
     for folder in _iter_league_folders(base):
         rows.append(
@@ -138,7 +140,30 @@ def _normalize_frame(raw_df: pd.DataFrame, csv_path: Path, league: LeagueFolder)
 def load_historical_data(base_path: str | Path = BASE_PATH) -> pd.DataFrame:
     base = Path(base_path)
     if not base.exists():
-        raise FileNotFoundError(f"Historical data path not found: {base}")
+        return pd.DataFrame(
+            columns=[
+                "match_id",
+                "country",
+                "division",
+                "league_key",
+                "season_key",
+                "source_file",
+                "source_name",
+                "match_date",
+                "match_time",
+                "match_datetime",
+                "home_team",
+                "away_team",
+                "home_goals",
+                "away_goals",
+                "full_time_result",
+                "total_goals",
+                "under25_hit",
+                "under25_odds",
+                "under25_odds_source",
+                "odds_eligible",
+            ]
+        )
     frames: list[pd.DataFrame] = []
     for folder in _iter_league_folders(base):
         for csv_path in folder.csv_files:
