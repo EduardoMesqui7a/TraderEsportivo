@@ -72,7 +72,13 @@ def render_backtesting(base_path: str) -> None:
     )
     min_date = pd.to_datetime(scored["match_datetime"]).min().date()
     max_date = pd.to_datetime(scored["match_datetime"]).max().date()
-    period = st.date_input("Periodo", value=(min_date, max_date), min_value=min_date, max_value=max_date)
+    period = st.date_input(
+        "Periodo",
+        value=(min_date, max_date),
+        min_value=min_date,
+        max_value=max_date,
+        format="DD/MM/YYYY",
+    )
 
     filtered = scored[scored["league_key"].isin(selected_leagues)].copy()
     if len(period) == 2:
