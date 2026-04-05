@@ -46,6 +46,31 @@ def cached_sofascore_daily_matches(target_date: date) -> pd.DataFrame:
     return client.fetch_sofascore_daily_matches(target_date)
 
 
+def _shift_period_to_cap(period: tuple[date, date], cap_end: date) -> tuple[date, date]:
+    start_date, end_date = period
+    if end_date <= cap_end:
+        return start_date, end_date
+    shift_days = (end_date - cap_end).days
+    adjusted_start = start_date - timedelta(days=shift_days)
+    if adjusted_start < date.min:
+        adjusted_start = date.min
+    return adjusted_start, cap_end
+
+
+def _normalize_period_selection(
+    period: tuple[date, date],
+    *,
+    cap_end: date,
+    min_date: date,
+) -> tuple[tuple[date, date], bool]:
+    adjusted_period = _shift_period_to_cap(period, cap_end)
+    start_date, end_date = adjusted_period
+    if start_date < min_date:
+        start_date = min_date
+        adjusted_period = (start_date, end_date)
+    return adjusted_period, adjusted_period != period
+
+
 def render_backtesting(base_path: str) -> None:
     st.subheader("Backtesting")
     leagues = cached_leagues(base_path)
@@ -72,17 +97,33 @@ def render_backtesting(base_path: str) -> None:
     )
     min_date = pd.to_datetime(scored["match_datetime"]).min().date()
     max_date = pd.to_datetime(scored["match_datetime"]).max().date()
-    end_date = min(max_date, date.today() - timedelta(days=3))
-    if end_date < min_date:
-        end_date = min_date
+    cap_end = min(max_date, date.today() - timedelta(days=3))
+    if cap_end < min_date:
+        cap_end = min_date
+
+    period_key = "backtest_period"
+    default_period = (min_date, cap_end)
+    if period_key not in st.session_state:
+        st.session_state[period_key] = default_period
 
     period = st.date_input(
         "Periodo",
-        value=(min_date, end_date),
+        value=st.session_state[period_key],
+        key=period_key,
         min_value=min_date,
-        max_value=end_date,
+        max_value=max_date,
         format="DD/MM/YYYY",
     )
+    if isinstance(period, tuple) and len(period) == 2:
+        normalized_period, changed = _normalize_period_selection(
+            (period[0], period[1]),
+            cap_end=cap_end,
+            min_date=min_date,
+        )
+        if changed:
+            st.session_state[period_key] = normalized_period
+            st.rerun()
+        period = normalized_period
 
     filtered = scored[scored["league_key"].isin(selected_leagues)].copy()
     if len(period) == 2:
