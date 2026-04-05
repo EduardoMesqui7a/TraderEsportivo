@@ -72,9 +72,12 @@ def render_backtesting(base_path: str) -> None:
     )
     min_date = pd.to_datetime(scored["match_datetime"]).min().date()
     max_date = pd.to_datetime(scored["match_datetime"]).max().date()
+    default_end_date = min(max_date, date.today() - timedelta(days=3))
+    if default_end_date < min_date:
+        default_end_date = min_date
     period = st.date_input(
         "Periodo",
-        value=(min_date, max_date),
+        value=(min_date, default_end_date),
         min_value=min_date,
         max_value=max_date,
         format="DD/MM/YYYY",
