@@ -6,6 +6,8 @@ import numpy as np
 import pandas as pd
 from scipy.stats import poisson
 
+from engine.stats_engine import build_feature_frame
+
 
 LOW_SCORE_CELLS = ((0, 0), (0, 1), (1, 0), (1, 1))
 
@@ -32,6 +34,17 @@ def score_under25(
     cv_max: float = 1.35,
     kelly_fraction: float = 0.25,
 ) -> pd.DataFrame:
+    required_columns = {
+        "home_attack_strength",
+        "away_attack_strength",
+        "home_defense_strength",
+        "away_defense_strength",
+        "league_home_goals_avg",
+        "league_away_goals_avg",
+    }
+    if not required_columns.issubset(features.columns):
+        features = build_feature_frame(features, window=10)
+
     scored = features.copy()
     scored["lambda_home"] = scored["home_attack_strength"] * scored["away_defense_strength"] * scored["league_home_goals_avg"]
     scored["lambda_away"] = scored["away_attack_strength"] * scored["home_defense_strength"] * scored["league_away_goals_avg"]
