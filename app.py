@@ -90,10 +90,15 @@ def render_backtesting(base_path: str) -> None:
         )
         return
 
+    league_options = leagues["league_key"].tolist()
+    leagues_key = "backtest_leagues"
+    if leagues_key not in st.session_state:
+        st.session_state[leagues_key] = league_options
     selected_leagues = st.multiselect(
         "Ligas",
-        options=leagues["league_key"].tolist(),
-        default=leagues["league_key"].tolist()[:4],
+        options=league_options,
+        key=leagues_key,
+        default=league_options,
     )
     min_date = pd.to_datetime(scored["match_datetime"]).min().date()
     max_date = pd.to_datetime(scored["match_datetime"]).max().date()
@@ -102,7 +107,10 @@ def render_backtesting(base_path: str) -> None:
         cap_end = min_date
 
     period_key = "backtest_period"
-    default_period = (min_date, cap_end)
+    default_start = date(2020, 1, 1)
+    if default_start < min_date:
+        default_start = min_date
+    default_period = (default_start, cap_end)
     if period_key not in st.session_state:
         st.session_state[period_key] = default_period
 
