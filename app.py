@@ -76,29 +76,13 @@ def render_backtesting(base_path: str) -> None:
     if end_date < min_date:
         end_date = min_date
 
-    range_options = {
-        "Past Week": timedelta(days=7),
-        "Past Month": timedelta(days=30),
-        "Past 3 Months": timedelta(days=90),
-        "Past 6 Months": timedelta(days=180),
-        "Past Year": timedelta(days=365),
-        "Past 2 Years": timedelta(days=730),
-        "Custom": None,
-    }
-    selected_range = st.selectbox("Choose a date range", list(range_options.keys()), index=5)
-
-    if selected_range == "Custom":
-        period = st.date_input(
-            "Periodo",
-            value=(min_date, end_date),
-            min_value=min_date,
-            max_value=max_date,
-            format="DD/MM/YYYY",
-        )
-    else:
-        start_date = max(min_date, end_date - range_options[selected_range])
-        period = (start_date, end_date)
-        st.caption(f"Periodo selecionado: {start_date:%d/%m/%Y} - {end_date:%d/%m/%Y}")
+    period = st.date_input(
+        "Periodo",
+        value=(min_date, end_date),
+        min_value=min_date,
+        max_value=end_date,
+        format="DD/MM/YYYY",
+    )
 
     filtered = scored[scored["league_key"].isin(selected_leagues)].copy()
     if len(period) == 2:
