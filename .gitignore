@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+data/football-data/
+Nova pasta/
+.streamlit_app.log
+.streamlit_app.err.log
+.streamlit_app_run.log
+.streamlit_app_run.err.log
