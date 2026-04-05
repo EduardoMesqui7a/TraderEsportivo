@@ -34,6 +34,9 @@ def score_under25(
     cv_max: float = 1.35,
     kelly_fraction: float = 0.25,
 ) -> pd.DataFrame:
+    if features.empty:
+        return features.copy()
+
     required_columns = {
         "home_attack_strength",
         "away_attack_strength",
