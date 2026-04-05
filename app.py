@@ -6,6 +6,7 @@ import pandas as pd
 import streamlit as st
 
 from data.api_client import APIClient
+from data.bootstrap import resolve_football_data_root
 from data.importer import BASE_PATH, list_available_leagues, load_historical_data
 from engine import run_backtest, score_under25
 from engine.stats_engine import build_feature_frame
@@ -18,12 +19,14 @@ DATA_PATH = BASE_PATH
 
 @st.cache_data(show_spinner=False)
 def cached_leagues(base_path: str) -> pd.DataFrame:
-    return list_available_leagues(base_path)
+    resolved = str(resolve_football_data_root(base_path))
+    return list_available_leagues(resolved)
 
 
 @st.cache_data(show_spinner=True)
 def cached_matches(base_path: str) -> pd.DataFrame:
-    return load_historical_data(base_path)
+    resolved = str(resolve_football_data_root(base_path))
+    return load_historical_data(resolved)
 
 
 @st.cache_data(show_spinner=True)
@@ -145,10 +148,11 @@ def render_live_dashboard() -> None:
 def main() -> None:
     st.title("Quant-Bet Under 2.5")
     base_path = st.sidebar.text_input("Base historica", value=str(DATA_PATH))
+    resolved_base = str(resolve_football_data_root(base_path))
     tab_backtest, tab_live = st.tabs(["Backtesting", "Dashboard Live"])
 
     with tab_backtest:
-        render_backtesting(base_path)
+        render_backtesting(resolved_base)
 
     with tab_live:
         render_live_dashboard()
