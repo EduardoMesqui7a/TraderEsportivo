@@ -144,8 +144,8 @@ def render_backtesting(base_path: str) -> None:
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Apostas", f"{metrics['bets']}")
     col2.metric("ROI", f"{metrics['roi']:.2%}")
-    col3.metric("Lucro", f"{metrics['total_profit']:.4f}")
-    col4.metric("Max Drawdown", f"{metrics['max_drawdown']:.4f}")
+    col3.metric("Lucro (stakes)", f"{metrics['total_profit']:.1f}")
+    col4.metric("Max Drawdown (stakes)", f"{metrics['max_drawdown']:.1f}")
 
     st.line_chart(result_df.set_index("match_datetime")["cumulative_profit"], use_container_width=True)
     st.dataframe(
