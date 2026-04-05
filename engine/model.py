@@ -47,8 +47,18 @@ def score_under25(
     }
     if not required_columns.issubset(features.columns):
         features = build_feature_frame(features, window=10)
+        if features.empty or not required_columns.issubset(features.columns):
+            return features.copy()
 
     scored = features.copy()
+    if "under25_odds" not in scored.columns:
+        scored["under25_odds"] = np.nan
+    if "defense_cv_10" not in scored.columns:
+        scored["defense_cv_10"] = np.nan
+    if "features_ready" not in scored.columns:
+        scored["features_ready"] = False
+    if "odds_eligible" not in scored.columns:
+        scored["odds_eligible"] = False
     scored["lambda_home"] = scored["home_attack_strength"] * scored["away_defense_strength"] * scored["league_home_goals_avg"]
     scored["lambda_away"] = scored["away_attack_strength"] * scored["home_defense_strength"] * scored["league_away_goals_avg"]
     scored["lambda_total"] = scored["lambda_home"] + scored["lambda_away"]

@@ -29,7 +29,11 @@ def cached_matches(base_path: str) -> pd.DataFrame:
 @st.cache_data(show_spinner=True)
 def cached_feature_frame(base_path: str) -> pd.DataFrame:
     matches = cached_matches(base_path)
+    if matches.empty:
+        return matches.copy()
     features = build_feature_frame(matches, window=10)
+    if features.empty:
+        return features.copy()
     return score_under25(features)
 
 
@@ -42,12 +46,19 @@ def cached_sofascore_daily_matches(target_date: date) -> pd.DataFrame:
 def render_backtesting(base_path: str) -> None:
     st.subheader("Backtesting")
     leagues = cached_leagues(base_path)
-    scored = cached_feature_frame(base_path)
-
-    if leagues.empty or scored.empty:
+    matches = cached_matches(base_path)
+    if leagues.empty or matches.empty:
         st.info(
             "Nenhum CSV historico encontrado neste deploy. "
             "No Streamlit Cloud, inclua `data/football-data` no repo ou aponte a base historica para uma fonte acessivel."
+        )
+        return
+
+    scored = cached_feature_frame(base_path)
+
+    if scored.empty:
+        st.info(
+            "Os CSVs foram carregados, mas ainda nao ha jogos elegiveis para scoring com a janela atual."
         )
         return
 
