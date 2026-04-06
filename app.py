@@ -948,8 +948,13 @@ def render_optimization(base_path: str) -> None:
         cv_range = st.slider("CV maximo", min_value=0.50, max_value=2.00, value=(1.10, 1.35), step=0.05)
 
     k1, k2 = st.columns(2)
+    show_kelly_search = settings["model_name"] != "Modelo Excel"
     with k1:
-        kelly_range = st.slider("Kelly fracionado", min_value=0.05, max_value=0.50, value=(0.10, 0.25), step=0.05)
+        if show_kelly_search:
+            kelly_range = st.slider("Kelly fracionado", min_value=0.05, max_value=0.50, value=(0.10, 0.25), step=0.05)
+        else:
+            kelly_range = (1.0, 1.0)
+            st.caption("Kelly fracionado oculto no Modelo Excel; a otimização usa stake fixa.")
     with k2:
         n_trials = st.slider("Numero de testes", min_value=20, max_value=300, value=120, step=10)
 
