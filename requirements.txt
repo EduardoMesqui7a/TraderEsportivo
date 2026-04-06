@@ -5,3 +5,4 @@ streamlit>=1.44
 requests>=2.32
 thefuzz>=0.22
 python-dotenv>=1.0
+duckdb>=1.5
