@@ -3,9 +3,9 @@ match_datetime,league_key,home_team,away_team,legacy_lambda_total,legacy_prob_un
 2025-11-22 15:00:00,england/premier_league,Bournemouth,West Ham United,2.9000000000000004,0.4459631985571805,Nao entrar
 2025-11-22 15:00:00,england/premier_league,Brighton & Hove Albion,Brentford,2.9,0.4459631985571806,Nao entrar
 2025-11-22 15:00:00,england/premier_league,Fulham,Sunderland,3.3000000000000003,0.3594264663250838,Nao entrar
-2025-11-22 15:00:00,england/premier_league,Liverpool,Nottingham Forest,3.0,0.42319008112684353,Nao entrar
+2025-11-22 15:00:00,england/premier_league,Liverpool,Nottingham Forest,3,0.42319008112684353,Nao entrar
 2025-11-22 15:00:00,england/premier_league,Wolverhampton,Crystal Palace,2.4,0.5697087466575106,Nao entrar
-2025-11-22 17:30:00,england/premier_league,Newcastle United,Manchester City,4.0,0.2381033055535443,Nao entrar
+2025-11-22 17:30:00,england/premier_league,Newcastle United,Manchester City,4,0.2381033055535443,Nao entrar
 2025-11-23 14:00:00,england/premier_league,Leeds United,Aston Villa,3.9,0.25312510262978394,Nao entrar
 2025-11-23 16:30:00,england/premier_league,Arsenal,Tottenham Hotspur,3.8000000000000003,0.2688966777111104,Nao entrar
 2025-11-22 14:00:00,italy/serie_a,Cagliari,Genoa,3.2,0.3799037410783731,Nao entrar
@@ -22,16 +22,16 @@ match_datetime,league_key,home_team,away_team,legacy_lambda_total,legacy_prob_un
 2025-11-22 20:00:00,spain/la_liga,Villarreal,Mallorca,2.6999999999999997,0.4936244910734621,Nao entrar
 2025-11-23 13:00:00,spain/la_liga,Real Oviedo,Rayo Vallecano,1.1,0.9004162814033052,Entrar
 2025-11-23 15:15:00,spain/la_liga,Real Betis,Girona FC,3.1,0.4011631473146322,Nao entrar
-2025-11-23 17:30:00,spain/la_liga,Getafe,Atlético Madrid,2.0,0.6766764161830635,Entrar
-2025-11-23 20:00:00,spain/la_liga,Elche,Real Madrid,3.0,0.42319008112684353,Nao entrar
+2025-11-23 17:30:00,spain/la_liga,Getafe,Atlético Madrid,2,0.6766764161830635,Entrar
+2025-11-23 20:00:00,spain/la_liga,Elche,Real Madrid,3,0.42319008112684353,Nao entrar
 2025-11-22 14:30:00,germany/bundesliga,1. FC Heidenheim,Borussia M'gladbach,2.5,0.5438131158833295,Nao entrar
 2025-11-22 14:30:00,germany/bundesliga,Borussia Dortmund,VfB Stuttgart,3.6,0.30274684471600155,Nao entrar
-2025-11-22 14:30:00,germany/bundesliga,FC Augsburg,Hamburger SV,3.0,0.42319008112684353,Nao entrar
+2025-11-22 14:30:00,germany/bundesliga,FC Augsburg,Hamburger SV,3,0.42319008112684353,Nao entrar
 2025-11-22 14:30:00,germany/bundesliga,FC Bayern München,SC Freiburg,4.300000000000001,0.19735469083246246,Nao entrar
-2025-11-22 14:30:00,germany/bundesliga,VfL Wolfsburg,Bayer 04 Leverkusen,3.0,0.42319008112684353,Nao entrar
+2025-11-22 14:30:00,germany/bundesliga,VfL Wolfsburg,Bayer 04 Leverkusen,3,0.42319008112684353,Nao entrar
 2025-11-22 17:30:00,germany/bundesliga,1. FC Köln,Eintracht Frankfurt,3.9,0.25312510262978394,Nao entrar
-2025-11-23 14:30:00,germany/bundesliga,RB Leipzig,SV Werder Bremen,3.0,0.42319008112684353,Nao entrar
-2025-11-23 16:30:00,germany/bundesliga,FC St. Pauli,1. FC Union Berlin,3.0,0.42319008112684353,Nao entrar
+2025-11-23 14:30:00,germany/bundesliga,RB Leipzig,SV Werder Bremen,3,0.42319008112684353,Nao entrar
+2025-11-23 16:30:00,germany/bundesliga,FC St. Pauli,1. FC Union Berlin,3,0.42319008112684353,Nao entrar
 2025-11-22 16:00:00,france/ligue_1,RC Lens,RC Strasbourg,2.5,0.5438131158833295,Nao entrar
 2025-11-22 18:00:00,france/ligue_1,Stade Rennais,AS Monaco,3.3,0.3594264663250839,Nao entrar
 2025-11-22 20:05:00,france/ligue_1,Paris Saint-Germain,Le Havre,2.8,0.4694536834666827,Nao entrar
@@ -52,7 +52,7 @@ match_datetime,league_key,home_team,away_team,legacy_lambda_total,legacy_prob_un
 2025-11-22 16:00:00,austria/bundesliga,FC Blau Weiss Linz,Austria Wien,2.9000000000000004,0.4459631985571805,Nao entrar
 2025-11-22 16:00:00,austria/bundesliga,SC Rheindorf Altach,Wolfsberger AC,2.0999999999999996,0.6496313518820691,Entrar
 2025-11-22 16:00:00,austria/bundesliga,TSV Hartberg,SV Ried,2.7,0.49362449107346196,Nao entrar
-2025-11-23 13:30:00,austria/bundesliga,Red Bull Salzburg,WSG Tirol,3.0,0.42319008112684353,Nao entrar
+2025-11-23 13:30:00,austria/bundesliga,Red Bull Salzburg,WSG Tirol,3,0.42319008112684353,Nao entrar
 2025-11-23 13:30:00,austria/bundesliga,SK Sturm Graz,LASK,2.8,0.4694536834666827,Nao entrar
 2025-11-23 16:00:00,austria/bundesliga,SK Rapid Wien,Grazer AK 1902,2.9,0.4459631985571806,Nao entrar
 2025-11-22 11:00:00,england/premier_league,Orenburg,Baltika Kaliningrad,1.5,0.8088468305380581,Entrar
@@ -62,7 +62,7 @@ match_datetime,league_key,home_team,away_team,legacy_lambda_total,legacy_prob_un
 2025-11-23 12:15:00,england/premier_league,Pari Nizhny Novgorod,Zenit St. Petersburg,1.6,0.7833584898192629,Entrar
 2025-11-23 14:30:00,england/premier_league,Dynamo Moscow,Dinamo Makhachkala,1.9999999999999998,0.6766764161830634,Entrar
 2025-11-23 16:45:00,england/premier_league,Lokomotiv Moscow,FC Krasnodar,3.5999999999999996,0.30274684471600166,Nao entrar
-2025-11-22 13:00:00,france/ligue_1,USM Khenchela,JS Saoura,2.0,0.6766764161830635,Entrar
+2025-11-22 13:00:00,france/ligue_1,USM Khenchela,JS Saoura,2,0.6766764161830635,Entrar
 2025-11-22 11:00:00,england/premier_league,Araz Naxçıvan,Turan Tovuz,2.0999999999999996,0.6496313518820691,Entrar
 2025-11-22 13:30:00,england/premier_league,Zirə FK,Qəbələ FK,1.5,0.8088468305380581,Entrar
 2025-11-23 11:00:00,england/premier_league,Sabah FK,Şamaxı FK,1.9000000000000001,0.7037203534424978,Entrar
@@ -88,112 +88,33 @@ match_datetime,league_key,home_team,away_team,legacy_lambda_total,legacy_prob_un
 2025-11-23 14:00:00,portugal/segunda_liga,Marítimo,Penafiel,2.3,0.5960388259320683,Nao entrar
 2025-11-22 13:00:00,france/ligue_1,Avenir Sportif De La Marsa,JS Omrane,1.9,0.7037203534424978,Entrar
 2025-11-22 13:00:00,france/ligue_1,ES Zarzis,CA Bizertin,2.0999999999999996,0.6496313518820691,Entrar
-2025-11-22 13:00:00,france/ligue_1,JS Kairouanaise,ES Métlaoui,2.0,0.6766764161830635,Entrar
+2025-11-22 13:00:00,france/ligue_1,JS Kairouanaise,ES Métlaoui,2,0.6766764161830635,Entrar
 2025-11-23 13:00:00,france/ligue_1,AS Soliman,US Monastir,1.9,0.7037203534424978,Entrar
 2025-11-23 13:00:00,france/ligue_1,Etoile Sportive Du Sahel,CS Sfaxien,1.5,0.8088468305380581,Entrar
 2025-11-23 13:00:00,france/ligue_1,Olympique Béja,Club Africain,1.6,0.7833584898192629,Entrar
 2025-11-23 13:00:00,france/ligue_1,Stade Tunisien,Avenir Sportif De Gabes,1.6999999999999997,0.7572232071985852,Entrar
-2025-11-22 11:00:00,england/premier_league,Karpaty Lviv,Metalist 1925,2.0,0.6766764161830635,Entrar
+2025-11-22 11:00:00,england/premier_league,Karpaty Lviv,Metalist 1925,2,0.6766764161830635,Entrar
 2025-11-22 13:30:00,england/premier_league,Kolos Kovalivka,Dynamo Kyiv,2.0999999999999996,0.6496313518820691,Entrar
 2025-11-22 16:00:00,england/premier_league,Obolon Kyiv,Shakhtar Donetsk,3.4,0.33973988819611944,Nao entrar
 2025-11-23 11:00:00,england/premier_league,FC Kryvbas Kryvyi Rih,NK Veres Rivne,2.5999999999999996,0.5184295759360505,Nao entrar
 2025-11-23 13:30:00,england/premier_league,Polissya Zhytomyr,FC Epicentr Dunaivtsi,1.7,0.7572232071985852,Entrar
 2025-11-23 16:00:00,england/premier_league,Rukh Lviv,Kudrivka,2.5,0.5438131158833295,Nao entrar
-2025-11-23 14:00:00,england/premier_league,Leeds United,Aston Villa,3.9,0.25312510262978394,Nao entrar
-2025-11-23 16:30:00,england/premier_league,Arsenal,Tottenham Hotspur,3.8000000000000003,0.2688966777111104,Nao entrar
 2025-11-24 20:00:00,england/premier_league,Manchester United,Everton,2.6999999999999997,0.4936244910734621,Nao entrar
-2025-11-23 11:30:00,italy/serie_a,Hellas Verona,Parma,2.5,0.5438131158833295,Nao entrar
-2025-11-23 14:00:00,italy/serie_a,Cremonese,Roma,2.5,0.5438131158833295,Nao entrar
-2025-11-23 17:00:00,italy/serie_a,Lazio,Lecce,1.6,0.7833584898192629,Entrar
-2025-11-23 19:45:00,italy/serie_a,Inter,Milan,2.8,0.4694536834666827,Nao entrar
-2025-11-24 17:30:00,italy/serie_a,Torino,Como,3.0,0.42319008112684353,Nao entrar
+2025-11-24 17:30:00,italy/serie_a,Torino,Como,3,0.42319008112684353,Nao entrar
 2025-11-24 19:45:00,italy/serie_a,Sassuolo,Pisa,2.8,0.4694536834666827,Nao entrar
-2025-11-23 13:00:00,spain/la_liga,Real Oviedo,Rayo Vallecano,1.1,0.9004162814033052,Entrar
-2025-11-23 15:15:00,spain/la_liga,Real Betis,Girona FC,3.1,0.4011631473146322,Nao entrar
-2025-11-23 17:30:00,spain/la_liga,Getafe,Atlético Madrid,2.0,0.6766764161830635,Entrar
-2025-11-23 20:00:00,spain/la_liga,Elche,Real Madrid,3.0,0.42319008112684353,Nao entrar
 2025-11-24 20:00:00,spain/la_liga,Espanyol,Sevilla,1.9,0.7037203534424978,Entrar
-2025-11-23 14:30:00,germany/bundesliga,RB Leipzig,SV Werder Bremen,3.0,0.42319008112684353,Nao entrar
-2025-11-23 16:30:00,germany/bundesliga,FC St. Pauli,1. FC Union Berlin,3.0,0.42319008112684353,Nao entrar
-2025-11-23 14:00:00,france/ligue_1,Auxerre,Olympique Lyonnais,2.4,0.5697087466575106,Nao entrar
-2025-11-23 16:15:00,france/ligue_1,Nantes,Lorient,2.4,0.5697087466575106,Nao entrar
-2025-11-23 16:15:00,france/ligue_1,Stade Brestois,Metz,2.6999999999999997,0.4936244910734621,Nao entrar
-2025-11-23 16:15:00,france/ligue_1,Toulouse,Angers,1.6,0.7833584898192629,Entrar
-2025-11-23 19:45:00,france/ligue_1,Lille,Paris FC,2.4000000000000004,0.5697087466575104,Nao entrar
-2025-11-23 11:15:00,netherlands/eredivisie,SC Heerenveen,AZ Alkmaar,2.8,0.4694536834666827,Nao entrar
-2025-11-23 13:30:00,netherlands/eredivisie,Feyenoord,NEC Nijmegen,4.1,0.2238139813007857,Nao entrar
-2025-11-23 13:30:00,netherlands/eredivisie,SC Telstar,FC Utrecht,2.5,0.5438131158833295,Nao entrar
-2025-11-23 15:45:00,netherlands/eredivisie,FC Groningen,PEC Zwolle,3.8,0.26889667771111053,Nao entrar
-2025-11-23 13:30:00,austria/bundesliga,Red Bull Salzburg,WSG Tirol,3.0,0.42319008112684353,Nao entrar
-2025-11-23 13:30:00,austria/bundesliga,SK Sturm Graz,LASK,2.8,0.4694536834666827,Nao entrar
-2025-11-23 16:00:00,austria/bundesliga,SK Rapid Wien,Grazer AK 1902,2.9,0.4459631985571806,Nao entrar
-2025-11-23 10:00:00,england/premier_league,Krylya Sovetov Samara,FC Rostov,2.6,0.5184295759360504,Nao entrar
-2025-11-23 12:15:00,england/premier_league,Pari Nizhny Novgorod,Zenit St. Petersburg,1.6,0.7833584898192629,Entrar
-2025-11-23 14:30:00,england/premier_league,Dynamo Moscow,Dinamo Makhachkala,1.9999999999999998,0.6766764161830634,Entrar
-2025-11-23 16:45:00,england/premier_league,Lokomotiv Moscow,FC Krasnodar,3.5999999999999996,0.30274684471600166,Nao entrar
-2025-11-23 11:00:00,england/premier_league,Sabah FK,Şamaxı FK,1.9000000000000001,0.7037203534424978,Entrar
-2025-11-23 13:30:00,england/premier_league,Neftçi Baku PFK,İmişli FK,2.2,0.6227137499963165,Entrar
-2025-11-23 20:30:00,italy/serie_a,Barcelona SC,LDU,2.6999999999999997,0.4936244910734621,Nao entrar
-2025-11-23 23:00:00,italy/serie_a,Independiente del Valle,Orense SC,2.1,0.6496313518820691,Entrar
-2025-11-23 18:00:00,italy/serie_a,Macará,Delfín,2.6,0.5184295759360504,Nao entrar
-2025-11-23 15:00:00,england/premier_league,Aduana Stars FC,Berekum Chelsea,1.8,0.7306210859394126,Entrar
-2025-11-23 15:00:00,england/premier_league,Hohoe United FC,Eleven Wonders,2.1,0.6496313518820691,Entrar
-2025-11-23 15:00:00,england/premier_league,Nations FC,Bibiani Gold Stars FC,1.9999999999999998,0.6766764161830634,Entrar
-2025-11-23 15:00:00,england/premier_league,Samartex,Asante Kotoko SC,1.7,0.7572232071985852,Entrar
-2025-11-23 15:00:00,england/premier_league,Vision FC,Heart of Lions,1.9000000000000001,0.7037203534424978,Entrar
-2025-11-23 15:00:00,england/premier_league,Young Apostles FC,Accra Hearts of Oak,0.9,0.937143065702081,Entrar
-2025-11-23 15:30:00,england/premier_league,Dreams,Swedru All Blacks United FC,2.0999999999999996,0.6496313518820691,Entrar
-2025-11-23 15:00:00,england/premier_league,Floriana FC,Marsaxlokk FC,2.6999999999999997,0.4936244910734621,Nao entrar
-2025-11-23 17:15:00,england/premier_league,Sliema Wanderers,Birkirkara FC,3.2,0.3799037410783731,Nao entrar
 2025-11-24 17:30:00,england/premier_league,Gżira United FC,Mosta FC,3.1,0.4011631473146322,Nao entrar
-2025-11-24 20:00:00,england/premier_league,Zabbar Saint Patrick FC,Tarxien Rainbows FC,2.0,0.6766764161830635,Entrar
-2025-11-23 11:00:00,portugal/segunda_liga,Chaves,Sporting CP B U21,1.5,0.8088468305380581,Entrar
-2025-11-23 11:00:00,portugal/segunda_liga,FC Porto B,Portimonense SAD,2.3,0.5960388259320683,Nao entrar
-2025-11-23 14:00:00,portugal/segunda_liga,Marítimo,Penafiel,2.3,0.5960388259320683,Nao entrar
-2025-11-23 13:00:00,france/ligue_1,AS Soliman,US Monastir,1.9,0.7037203534424978,Entrar
-2025-11-23 13:00:00,france/ligue_1,Etoile Sportive Du Sahel,CS Sfaxien,1.5,0.8088468305380581,Entrar
-2025-11-23 13:00:00,france/ligue_1,Olympique Béja,Club Africain,1.6,0.7833584898192629,Entrar
-2025-11-23 13:00:00,france/ligue_1,Stade Tunisien,Avenir Sportif De Gabes,1.6999999999999997,0.7572232071985852,Entrar
-2025-11-23 11:00:00,england/premier_league,FC Kryvbas Kryvyi Rih,NK Veres Rivne,2.5999999999999996,0.5184295759360505,Nao entrar
-2025-11-23 13:30:00,england/premier_league,Polissya Zhytomyr,FC Epicentr Dunaivtsi,1.7,0.7572232071985852,Entrar
-2025-11-23 16:00:00,england/premier_league,Rukh Lviv,Kudrivka,2.5,0.5438131158833295,Nao entrar
+2025-11-24 20:00:00,england/premier_league,Zabbar Saint Patrick FC,Tarxien Rainbows FC,2,0.6766764161830635,Entrar
 2025-11-24 16:00:00,england/premier_league,Zorya Luhansk,Oleksandria,2.5,0.5438131158833295,Nao entrar
 2025-11-25 17:45:00,uefa/champions_league,AFC Ajax,Benfica,2.7,0.49362449107346196,Nao entrar
 2025-11-25 17:45:00,uefa/champions_league,Galatasaray,Royale Union Saint-Gilloise,2.3,0.5960388259320683,Nao entrar
 2025-11-25 20:00:00,uefa/champions_league,Bodø/Glimt,Juventus,3.4,0.33973988819611944,Nao entrar
-2025-11-25 20:00:00,uefa/champions_league,Borussia Dortmund,Villarreal,3.0,0.42319008112684353,Nao entrar
+2025-11-25 20:00:00,uefa/champions_league,Borussia Dortmund,Villarreal,3,0.42319008112684353,Nao entrar
 2025-11-25 20:00:00,uefa/champions_league,Chelsea,Barcelona,3.4,0.33973988819611944,Nao entrar
 2025-11-25 20:00:00,uefa/champions_league,Manchester City,Bayer 04 Leverkusen,3.4,0.33973988819611944,Nao entrar
 2025-11-25 20:00:00,uefa/champions_league,Napoli,Qarabağ FK,2.7,0.49362449107346196,Nao entrar
 2025-11-25 20:00:00,uefa/champions_league,Olympique de Marseille,Newcastle United,3.5,0.3208471988621341,Nao entrar
 2025-11-25 20:00:00,uefa/champions_league,SK Slavia Praha,Athletic Club,2.8,0.4694536834666827,Nao entrar
-2025-11-24 20:00:00,england/premier_league,Manchester United,Everton,2.6999999999999997,0.4936244910734621,Nao entrar
-2025-11-24 17:30:00,italy/serie_a,Torino,Como,3.0,0.42319008112684353,Nao entrar
-2025-11-24 19:45:00,italy/serie_a,Sassuolo,Pisa,2.8,0.4694536834666827,Nao entrar
-2025-11-24 20:00:00,spain/la_liga,Espanyol,Sevilla,1.9,0.7037203534424978,Entrar
-2025-11-24 17:30:00,england/premier_league,Gżira United FC,Mosta FC,3.1,0.4011631473146322,Nao entrar
-2025-11-24 20:00:00,england/premier_league,Zabbar Saint Patrick FC,Tarxien Rainbows FC,2.0,0.6766764161830635,Entrar
-2025-11-25 19:30:00,england/premier_league,Hibernians,Naxxar Lions FC,3.2,0.3799037410783731,Nao entrar
-2025-11-24 16:00:00,england/premier_league,Zorya Luhansk,Oleksandria,2.5,0.5438131158833295,Nao entrar
-2025-11-25 17:45:00,uefa/champions_league,AFC Ajax,Benfica,2.7,0.49362449107346196,Nao entrar
-2025-11-25 17:45:00,uefa/champions_league,Galatasaray,Royale Union Saint-Gilloise,2.3,0.5960388259320683,Nao entrar
-2025-11-25 20:00:00,uefa/champions_league,Bodø/Glimt,Juventus,3.4,0.33973988819611944,Nao entrar
-2025-11-25 20:00:00,uefa/champions_league,Borussia Dortmund,Villarreal,3.0,0.42319008112684353,Nao entrar
-2025-11-25 20:00:00,uefa/champions_league,Chelsea,Barcelona,3.4,0.33973988819611944,Nao entrar
-2025-11-25 20:00:00,uefa/champions_league,Manchester City,Bayer 04 Leverkusen,3.4,0.33973988819611944,Nao entrar
-2025-11-25 20:00:00,uefa/champions_league,Napoli,Qarabağ FK,2.7,0.49362449107346196,Nao entrar
-2025-11-25 20:00:00,uefa/champions_league,Olympique de Marseille,Newcastle United,3.5,0.3208471988621341,Nao entrar
-2025-11-25 20:00:00,uefa/champions_league,SK Slavia Praha,Athletic Club,2.8,0.4694536834666827,Nao entrar
-2025-11-26 17:45:00,uefa/champions_league,FC København,Kairat Almaty,2.7,0.49362449107346196,Nao entrar
-2025-11-26 17:45:00,uefa/champions_league,Pafos FC,AS Monaco,3.4,0.33973988819611944,Nao entrar
-2025-11-26 20:00:00,uefa/champions_league,Arsenal,FC Bayern München,4.2,0.21023798702309743,Nao entrar
-2025-11-26 20:00:00,uefa/champions_league,Atlético Madrid,Inter,2.7,0.49362449107346196,Nao entrar
-2025-11-26 20:00:00,uefa/champions_league,Eintracht Frankfurt,Atalanta,3.6000000000000005,0.30274684471600144,Nao entrar
-2025-11-26 20:00:00,uefa/champions_league,Liverpool,PSV Eindhoven,3.5,0.3208471988621341,Nao entrar
-2025-11-26 20:00:00,uefa/champions_league,Olympiacos FC,Real Madrid,3.9,0.25312510262978394,Nao entrar
-2025-11-26 20:00:00,uefa/champions_league,Paris Saint-Germain,Tottenham Hotspur,4.4,0.18514228573827204,Nao entrar
-2025-11-26 20:00:00,uefa/champions_league,Sporting CP,Club Brugge KV,2.8,0.4694536834666827,Nao entrar
-2025-11-26 15:00:00,england/premier_league,Basake Holy Stars FC,Asante Kotoko SC,2.4,0.5697087466575106,Nao entrar
 2025-11-25 19:30:00,england/premier_league,Hibernians,Naxxar Lions FC,3.2,0.3799037410783731,Nao entrar
 2025-11-26 17:45:00,uefa/champions_league,FC København,Kairat Almaty,2.7,0.49362449107346196,Nao entrar
 2025-11-26 17:45:00,uefa/champions_league,Pafos FC,AS Monaco,3.4,0.33973988819611944,Nao entrar
@@ -204,8 +125,8 @@ match_datetime,league_key,home_team,away_team,legacy_lambda_total,legacy_prob_un
 2025-11-26 20:00:00,uefa/champions_league,Olympiacos FC,Real Madrid,3.9,0.25312510262978394,Nao entrar
 2025-11-26 20:00:00,uefa/champions_league,Paris Saint-Germain,Tottenham Hotspur,4.4,0.18514228573827204,Nao entrar
 2025-11-26 20:00:00,uefa/champions_league,Sporting CP,Club Brugge KV,2.8,0.4694536834666827,Nao entrar
-2025-11-28 10:00:00,england/premier_league,Kəpəz PFK,Zirə FK,2.0,0.6766764161830635,Entrar
 2025-11-26 15:00:00,england/premier_league,Basake Holy Stars FC,Asante Kotoko SC,2.4,0.5697087466575106,Nao entrar
+2025-11-28 10:00:00,england/premier_league,Kəpəz PFK,Zirə FK,2,0.6766764161830635,Entrar
 2025-11-28 19:45:00,italy/serie_a,Como,Sassuolo,2.8,0.4694536834666827,Nao entrar
 2025-11-28 20:00:00,spain/la_liga,Getafe,Elche,2.0999999999999996,0.6496313518820691,Entrar
 2025-11-28 19:30:00,germany/bundesliga,Borussia M'gladbach,RB Leipzig,2.4,0.5697087466575106,Nao entrar
@@ -213,46 +134,39 @@ match_datetime,league_key,home_team,away_team,legacy_lambda_total,legacy_prob_un
 2025-11-28 20:15:00,portugal/primeira_liga,Vitória SC,AVS - Futebol SAD,2.6,0.5184295759360504,Nao entrar
 2025-11-28 19:00:00,netherlands/eredivisie,PEC Zwolle,SC Heerenveen,3.2,0.3799037410783731,Nao entrar
 2025-11-29 11:00:00,england/premier_league,Akron Togliatti,Pari Nizhny Novgorod,2.2,0.6227137499963165,Entrar
-2025-11-28 10:00:00,england/premier_league,Kəpəz PFK,Zirə FK,2.0,0.6766764161830635,Entrar
 2025-11-28 14:30:00,england/premier_league,Turan Tovuz,Neftçi Baku PFK,1.7,0.7572232071985852,Entrar
 2025-11-29 10:30:00,england/premier_league,İmişli FK,Sabah FK,2.4000000000000004,0.5697087466575104,Nao entrar
 2025-11-29 00:00:00,italy/serie_a,LDU,Independiente del Valle,2.5,0.5438131158833295,Nao entrar
 2025-11-29 11:00:00,portugal/segunda_liga,Académico Viseu FC,Penafiel,2.3,0.5960388259320683,Nao entrar
 2025-11-28 16:00:00,england/premier_league,Obolon Kyiv,Kolos Kovalivka,2.2,0.6227137499963165,Entrar
-2025-11-29 15:00:00,england/premier_league,Brentford,Burnley,3.0,0.42319008112684353,Nao entrar
+2025-11-29 15:00:00,england/premier_league,Brentford,Burnley,3,0.42319008112684353,Nao entrar
 2025-11-29 15:00:00,england/premier_league,Manchester City,Leeds United,4.4,0.18514228573827204,Nao entrar
 2025-11-29 15:00:00,england/premier_league,Sunderland,Bournemouth,2.9000000000000004,0.4459631985571805,Nao entrar
-2025-11-29 17:30:00,england/premier_league,Everton,Newcastle United,3.0,0.42319008112684353,Nao entrar
-2025-11-29 20:00:00,england/premier_league,Tottenham Hotspur,Fulham,4.0,0.2381033055535443,Nao entrar
-2025-11-28 19:45:00,italy/serie_a,Como,Sassuolo,2.8,0.4694536834666827,Nao entrar
+2025-11-29 17:30:00,england/premier_league,Everton,Newcastle United,3,0.42319008112684353,Nao entrar
+2025-11-29 20:00:00,england/premier_league,Tottenham Hotspur,Fulham,4,0.2381033055535443,Nao entrar
 2025-11-29 14:00:00,italy/serie_a,Genoa,Hellas Verona,3.3000000000000003,0.3594264663250838,Nao entrar
-2025-11-29 14:00:00,italy/serie_a,Parma,Udinese,3.0,0.42319008112684353,Nao entrar
+2025-11-29 14:00:00,italy/serie_a,Parma,Udinese,3,0.42319008112684353,Nao entrar
 2025-11-29 17:00:00,italy/serie_a,Juventus,Cagliari,2.7,0.49362449107346196,Nao entrar
-2025-11-29 19:45:00,italy/serie_a,Milan,Lazio,2.0,0.6766764161830635,Entrar
+2025-11-29 19:45:00,italy/serie_a,Milan,Lazio,2,0.6766764161830635,Entrar
 2025-11-30 11:30:00,italy/serie_a,Lecce,Torino,2.6,0.5184295759360504,Nao entrar
-2025-11-28 20:00:00,spain/la_liga,Getafe,Elche,2.0999999999999996,0.6496313518820691,Entrar
 2025-11-29 13:00:00,spain/la_liga,Mallorca,Osasuna,3.2,0.3799037410783731,Nao entrar
 2025-11-29 15:15:00,spain/la_liga,Barcelona,Deportivo Alavés,3.3,0.3594264663250839,Nao entrar
-2025-11-29 17:30:00,spain/la_liga,Levante UD,Athletic Club,2.0,0.6766764161830635,Entrar
+2025-11-29 17:30:00,spain/la_liga,Levante UD,Athletic Club,2,0.6766764161830635,Entrar
 2025-11-29 20:00:00,spain/la_liga,Atlético Madrid,Real Oviedo,1.4,0.8334977381226298,Entrar
-2025-11-28 19:30:00,germany/bundesliga,Borussia M'gladbach,RB Leipzig,2.4,0.5697087466575106,Nao entrar
 2025-11-29 14:30:00,germany/bundesliga,1. FC Union Berlin,1. FC Heidenheim,3.4,0.33973988819611944,Nao entrar
 2025-11-29 14:30:00,germany/bundesliga,FC Bayern München,FC St. Pauli,3.9000000000000004,0.2531251026297838,Nao entrar
 2025-11-29 14:30:00,germany/bundesliga,SV Werder Bremen,1. FC Köln,3.4000000000000004,0.3397398881961194,Nao entrar
 2025-11-29 14:30:00,germany/bundesliga,TSG Hoffenheim,FC Augsburg,2.6,0.5184295759360504,Nao entrar
 2025-11-29 17:30:00,germany/bundesliga,Bayer 04 Leverkusen,Borussia Dortmund,2.8,0.4694536834666827,Nao entrar
-2025-11-28 19:45:00,france/ligue_1,Metz,Stade Rennais,3.2,0.3799037410783731,Nao entrar
 2025-11-29 16:00:00,france/ligue_1,AS Monaco,Paris Saint-Germain,3.8000000000000003,0.2688966777111104,Nao entrar
 2025-11-29 18:00:00,france/ligue_1,Paris FC,Auxerre,1.9,0.7037203534424978,Entrar
 2025-11-29 20:05:00,france/ligue_1,Olympique de Marseille,Toulouse,2.5,0.5438131158833295,Nao entrar
-2025-11-28 20:15:00,portugal/primeira_liga,Vitória SC,AVS - Futebol SAD,2.6,0.5184295759360504,Nao entrar
 2025-11-29 15:30:00,portugal/primeira_liga,Casa Pia,FC Alverca,3.1,0.4011631473146322,Nao entrar
-2025-11-29 15:30:00,portugal/primeira_liga,Moreirense,Famalicão,3.0,0.42319008112684353,Nao entrar
+2025-11-29 15:30:00,portugal/primeira_liga,Moreirense,Famalicão,3,0.42319008112684353,Nao entrar
 2025-11-29 18:00:00,portugal/primeira_liga,CD Nacional,Benfica,2.6,0.5184295759360504,Nao entrar
 2025-11-29 20:30:00,portugal/primeira_liga,Gil Vicente,Tondela,1.6,0.7833584898192629,Entrar
-2025-11-28 19:00:00,netherlands/eredivisie,PEC Zwolle,SC Heerenveen,3.2,0.3799037410783731,Nao entrar
-2025-11-29 15:30:00,netherlands/eredivisie,Excelsior,NAC Breda,2.0,0.6766764161830635,Entrar
-2025-11-29 17:45:00,netherlands/eredivisie,Fortuna Sittard,Heracles Almelo,4.0,0.2381033055535443,Nao entrar
+2025-11-29 15:30:00,netherlands/eredivisie,Excelsior,NAC Breda,2,0.6766764161830635,Entrar
+2025-11-29 17:45:00,netherlands/eredivisie,Fortuna Sittard,Heracles Almelo,4,0.2381033055535443,Nao entrar
 2025-11-29 20:00:00,netherlands/eredivisie,NEC Nijmegen,Sparta Rotterdam,2.6999999999999997,0.4936244910734621,Nao entrar
 2025-11-30 11:15:00,netherlands/eredivisie,PSV Eindhoven,FC Volendam,3.4000000000000004,0.3397398881961194,Nao entrar
 2025-11-29 16:00:00,austria/bundesliga,Austria Wien,WSG Tirol,2.8,0.4694536834666827,Nao entrar
@@ -263,129 +177,67 @@ match_datetime,league_key,home_team,away_team,legacy_lambda_total,legacy_prob_un
 2025-11-29 16:30:00,england/premier_league,Hapoel Ironi Kiryat Shmona,Hapoel Jerusalem,2.5999999999999996,0.5184295759360505,Nao entrar
 2025-11-29 16:30:00,england/premier_league,Maccabi Bney Reine,Ironi Dorot Tiberias,3.1,0.4011631473146322,Nao entrar
 2025-11-29 17:30:00,england/premier_league,Hapoel Petach Tikva,Maccabi Haifa,2.8,0.4694536834666827,Nao entrar
-2025-11-29 11:00:00,england/premier_league,Akron Togliatti,Pari Nizhny Novgorod,2.2,0.6227137499963165,Entrar
-2025-11-29 13:30:00,england/premier_league,CSKA Moscow,Orenburg,2.0,0.6766764161830635,Entrar
+2025-11-29 13:30:00,england/premier_league,CSKA Moscow,Orenburg,2,0.6766764161830635,Entrar
 2025-11-29 16:30:00,england/premier_league,Baltika Kaliningrad,FC Spartak Moscow,1.9,0.7037203534424978,Entrar
 2025-11-30 11:00:00,england/premier_league,FC Krasnodar,Krylya Sovetov Samara,3.0999999999999996,0.4011631473146323,Nao entrar
-2025-11-28 10:00:00,england/premier_league,Kəpəz PFK,Zirə FK,2.0,0.6766764161830635,Entrar
-2025-11-28 14:30:00,england/premier_league,Turan Tovuz,Neftçi Baku PFK,1.7,0.7572232071985852,Entrar
-2025-11-29 10:30:00,england/premier_league,İmişli FK,Sabah FK,2.4000000000000004,0.5697087466575104,Nao entrar
 2025-11-29 13:00:00,england/premier_league,Qarabağ FK,FK Karvan Yevlax,2.9000000000000004,0.4459631985571805,Nao entrar
 2025-11-30 10:00:00,england/premier_league,Şamaxı FK,Sumqayıt FK,2.8,0.4694536834666827,Nao entrar
-2025-11-29 00:00:00,italy/serie_a,LDU,Independiente del Valle,2.5,0.5438131158833295,Nao entrar
 2025-11-29 21:30:00,italy/serie_a,Universidad Católica del Ecuador,Orense SC,1.9,0.7037203534424978,Entrar
 2025-11-30 00:00:00,italy/serie_a,Libertad,Barcelona SC,2.7,0.49362449107346196,Nao entrar
 2025-11-29 16:00:00,england/premier_league,Accra Hearts of Oak,Vision FC,1.3,0.8571124890919696,Entrar
-2025-11-29 11:00:00,portugal/segunda_liga,Académico Viseu FC,Penafiel,2.3,0.5960388259320683,Nao entrar
 2025-11-29 14:00:00,portugal/segunda_liga,UD Oliveirense,Leixões SC,2.1,0.6496313518820691,Entrar
 2025-11-30 11:00:00,portugal/segunda_liga,FC Porto B,Lusitânia Lourosa,2.8,0.4694536834666827,Nao entrar
 2025-11-30 11:00:00,portugal/segunda_liga,Torreense,Chaves,1.4,0.8334977381226298,Entrar
-2025-11-28 16:00:00,england/premier_league,Obolon Kyiv,Kolos Kovalivka,2.2,0.6227137499963165,Entrar
 2025-11-29 13:30:00,england/premier_league,LNZ Cherkasy,Kudrivka,2.3,0.5960388259320683,Nao entrar
 2025-11-29 16:00:00,england/premier_league,NK Veres Rivne,Karpaty Lviv,1.5999999999999999,0.7833584898192629,Entrar
 2025-11-30 11:00:00,england/premier_league,Oleksandria,Rukh Lviv,2.3,0.5960388259320683,Nao entrar
-2025-11-29 15:00:00,england/premier_league,Brentford,Burnley,3.0,0.42319008112684353,Nao entrar
-2025-11-29 15:00:00,england/premier_league,Manchester City,Leeds United,4.4,0.18514228573827204,Nao entrar
-2025-11-29 15:00:00,england/premier_league,Sunderland,Bournemouth,2.9000000000000004,0.4459631985571805,Nao entrar
-2025-11-29 17:30:00,england/premier_league,Everton,Newcastle United,3.0,0.42319008112684353,Nao entrar
-2025-11-29 20:00:00,england/premier_league,Tottenham Hotspur,Fulham,4.0,0.2381033055535443,Nao entrar
 2025-11-30 12:00:00,england/premier_league,Crystal Palace,Manchester United,2.6999999999999997,0.4936244910734621,Nao entrar
 2025-11-30 14:05:00,england/premier_league,Aston Villa,Wolverhampton,2.9000000000000004,0.4459631985571805,Nao entrar
 2025-11-30 14:05:00,england/premier_league,Nottingham Forest,Brighton & Hove Albion,2.5999999999999996,0.5184295759360505,Nao entrar
 2025-11-30 14:05:00,england/premier_league,West Ham United,Liverpool,3.3,0.3594264663250839,Nao entrar
 2025-11-30 16:30:00,england/premier_league,Chelsea,Arsenal,2.7,0.49362449107346196,Nao entrar
-2025-11-29 14:00:00,italy/serie_a,Genoa,Hellas Verona,3.3000000000000003,0.3594264663250838,Nao entrar
-2025-11-29 14:00:00,italy/serie_a,Parma,Udinese,3.0,0.42319008112684353,Nao entrar
-2025-11-29 17:00:00,italy/serie_a,Juventus,Cagliari,2.7,0.49362449107346196,Nao entrar
-2025-11-29 19:45:00,italy/serie_a,Milan,Lazio,2.0,0.6766764161830635,Entrar
-2025-11-30 11:30:00,italy/serie_a,Lecce,Torino,2.6,0.5184295759360504,Nao entrar
 2025-11-30 14:00:00,italy/serie_a,Pisa,Inter,2.8,0.4694536834666827,Nao entrar
-2025-11-30 17:00:00,italy/serie_a,Atalanta,Fiorentina,3.0,0.42319008112684353,Nao entrar
+2025-11-30 17:00:00,italy/serie_a,Atalanta,Fiorentina,3,0.42319008112684353,Nao entrar
 2025-11-30 19:45:00,italy/serie_a,Roma,Napoli,2.3,0.5960388259320683,Nao entrar
-2025-11-29 13:00:00,spain/la_liga,Mallorca,Osasuna,3.2,0.3799037410783731,Nao entrar
-2025-11-29 15:15:00,spain/la_liga,Barcelona,Deportivo Alavés,3.3,0.3594264663250839,Nao entrar
-2025-11-29 17:30:00,spain/la_liga,Levante UD,Athletic Club,2.0,0.6766764161830635,Entrar
-2025-11-29 20:00:00,spain/la_liga,Atlético Madrid,Real Oviedo,1.4,0.8334977381226298,Entrar
 2025-11-30 13:00:00,spain/la_liga,Real Sociedad,Villarreal,2.8,0.4694536834666827,Nao entrar
 2025-11-30 15:15:00,spain/la_liga,Sevilla,Real Betis,3.0999999999999996,0.4011631473146323,Nao entrar
 2025-11-30 17:30:00,spain/la_liga,Celta Vigo,Espanyol,1.7000000000000002,0.7572232071985849,Entrar
 2025-11-30 20:00:00,spain/la_liga,Girona FC,Real Madrid,2.9000000000000004,0.4459631985571805,Nao entrar
-2025-11-29 14:30:00,germany/bundesliga,1. FC Union Berlin,1. FC Heidenheim,3.4,0.33973988819611944,Nao entrar
-2025-11-29 14:30:00,germany/bundesliga,FC Bayern München,FC St. Pauli,3.9000000000000004,0.2531251026297838,Nao entrar
-2025-11-29 14:30:00,germany/bundesliga,SV Werder Bremen,1. FC Köln,3.4000000000000004,0.3397398881961194,Nao entrar
-2025-11-29 14:30:00,germany/bundesliga,TSG Hoffenheim,FC Augsburg,2.6,0.5184295759360504,Nao entrar
-2025-11-29 17:30:00,germany/bundesliga,Bayer 04 Leverkusen,Borussia Dortmund,2.8,0.4694536834666827,Nao entrar
 2025-11-30 14:30:00,germany/bundesliga,Hamburger SV,VfB Stuttgart,3.8,0.26889667771111053,Nao entrar
 2025-11-30 16:30:00,germany/bundesliga,Eintracht Frankfurt,VfL Wolfsburg,3.7,0.28543311310006825,Nao entrar
 2025-11-30 18:30:00,germany/bundesliga,SC Freiburg,1. FSV Mainz 05,2.6,0.5184295759360504,Nao entrar
-2025-11-29 16:00:00,france/ligue_1,AS Monaco,Paris Saint-Germain,3.8000000000000003,0.2688966777111104,Nao entrar
-2025-11-29 18:00:00,france/ligue_1,Paris FC,Auxerre,1.9,0.7037203534424978,Entrar
-2025-11-29 20:05:00,france/ligue_1,Olympique de Marseille,Toulouse,2.5,0.5438131158833295,Nao entrar
 2025-11-30 14:00:00,france/ligue_1,RC Strasbourg,Stade Brestois,2.2,0.6227137499963165,Entrar
 2025-11-30 16:15:00,france/ligue_1,Angers,RC Lens,2.3,0.5960388259320683,Nao entrar
-2025-11-30 16:15:00,france/ligue_1,Le Havre,Lille,2.0,0.6766764161830635,Entrar
+2025-11-30 16:15:00,france/ligue_1,Le Havre,Lille,2,0.6766764161830635,Entrar
 2025-11-30 16:15:00,france/ligue_1,Lorient,Nice,2.9,0.4459631985571806,Nao entrar
 2025-11-30 19:45:00,france/ligue_1,Olympique Lyonnais,Nantes,2.7,0.49362449107346196,Nao entrar
-2025-11-29 15:30:00,portugal/primeira_liga,Casa Pia,FC Alverca,3.1,0.4011631473146322,Nao entrar
-2025-11-29 15:30:00,portugal/primeira_liga,Moreirense,Famalicão,3.0,0.42319008112684353,Nao entrar
-2025-11-29 18:00:00,portugal/primeira_liga,CD Nacional,Benfica,2.6,0.5184295759360504,Nao entrar
-2025-11-29 20:30:00,portugal/primeira_liga,Gil Vicente,Tondela,1.6,0.7833584898192629,Entrar
 2025-11-30 15:30:00,portugal/primeira_liga,Rio Ave,Santa Clara,2.4,0.5697087466575106,Nao entrar
 2025-11-30 18:00:00,portugal/primeira_liga,Sporting CP,CF Estrela Amadora,3.7,0.28543311310006825,Nao entrar
 2025-11-30 20:30:00,portugal/primeira_liga,FC Porto,Estoril Praia,3.4,0.33973988819611944,Nao entrar
-2025-11-29 15:30:00,netherlands/eredivisie,Excelsior,NAC Breda,2.0,0.6766764161830635,Entrar
-2025-11-29 17:45:00,netherlands/eredivisie,Fortuna Sittard,Heracles Almelo,4.0,0.2381033055535443,Nao entrar
-2025-11-29 20:00:00,netherlands/eredivisie,NEC Nijmegen,Sparta Rotterdam,2.6999999999999997,0.4936244910734621,Nao entrar
-2025-11-30 11:15:00,netherlands/eredivisie,PSV Eindhoven,FC Volendam,3.4000000000000004,0.3397398881961194,Nao entrar
 2025-11-30 13:30:00,netherlands/eredivisie,Go Ahead Eagles,FC Utrecht,3.5,0.3208471988621341,Nao entrar
 2025-11-30 13:30:00,netherlands/eredivisie,SC Telstar,Feyenoord,3.4,0.33973988819611944,Nao entrar
 2025-11-30 15:45:00,netherlands/eredivisie,FC Twente,AZ Alkmaar,2.1,0.6496313518820691,Entrar
-2025-11-29 16:00:00,austria/bundesliga,Austria Wien,WSG Tirol,2.8,0.4694536834666827,Nao entrar
-2025-11-29 16:00:00,austria/bundesliga,Grazer AK 1902,FC Blau Weiss Linz,2.8,0.4694536834666827,Nao entrar
-2025-11-29 16:00:00,austria/bundesliga,SV Ried,Wolfsberger AC,2.5,0.5438131158833295,Nao entrar
 2025-11-30 13:30:00,austria/bundesliga,SC Rheindorf Altach,Red Bull Salzburg,2.6,0.5184295759360504,Nao entrar
 2025-11-30 13:30:00,austria/bundesliga,TSV Hartberg,SK Sturm Graz,2.8000000000000003,0.4694536834666827,Nao entrar
 2025-11-30 16:00:00,austria/bundesliga,LASK,SK Rapid Wien,2.9000000000000004,0.4459631985571805,Nao entrar
-2025-11-29 13:00:00,england/premier_league,Hapoel Haifa,Hapoel Be'er Sheva,4.1,0.2238139813007857,Nao entrar
-2025-11-29 15:30:00,england/premier_league,Hapoel Tel Aviv,Bnei Sakhnin,2.5999999999999996,0.5184295759360505,Nao entrar
-2025-11-29 16:30:00,england/premier_league,Hapoel Ironi Kiryat Shmona,Hapoel Jerusalem,2.5999999999999996,0.5184295759360505,Nao entrar
-2025-11-29 16:30:00,england/premier_league,Maccabi Bney Reine,Ironi Dorot Tiberias,3.1,0.4011631473146322,Nao entrar
-2025-11-29 17:30:00,england/premier_league,Hapoel Petach Tikva,Maccabi Haifa,2.8,0.4694536834666827,Nao entrar
 2025-11-30 18:00:00,england/premier_league,Ashdod SC,Maccabi Tel Aviv,4.1,0.2238139813007857,Nao entrar
 2025-11-30 18:30:00,england/premier_league,Beitar Jerusalem,Maccabi Netanya,4.5,0.17357807091003602,Nao entrar
-2025-11-29 11:00:00,england/premier_league,Akron Togliatti,Pari Nizhny Novgorod,2.2,0.6227137499963165,Entrar
-2025-11-29 13:30:00,england/premier_league,CSKA Moscow,Orenburg,2.0,0.6766764161830635,Entrar
-2025-11-29 16:30:00,england/premier_league,Baltika Kaliningrad,FC Spartak Moscow,1.9,0.7037203534424978,Entrar
-2025-11-30 11:00:00,england/premier_league,FC Krasnodar,Krylya Sovetov Samara,3.0999999999999996,0.4011631473146323,Nao entrar
 2025-11-30 13:30:00,england/premier_league,Akhmat Grozny,Dynamo Moscow,2.2,0.6227137499963165,Entrar
 2025-11-30 13:30:00,england/premier_league,FC Rostov,Lokomotiv Moscow,3.1,0.4011631473146322,Nao entrar
 2025-11-30 16:00:00,england/premier_league,Zenit St. Petersburg,Rubin Kazan,1.2,0.8794870987836302,Entrar
-2025-11-29 10:30:00,england/premier_league,İmişli FK,Sabah FK,2.4000000000000004,0.5697087466575104,Nao entrar
-2025-11-29 13:00:00,england/premier_league,Qarabağ FK,FK Karvan Yevlax,2.9000000000000004,0.4459631985571805,Nao entrar
-2025-11-30 10:00:00,england/premier_league,Şamaxı FK,Sumqayıt FK,2.8,0.4694536834666827,Nao entrar
 2025-11-30 12:30:00,england/premier_league,Qəbələ FK,Araz Naxçıvan,2.3,0.5960388259320683,Nao entrar
-2025-11-29 21:30:00,italy/serie_a,Universidad Católica del Ecuador,Orense SC,1.9,0.7037203534424978,Entrar
-2025-11-30 00:00:00,italy/serie_a,Libertad,Barcelona SC,2.7,0.49362449107346196,Nao entrar
 2025-11-30 18:00:00,italy/serie_a,Aucas,Deportivo Cuenca,3.5,0.3208471988621341,Nao entrar
 2025-11-30 20:30:00,italy/serie_a,Macará,El Nacional,3.2,0.3799037410783731,Nao entrar
 2025-11-30 23:00:00,italy/serie_a,Delfín,Emelec,2.4000000000000004,0.5697087466575104,Nao entrar
-2025-11-29 16:00:00,england/premier_league,Accra Hearts of Oak,Vision FC,1.3,0.8571124890919696,Entrar
 2025-11-30 15:00:00,england/premier_league,Basake Holy Stars FC,Nations FC,2.5,0.5438131158833295,Nao entrar
 2025-11-30 15:00:00,england/premier_league,Bechem United,Hohoe United FC,2.2,0.6227137499963165,Entrar
 2025-11-30 15:00:00,england/premier_league,Berekum Chelsea,Samartex,1.7000000000000002,0.7572232071985849,Entrar
 2025-11-30 15:00:00,england/premier_league,Bibiani Gold Stars FC,Aduana Stars FC,1.5,0.8088468305380581,Entrar
-2025-11-30 15:00:00,england/premier_league,Heart of Lions,Karela United,2.0,0.6766764161830635,Entrar
+2025-11-30 15:00:00,england/premier_league,Heart of Lions,Karela United,2,0.6766764161830635,Entrar
 2025-11-30 15:00:00,england/premier_league,Swedru All Blacks United FC,Young Apostles FC,1.3,0.8571124890919696,Entrar
 2025-11-30 16:00:00,england/premier_league,Asante Kotoko SC,Medeama SC,2.1,0.6496313518820691,Entrar
-2025-11-29 11:00:00,portugal/segunda_liga,Académico Viseu FC,Penafiel,2.3,0.5960388259320683,Nao entrar
-2025-11-29 14:00:00,portugal/segunda_liga,UD Oliveirense,Leixões SC,2.1,0.6496313518820691,Entrar
-2025-11-30 11:00:00,portugal/segunda_liga,FC Porto B,Lusitânia Lourosa,2.8,0.4694536834666827,Nao entrar
-2025-11-30 11:00:00,portugal/segunda_liga,Torreense,Chaves,1.4,0.8334977381226298,Entrar
 2025-11-30 14:00:00,portugal/segunda_liga,Portimonense SAD,Marítimo,2.2,0.6227137499963165,Entrar
 2025-11-30 15:30:00,portugal/segunda_liga,Sporting CP B U21,SC Farense,2.3,0.5960388259320683,Nao entrar
 2025-11-30 15:30:00,portugal/segunda_liga,União de Leiria,Benfica B U21,2.6999999999999997,0.4936244910734621,Nao entrar
-2025-11-29 13:30:00,england/premier_league,LNZ Cherkasy,Kudrivka,2.3,0.5960388259320683,Nao entrar
-2025-11-29 16:00:00,england/premier_league,NK Veres Rivne,Karpaty Lviv,1.5999999999999999,0.7833584898192629,Entrar
-2025-11-30 11:00:00,england/premier_league,Oleksandria,Rukh Lviv,2.3,0.5960388259320683,Nao entrar
 2025-11-30 13:30:00,england/premier_league,FC Epicentr Dunaivtsi,Metalist 1925,2.5,0.5438131158833295,Nao entrar
 2025-11-30 16:00:00,england/premier_league,Polissya Zhytomyr,Zorya Luhansk,1.7999999999999998,0.7306210859394126,Entrar

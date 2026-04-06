@@ -21,6 +21,90 @@ from engine.stats_engine import build_feature_frame
 
 LOW_SCORE_CELLS = ((0, 0), (0, 1), (1, 0), (1, 1))
 LEGACY_EXCEL_SCORES_PATH = Path(__file__).resolve().parents[1] / "data" / "legacy_excel_scores.csv"
+LEGACY_TEAM_ALIASES: dict[str, dict[str, str]] = {
+    "spain/la_liga": {
+        "levante": "Levante UD",
+        "oviedo": "Real Oviedo",
+        "vallecano": "Rayo Vallecano",
+        "ath bilbao": "Athletic Club",
+        "athletic bilbao": "Athletic Club",
+        "ath madrid": "Atletico Madrid",
+        "atleti": "Atletico Madrid",
+        "espanol": "Espanyol",
+        "sociedad": "Real Sociedad",
+        "betis": "Real Betis",
+        "alaves": "Deportivo Alaves",
+        "malaga": "Malaga",
+        "la coruna": "Deportivo La Coruna",
+        "las palmas": "Las Palmas",
+        "real madrid": "Real Madrid",
+        "barcelona": "Barcelona",
+        "sevilla": "Sevilla",
+        "celta": "Celta Vigo",
+        "getafe": "Getafe",
+        "girona": "Girona",
+        "osasuna": "Osasuna",
+        "cadiz": "Cadiz",
+        "mallorca": "Mallorca",
+        "granada": "Granada",
+    },
+    "england/premier_league": {
+        "man city": "Manchester City",
+        "man united": "Manchester United",
+        "nott'm forest": "Nottingham Forest",
+        "newcastle": "Newcastle United",
+        "leeds": "Leeds United",
+        "burnley": "Burnley",
+        "bournemouth": "Bournemouth",
+        "crystal palace": "Crystal Palace",
+        "aston villa": "Aston Villa",
+        "brighton": "Brighton & Hove Albion",
+        "sheffield weds": "Sheffield Wednesday",
+    },
+    "germany/bundesliga": {
+        "ein frankfurt": "Eintracht Frankfurt",
+        "fc koln": "1. FC Koln",
+        "m'gladbach": "Borussia Monchengladbach",
+        "dusseldorf": "Fortuna Dusseldorf",
+        "nurnberg": "FC Nurnberg",
+        "greuther furth": "Greuther Furth",
+        "leverkusen": "Bayer Leverkusen",
+        "munich 1860": "Munich 1860",
+    },
+    "france/ligue_1": {
+        "psg": "Paris SG",
+        "paris sg": "Paris SG",
+        "st etienne": "St Etienne",
+        "saint etienne": "St Etienne",
+        "marseille": "Marseille",
+        "lyon": "Lyon",
+    },
+    "portugal/primeira_liga": {
+        "pacos ferreira": "Pacos Ferreira",
+        "estrela amadora": "Est Amadora",
+        "aves": "Aves",
+        "santa clara": "Santa Clara",
+        "porto": "Porto",
+        "benfica": "Benfica",
+        "sporting": "Sporting",
+    },
+    "netherlands/eredivisie": {
+        "for sittard": "Fort Sittard",
+        "fortuna sittard": "Fort Sittard",
+        "nijmegen": "Nijmegen",
+        "psv eindhoven": "PSV Eindhoven",
+        "twente": "Twente",
+        "utrecht": "Utrecht",
+    },
+    "italy/serie_a": {
+        "inter": "Inter",
+        "juventus": "Juventus",
+        "napoli": "Napoli",
+        "milan": "Milan",
+        "roma": "Roma",
+        "lazio": "Lazio",
+    },
+}
 
 
 def dixon_coles_tau(home_goals: int, away_goals: int, lambda_home: float, lambda_away: float, rho: float) -> float:
@@ -114,11 +198,15 @@ def _normalize_team_name(value: Any) -> str:
     return " ".join(normalized.split())
 
 
-def _best_team_match(name: str, candidates: list[str]) -> str:
+def _best_team_match(name: str, candidates: list[str], *, league_key: str | None = None) -> str:
     if not candidates:
         return name
     normalized_candidates = {candidate: _normalize_team_name(candidate) for candidate in candidates}
     normalized_name = _normalize_team_name(name)
+    if league_key and league_key in LEGACY_TEAM_ALIASES:
+        alias = LEGACY_TEAM_ALIASES[league_key].get(normalized_name)
+        if alias and alias in candidates:
+            return alias
     for candidate, candidate_normalized in normalized_candidates.items():
         if candidate_normalized == normalized_name:
             return candidate
@@ -150,7 +238,7 @@ def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
             continue
         candidates = sorted(set(legacy_league["home_team"].astype(str)).union(set(legacy_league["away_team"].astype(str))))
         current_names = sorted(set(league_frame["home_team"].astype(str)).union(set(league_frame["away_team"].astype(str))))
-        mapping = {name: _best_team_match(name, candidates) for name in current_names}
+        mapping = {name: _best_team_match(name, candidates, league_key=league_key) for name in current_names}
         matched.loc[matched["league_key"].eq(league_key), "legacy_home_team"] = matched.loc[matched["league_key"].eq(league_key), "home_team"].map(mapping)
         matched.loc[matched["league_key"].eq(league_key), "legacy_away_team"] = matched.loc[matched["league_key"].eq(league_key), "away_team"].map(mapping)
 
@@ -162,6 +250,7 @@ def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
         suffixes=("", "_legacy"),
     )
     legacy_mask = merged["legacy_prob_under25"].notna()
+    merged["legacy_reference_found"] = legacy_mask.fillna(False)
     if not legacy_mask.any():
         return scored
 
@@ -182,6 +271,17 @@ def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
         merged.loc[legacy_mask, "lambda_min"], merged.loc[legacy_mask, "lambda_max"], inclusive="both"
     )
     merged.loc[legacy_mask, "edge_ok"] = True
+    unmatched_mask = ~legacy_mask
+    if unmatched_mask.any():
+        for column in ["lambda_home", "lambda_away", "lambda_total", "p_under25", "fair_odds", "edge_pct", "delta_p"]:
+            if column in merged.columns:
+                merged.loc[unmatched_mask, column] = np.nan
+        merged.loc[unmatched_mask, "selection_ok"] = False
+        merged.loc[unmatched_mask, "cv_ok"] = False
+        merged.loc[unmatched_mask, "lambda_ok"] = False
+        merged.loc[unmatched_mask, "edge_ok"] = False
+        merged.loc[unmatched_mask, "stake_fraction"] = 0.0
+        merged.loc[unmatched_mask, "stake"] = 0.0
     merged["bet_eligible"] = (
         merged["features_ready"]
         & merged["league_history_ready"]
