@@ -24,8 +24,8 @@ CARD_STYLE = """
 <style>
 .quant-card {
     border: 1px solid rgba(0,0,0,0.08);
-    border-radius: 18px;
-    padding: 1rem 1.1rem;
+    border-radius: 16px;
+    padding: 0.75rem 0.9rem;
     background: #ffffff;
     box-shadow: 0 1px 2px rgba(0,0,0,0.04);
 }
@@ -38,13 +38,13 @@ CARD_STYLE = """
     background: rgba(239, 68, 68, 0.08);
 }
 .quant-card-label {
-    font-size: 0.95rem;
+    font-size: 0.84rem;
     font-weight: 600;
     color: #111827;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.25rem;
 }
 .quant-card-value {
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 1.1;
     font-weight: 700;
     color: #111827;
@@ -830,12 +830,17 @@ def render_backtesting(base_path: str) -> None:
     result_df = metrics["result_df"]
 
     col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Apostas", f"{metrics['bets']}")
+    col1, col2, col3, col4, col5 = st.columns(5)
+    with col1:
+        _render_result_card("Apostas", f"{metrics['bets']}", True)
     with col2:
         _render_result_card("ROI", f"{metrics['roi']:.2%}", metrics["roi"] >= 0)
     with col3:
         _render_result_card("Lucro (stakes)", f"{metrics['total_profit']:.1f}", metrics["total_profit"] >= 0)
-    col4.metric("Max Drawdown (stakes)", f"{metrics['max_drawdown']:.1f}")
+    with col4:
+        _render_result_card("Winrate", f"{metrics['win_rate']:.1%}", metrics["win_rate"] >= 0.5)
+    with col5:
+        _render_result_card("Max Drawdown (stakes)", f"{metrics['max_drawdown']:.1f}", metrics["max_drawdown"] >= 0)
 
     st.line_chart(result_df.set_index("match_datetime")["cumulative_profit"], width="stretch")
     _render_league_summary(result_df, selected_leagues)
