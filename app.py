@@ -203,13 +203,14 @@ def render_backtesting(base_path: str) -> None:
     )
 
     st.sidebar.markdown("### Parâmetros do método")
-    window = st.sidebar.slider("Janela de jogos", min_value=5, max_value=20, value=10, step=1)
-    rho = st.sidebar.slider("Dixon-Coles rho", min_value=-0.20, max_value=0.20, value=-0.08, step=0.01)
+    st.sidebar.caption("Defaults calibrados na validação de 2025-01-01 a 2026-04-02.")
+    window = st.sidebar.slider("Janela de jogos", min_value=5, max_value=20, value=15, step=1)
+    rho = st.sidebar.slider("Dixon-Coles rho", min_value=-0.20, max_value=0.20, value=0.02, step=0.01)
     edge_buffer = st.sidebar.slider("Edge mínimo", min_value=0.00, max_value=0.20, value=0.10, step=0.01)
-    lambda_min = st.sidebar.slider("Lambda mínimo", min_value=0.50, max_value=1.50, value=0.80, step=0.05)
-    lambda_max = st.sidebar.slider("Lambda máximo", min_value=1.50, max_value=4.00, value=2.60, step=0.05)
-    cv_max = st.sidebar.slider("CV máximo", min_value=0.50, max_value=2.00, value=1.35, step=0.05)
-    kelly_fraction = st.sidebar.slider("Kelly fracionado", min_value=0.05, max_value=0.50, value=0.25, step=0.05)
+    lambda_min = st.sidebar.slider("Lambda mínimo", min_value=0.50, max_value=1.50, value=0.70, step=0.05)
+    lambda_max = st.sidebar.slider("Lambda máximo", min_value=1.50, max_value=4.00, value=2.40, step=0.05)
+    cv_max = st.sidebar.slider("CV máximo", min_value=0.50, max_value=2.00, value=1.10, step=0.05)
+    kelly_fraction = st.sidebar.slider("Kelly fracionado", min_value=0.05, max_value=0.50, value=0.20, step=0.05)
 
     scored = cached_feature_frame(
         base_path,
