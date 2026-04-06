@@ -244,6 +244,7 @@ def _render_league_summary(result_df: pd.DataFrame, selected_leagues: list[str])
         '<div style="margin-top: 0.5rem; font-size: 0.92rem; font-weight: 600;">Resumo por liga</div>',
         unsafe_allow_html=True,
     )
+    table_df["Data/Hora"] = pd.to_datetime(table_df["Data/Hora"]).dt.strftime("%d/%m/%Y %H:%M:%S")
     st.dataframe(
         summary_display,
         width="stretch",
@@ -838,7 +839,6 @@ def render_backtesting(base_path: str) -> None:
     metrics = run_backtest(filtered)
     result_df = metrics["result_df"]
 
-    col1, col2, col3, col4 = st.columns(4)
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
         _render_result_card("Apostas", f"{metrics['bets']}", "neutral")
@@ -882,6 +882,7 @@ def render_backtesting(base_path: str) -> None:
             "profit": "Lucro (stakes)",
         }
     )
+    table_df["Data/Hora"] = pd.to_datetime(table_df["Data/Hora"]).dt.strftime("%d/%m/%Y %H:%M:%S")
     st.dataframe(
         table_df,
         width="stretch",
