@@ -86,6 +86,7 @@ def _finalize_scored_frame(
     lambda_min: float,
     lambda_max: float,
     kelly_fraction: float,
+    stake_amount: float,
     lambda_liga_padrao: float,
 ) -> pd.DataFrame:
     scored["lambda_home"] = lambda_home
@@ -96,9 +97,11 @@ def _finalize_scored_frame(
     scored["edge_pct"] = ((scored["under25_odds"] / scored["fair_odds"]) - 1.0) * 100.0
     scored["prob_liga"] = float(poisson.cdf(2, lambda_liga_padrao))
     scored["delta_p"] = (scored["p_under25"] - scored["prob_liga"]) * 100.0
-    net_odds = scored["under25_odds"] - 1.0
-    raw_kelly = ((scored["p_under25"] * net_odds) - (1.0 - scored["p_under25"])) / net_odds
-    scored["stake_fraction"] = (kelly_fraction * raw_kelly.where(net_odds > 0)).clip(lower=0.0)
+    fixed_stake = float(stake_amount)
+    if not np.isfinite(fixed_stake) or fixed_stake <= 0:
+        fixed_stake = 1.0
+    scored["stake_fraction"] = fixed_stake
+    scored["stake"] = fixed_stake
     scored["edge_ok"] = scored["under25_odds"] > (scored["fair_odds"] * (1.0 + edge_buffer))
     scored["cv_ok"] = scored["defense_cv_10"] <= cv_max
     scored["lambda_ok"] = scored["lambda_total"].between(lambda_min, lambda_max, inclusive="both")
@@ -142,6 +145,7 @@ def score_under25(
     lambda_max: float = 2.6,
     cv_max: float = 1.35,
     kelly_fraction: float = 0.25,
+    stake_amount: float = 1.0,
     delta_p_min: float = 10.0,
     lambda_liga_padrao: float = 2.6,
     blend_weight: float = 0.5,
@@ -175,6 +179,7 @@ def score_under25(
             lambda_min=lambda_min,
             lambda_max=lambda_max,
             kelly_fraction=kelly_fraction,
+            stake_amount=stake_amount,
             lambda_liga_padrao=lambda_liga_padrao,
         )
 
@@ -191,6 +196,7 @@ def score_under25(
             lambda_min=lambda_min,
             lambda_max=lambda_max,
             kelly_fraction=kelly_fraction,
+            stake_amount=stake_amount,
             lambda_liga_padrao=lambda_liga_padrao,
         )
 
@@ -212,13 +218,16 @@ def score_under25(
         lambda_min=lambda_min,
         lambda_max=lambda_max,
         kelly_fraction=kelly_fraction,
+        stake_amount=stake_amount,
         lambda_liga_padrao=lambda_liga_padrao,
     )
 
 
 def run_backtest(scored_matches: pd.DataFrame) -> dict[str, Any]:
     result_df = scored_matches.sort_values("match_datetime").copy()
-    result_df["stake"] = np.where(result_df["bet_eligible"], result_df["stake_fraction"], 0.0)
+    if "stake" not in result_df.columns:
+        result_df["stake"] = np.where(result_df["bet_eligible"], result_df["stake_fraction"], 0.0)
+    result_df["stake"] = np.where(result_df["bet_eligible"], result_df["stake"], 0.0)
     result_df["profit"] = np.where(
         result_df["bet_eligible"] & result_df["under25_hit"].eq(1),
         result_df["stake"] * (result_df["under25_odds"] - 1.0),

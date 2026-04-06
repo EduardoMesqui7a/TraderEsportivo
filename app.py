@@ -83,6 +83,7 @@ def cached_feature_frame(
     delta_p_min: float,
     lambda_liga_padrao: float,
     blend_weight: float,
+    stake_amount: float,
     lambda_min: float,
     lambda_max: float,
     cv_max: float,
@@ -99,6 +100,7 @@ def cached_feature_frame(
         delta_p_min=delta_p_min,
         lambda_liga_padrao=lambda_liga_padrao,
         blend_weight=blend_weight,
+        stake_amount=stake_amount,
         lambda_min=lambda_min,
         lambda_max=lambda_max,
         cv_max=cv_max,
@@ -135,7 +137,7 @@ def _render_model_sidebar() -> None:
     st.sidebar.slider("Lambda mínimo", min_value=0.50, max_value=1.50, value=0.70 if model != "Modelo Excel" else 1.20, step=0.05, key="model_lambda_min")
     st.sidebar.slider("Lambda máximo", min_value=1.50, max_value=4.00, value=2.40 if model != "Modelo Excel" else 2.20, step=0.05, key="model_lambda_max")
     st.sidebar.slider("CV máximo", min_value=0.50, max_value=2.00, value=1.10 if model != "Modelo Excel" else 0.70, step=0.05, key="model_cv_max")
-    st.sidebar.slider("Kelly fracionado", min_value=0.05, max_value=0.50, value=0.20 if model != "Modelo Excel" else 0.35, step=0.05, key="model_kelly_fraction")
+    st.sidebar.number_input("Stake fixa", min_value=0.10, max_value=10.00, value=1.0, step=0.10, key="model_stake_amount")
 
 
 def _get_model_settings() -> dict[str, float | int | str]:
@@ -147,6 +149,7 @@ def _get_model_settings() -> dict[str, float | int | str]:
         "delta_p_min": float(st.session_state.get("model_delta_p_min", 10.0)),
         "lambda_liga_padrao": float(st.session_state.get("model_lambda_liga_padrao", 2.6)),
         "blend_weight": float(st.session_state.get("model_blend_weight", 0.5)),
+        "stake_amount": float(st.session_state.get("model_stake_amount", 1.0)),
         "lambda_min": float(st.session_state.get("model_lambda_min", 0.70)),
         "lambda_max": float(st.session_state.get("model_lambda_max", 2.40)),
         "cv_max": float(st.session_state.get("model_cv_max", 1.10)),
@@ -395,6 +398,7 @@ def cached_parameter_search(
     lambda_liga_max: float,
     blend_weight_min: float,
     blend_weight_max: float,
+    stake_amount: float,
     n_trials: int,
     min_bets: int,
 ) -> pd.DataFrame:
@@ -409,7 +413,6 @@ def cached_parameter_search(
     lambda_min_candidates = _candidate_values(lambda_min_min, lambda_min_max, 4)
     lambda_max_candidates = _candidate_values(lambda_max_min, lambda_max_max, 4)
     cv_candidates = _candidate_values(cv_min, cv_max, 4)
-    kelly_candidates = _candidate_values(kelly_min, kelly_max, 4)
     delta_p_candidates = _candidate_values(delta_p_min_min, delta_p_min_max, 4)
     lambda_liga_candidates = _candidate_values(lambda_liga_min, lambda_liga_max, 4)
     blend_candidates = _candidate_values(blend_weight_min, blend_weight_max, 4)
@@ -425,7 +428,7 @@ def cached_parameter_search(
         if lambda_min >= lambda_max:
             continue
         cv_cut = float(rng.choice(cv_candidates))
-        kelly_fraction = float(rng.choice(kelly_candidates))
+        kelly_fraction = float(stake_amount)
         model_key = (model_name or "poisson").strip().lower()
         rho = float(rng.choice(rho_candidates))
         edge_buffer = float(rng.choice(edge_candidates))
@@ -455,6 +458,7 @@ def cached_parameter_search(
             delta_p_min=delta_p_min,
             lambda_liga_padrao=lambda_liga_padrao,
             blend_weight=blend_weight,
+            stake_amount=stake_amount,
             lambda_min=lambda_min,
             lambda_max=lambda_max,
             cv_max=cv_cut,
@@ -530,6 +534,7 @@ def cached_walk_forward_validation(
     lambda_liga_max: float,
     blend_weight_min: float,
     blend_weight_max: float,
+    stake_amount: float,
     n_trials: int,
     min_train_bets: int,
     min_val_bets: int,
@@ -557,7 +562,6 @@ def cached_walk_forward_validation(
     lambda_min_candidates = _candidate_values(lambda_min_min, lambda_min_max, 4)
     lambda_max_candidates = _candidate_values(lambda_max_min, lambda_max_max, 4)
     cv_candidates = _candidate_values(cv_min, cv_max, 4)
-    kelly_candidates = _candidate_values(kelly_min, kelly_max, 4)
     delta_p_candidates = _candidate_values(delta_p_min_min, delta_p_min_max, 4)
     lambda_liga_candidates = _candidate_values(lambda_liga_min, lambda_liga_max, 4)
     blend_candidates = _candidate_values(blend_weight_min, blend_weight_max, 4)
@@ -576,7 +580,7 @@ def cached_walk_forward_validation(
             if lambda_min >= lambda_max:
                 continue
             cv_cut = float(rng.choice(cv_candidates))
-            kelly_fraction = float(rng.choice(kelly_candidates))
+            kelly_fraction = float(stake_amount)
             rho = float(rng.choice(rho_candidates))
             edge_buffer = float(rng.choice(edge_candidates))
             delta_p_min = float(rng.choice(delta_p_candidates))
@@ -608,6 +612,7 @@ def cached_walk_forward_validation(
                 delta_p_min=delta_p_min,
                 lambda_liga_padrao=lambda_liga_padrao,
                 blend_weight=blend_weight,
+                stake_amount=stake_amount,
                 lambda_min=lambda_min,
                 lambda_max=lambda_max,
                 cv_max=cv_cut,
@@ -664,6 +669,7 @@ def cached_walk_forward_validation(
             delta_p_min=float(best_candidate["delta_p_min"]),
             lambda_liga_padrao=float(best_candidate["lambda_liga_padrao"]),
             blend_weight=float(best_candidate["blend_weight"]),
+            stake_amount=stake_amount,
             lambda_min=float(best_candidate["lambda_min"]),
             lambda_max=float(best_candidate["lambda_max"]),
             cv_max=float(best_candidate["cv_max"]),
@@ -786,6 +792,7 @@ def render_backtesting(base_path: str) -> None:
         settings["delta_p_min"],
         settings["lambda_liga_padrao"],
         settings["blend_weight"],
+        settings["stake_amount"],
         settings["lambda_min"],
         settings["lambda_max"],
         settings["cv_max"],
@@ -980,6 +987,7 @@ def render_optimization(base_path: str) -> None:
         4.00,
         0.0,
         1.0,
+        settings["stake_amount"],
         n_trials,
         min_bets,
     )
@@ -1016,6 +1024,7 @@ def render_optimization(base_path: str) -> None:
                     4.00,
                     0.0,
                     1.0,
+                    settings["stake_amount"],
                     n_trials,
                     min_bets,
                 )
@@ -1070,6 +1079,7 @@ def render_optimization(base_path: str) -> None:
         delta_p_min=float(best.get("delta_p_min", 10.0)),
         lambda_liga_padrao=float(best.get("lambda_liga_padrao", 2.6)),
         blend_weight=float(best.get("blend_weight", 0.5)),
+        stake_amount=float(settings["stake_amount"]),
         lambda_min=float(best["lambda_min"]),
         lambda_max=float(best["lambda_max"]),
         cv_max=float(best["cv_max"]),
@@ -1144,6 +1154,7 @@ def render_optimization(base_path: str) -> None:
                 4.00,
                 0.0,
                 1.0,
+                settings["stake_amount"],
                 wf_trials,
                 min_train_bets,
                 min_val_bets,
