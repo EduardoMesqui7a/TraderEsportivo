@@ -175,7 +175,7 @@ def _render_league_summary(result_df: pd.DataFrame, selected_leagues: list[str])
     )
     st.dataframe(
         summary_display,
-        use_container_width=True,
+        width="stretch",
         hide_index=True,
         height=min(35 + 38 * len(summary_display), 280),
     )
@@ -212,7 +212,7 @@ def _render_odds_band_summary(result_df: pd.DataFrame) -> None:
     )
     st.dataframe(
         summary[["Faixa", "ROI", "Lucro", "apostas"]],
-        use_container_width=True,
+        width="stretch",
         hide_index=True,
         height=min(35 + 38 * len(summary), 280),
     )
@@ -664,14 +664,11 @@ def render_backtesting(base_path: str) -> None:
         return
 
     league_options = leagues["league_key"].tolist()
-    leagues_key = "backtest_leagues"
-    if leagues_key not in st.session_state:
-        st.session_state[leagues_key] = league_options
     selected_leagues = st.multiselect(
         "Ligas",
         options=league_options,
-        key=leagues_key,
         default=league_options,
+        key="backtest_leagues",
     )
 
     st.sidebar.markdown("### Parâmetros do método")
@@ -749,7 +746,7 @@ def render_backtesting(base_path: str) -> None:
         _render_result_card("Lucro (stakes)", f"{metrics['total_profit']:.1f}", metrics["total_profit"] >= 0)
     col4.metric("Max Drawdown (stakes)", f"{metrics['max_drawdown']:.1f}")
 
-    st.line_chart(result_df.set_index("match_datetime")["cumulative_profit"], use_container_width=True)
+    st.line_chart(result_df.set_index("match_datetime")["cumulative_profit"], width="stretch")
     _render_league_summary(result_df, selected_leagues)
     table_df = result_df[
         [
@@ -782,7 +779,7 @@ def render_backtesting(base_path: str) -> None:
     )
     st.dataframe(
         table_df,
-        use_container_width=True,
+        width="stretch",
         hide_index=True,
     )
 
@@ -910,7 +907,7 @@ def render_optimization(base_path: str) -> None:
     display_results["Acerto"] = display_results["Acerto"].map(lambda value: f"{value:.1%}")
     display_results["Lucro"] = display_results["Lucro"].map(lambda value: f"{value:.1f}")
     display_results["Drawdown"] = display_results["Drawdown"].map(lambda value: f"{value:.1f}")
-    st.dataframe(display_results, use_container_width=True, hide_index=True)
+    st.dataframe(display_results, width="stretch", hide_index=True)
 
     matches = cached_matches(base_path)
     features = build_feature_frame(matches, window=int(best["window"]))
@@ -1069,7 +1066,7 @@ def render_optimization(base_path: str) -> None:
                                 "Lucro teste": lambda df: df["Lucro teste"].map(lambda value: f"{value:.1f}"),
                             }
                         ),
-                        use_container_width=True,
+                        width="stretch",
                         hide_index=True,
                     )
 
@@ -1114,11 +1111,11 @@ def render_optimization(base_path: str) -> None:
                                 "Apostas teste",
                             ]
                         ],
-                        use_container_width=True,
+                        width="stretch",
                         hide_index=True,
                     )
                 st.markdown("#### Resultado por fold")
-                st.dataframe(wf_results_display, use_container_width=True, hide_index=True)
+                st.dataframe(wf_results_display, width="stretch", hide_index=True)
 
 
 def render_live_dashboard() -> None:
@@ -1151,7 +1148,7 @@ def render_live_dashboard() -> None:
         daily_matches.rename(columns={"league_name": "Liga"})[
             ["Hora", "Liga", "Jogo", "Odd Justa", "Odd Casa", "Edge %", "Stake Sugerida", "xG medio"]
         ],
-        use_container_width=True,
+        width="stretch",
         hide_index=True,
     )
 
