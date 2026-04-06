@@ -234,6 +234,81 @@ def _date_filter(df: pd.DataFrame, start_date: date, end_date: date) -> pd.DataF
     return df[df["match_datetime"].dt.date.between(start_date, end_date)]
 
 
+def _add_date_offset(base_date: date, *, years: int = 0, months: int = 0) -> date:
+    return (pd.Timestamp(base_date) + pd.DateOffset(years=years, months=months)).date()
+
+
+def _build_walk_forward_folds(
+    start_date: date,
+    end_date: date,
+    *,
+    train_years: int,
+    val_months: int,
+    test_months: int,
+    step_months: int,
+) -> list[dict[str, date]]:
+    folds: list[dict[str, date]] = []
+    cursor = start_date
+    while True:
+        train_start = cursor
+        train_end = _add_date_offset(train_start, years=train_years) - timedelta(days=1)
+        val_start = train_end + timedelta(days=1)
+        val_end = _add_date_offset(val_start, months=val_months) - timedelta(days=1)
+        test_start = val_end + timedelta(days=1)
+        test_end = _add_date_offset(test_start, months=test_months) - timedelta(days=1)
+        if test_end > end_date:
+            break
+        folds.append(
+            {
+                "train_start": train_start,
+                "train_end": train_end,
+                "val_start": val_start,
+                "val_end": val_end,
+                "test_start": test_start,
+                "test_end": test_end,
+            }
+        )
+        cursor = _add_date_offset(cursor, months=step_months)
+        if cursor >= end_date:
+            break
+    return folds
+
+
+def _filter_scored_period(
+    scored: pd.DataFrame,
+    selected_leagues: set[str],
+    odd_min: float,
+    odd_max: float,
+    start_date: date,
+    end_date: date,
+) -> pd.DataFrame:
+    subset = _date_filter(scored, start_date, end_date)
+    subset = subset[subset["league_key"].isin(selected_leagues)].copy()
+    return subset[subset["under25_odds"].between(odd_min, odd_max, inclusive="both")]
+
+
+def _evaluate_config(
+    scored: pd.DataFrame,
+    *,
+    selected_leagues: set[str],
+    odd_min: float,
+    odd_max: float,
+    period_start: date,
+    period_end: date,
+    config: dict[str, float | int],
+) -> dict[str, float | int]:
+    subset = _filter_scored_period(scored, selected_leagues, odd_min, odd_max, period_start, period_end)
+    metrics = run_backtest(subset)
+    return {
+        **config,
+        "bets": metrics["bets"],
+        "win_rate": metrics["win_rate"],
+        "roi": metrics["roi"],
+        "profit": metrics["total_profit"],
+        "drawdown": metrics["max_drawdown"],
+    }
+
+
 @st.cache_data(show_spinner=True)
 def cached_parameter_search(
     base_path: str,
@@ -338,6 +413,242 @@ def cached_parameter_search(
         return pd.DataFrame()
     result = pd.DataFrame(rows)
     return result.sort_values(["roi", "profit", "bets"], ascending=[False, False, False]).reset_index(drop=True)
+
+
+@st.cache_data(show_spinner=True)
+def cached_walk_forward_validation(
+    base_path: str,
+    selected_leagues: tuple[str, ...],
+    start_date: date,
+    end_date: date,
+    odd_min: float,
+    odd_max: float,
+    train_years: int,
+    val_months: int,
+    test_months: int,
+    step_months: int,
+    window_min: int,
+    window_max: int,
+    rho_min: float,
+    rho_max: float,
+    edge_min: float,
+    edge_max: float,
+    lambda_min_min: float,
+    lambda_min_max: float,
+    lambda_max_min: float,
+    lambda_max_max: float,
+    cv_min: float,
+    cv_max: float,
+    kelly_min: float,
+    kelly_max: float,
+    n_trials: int,
+    min_train_bets: int,
+    min_val_bets: int,
+    min_test_bets: int,
+) -> pd.DataFrame:
+    matches = cached_matches(base_path)
+    if matches.empty:
+        return pd.DataFrame()
+
+    folds = _build_walk_forward_folds(
+        start_date,
+        end_date,
+        train_years=train_years,
+        val_months=val_months,
+        test_months=test_months,
+        step_months=step_months,
+    )
+    if not folds:
+        return pd.DataFrame()
+
+    rng = random.Random(42)
+    window_candidates = _candidate_values(window_min, window_max, min(5, abs(window_max - window_min) + 1), as_int=True)
+    rho_candidates = _candidate_values(rho_min, rho_max, 5)
+    edge_candidates = _candidate_values(edge_min, edge_max, 4)
+    lambda_min_candidates = _candidate_values(lambda_min_min, lambda_min_max, 4)
+    lambda_max_candidates = _candidate_values(lambda_max_min, lambda_max_max, 4)
+    cv_candidates = _candidate_values(cv_min, cv_max, 4)
+    kelly_candidates = _candidate_values(kelly_min, kelly_max, 4)
+
+    feature_cache: dict[int, pd.DataFrame] = {}
+    selected_set = set(selected_leagues)
+    rows: list[dict[str, float | int | str | date]] = []
+
+    for fold_idx, fold in enumerate(folds, start=1):
+        best_candidate: dict[str, float | int] | None = None
+        best_score: tuple[float, float, int] | None = None
+
+        for _ in range(n_trials):
+            window = int(rng.choice(window_candidates))
+            rho = float(rng.choice(rho_candidates))
+            edge_buffer = float(rng.choice(edge_candidates))
+            lambda_min = float(rng.choice(lambda_min_candidates))
+            lambda_max = float(rng.choice(lambda_max_candidates))
+            if lambda_min >= lambda_max:
+                continue
+            cv_cut = float(rng.choice(cv_candidates))
+            kelly_fraction = float(rng.choice(kelly_candidates))
+            config = {
+                "window": window,
+                "rho": rho,
+                "edge_buffer": edge_buffer,
+                "lambda_min": lambda_min,
+                "lambda_max": lambda_max,
+                "cv_max": cv_cut,
+                "kelly_fraction": kelly_fraction,
+            }
+
+            if window not in feature_cache:
+                feature_cache[window] = build_feature_frame(matches, window=window)
+            features = feature_cache[window]
+            if features.empty:
+                continue
+
+            scored = score_under25(
+                features,
+                rho=rho,
+                edge_buffer=edge_buffer,
+                lambda_min=lambda_min,
+                lambda_max=lambda_max,
+                cv_max=cv_cut,
+                kelly_fraction=kelly_fraction,
+            )
+
+            train_metrics = _evaluate_config(
+                scored,
+                selected_leagues=selected_set,
+                odd_min=odd_min,
+                odd_max=odd_max,
+                period_start=fold["train_start"],
+                period_end=fold["train_end"],
+                config=config,
+            )
+            val_metrics = _evaluate_config(
+                scored,
+                selected_leagues=selected_set,
+                odd_min=odd_min,
+                odd_max=odd_max,
+                period_start=fold["val_start"],
+                period_end=fold["val_end"],
+                config=config,
+            )
+            if int(train_metrics["bets"]) < min_train_bets or int(val_metrics["bets"]) < min_val_bets:
+                continue
+
+            score_tuple = (float(val_metrics["roi"]), float(val_metrics["profit"]), int(val_metrics["bets"]))
+            if best_score is None or score_tuple > best_score:
+                best_score = score_tuple
+                best_candidate = config
+
+        if best_candidate is None:
+            rows.append(
+                {
+                    "fold": fold_idx,
+                    "train_start": fold["train_start"],
+                    "train_end": fold["train_end"],
+                    "val_start": fold["val_start"],
+                    "val_end": fold["val_end"],
+                    "test_start": fold["test_start"],
+                    "test_end": fold["test_end"],
+                    "status": "sem candidato",
+                }
+            )
+            continue
+
+        features = feature_cache[int(best_candidate["window"])]
+        scored = score_under25(
+            features,
+            rho=float(best_candidate["rho"]),
+            edge_buffer=float(best_candidate["edge_buffer"]),
+            lambda_min=float(best_candidate["lambda_min"]),
+            lambda_max=float(best_candidate["lambda_max"]),
+            cv_max=float(best_candidate["cv_max"]),
+            kelly_fraction=float(best_candidate["kelly_fraction"]),
+        )
+        train_subset = _filter_scored_period(
+            scored,
+            selected_set,
+            odd_min,
+            odd_max,
+            fold["train_start"],
+            fold["train_end"],
+        )
+        val_subset = _filter_scored_period(
+            scored,
+            selected_set,
+            odd_min,
+            odd_max,
+            fold["val_start"],
+            fold["val_end"],
+        )
+        test_subset = _filter_scored_period(
+            scored,
+            selected_set,
+            odd_min,
+            odd_max,
+            fold["test_start"],
+            fold["test_end"],
+        )
+        train_metrics = run_backtest(train_subset)
+        val_metrics = run_backtest(val_subset)
+        test_metrics = run_backtest(test_subset)
+        if int(test_metrics["bets"]) < min_test_bets:
+            rows.append(
+                {
+                    "fold": fold_idx,
+                    "train_start": fold["train_start"],
+                    "train_end": fold["train_end"],
+                    "val_start": fold["val_start"],
+                    "val_end": fold["val_end"],
+                    "test_start": fold["test_start"],
+                    "test_end": fold["test_end"],
+                    "status": "poucas apostas no teste",
+                    **best_candidate,
+                    "train_bets": int(train_metrics["bets"]),
+                    "train_roi": float(train_metrics["roi"]),
+                    "train_profit": float(train_metrics["total_profit"]),
+                    "train_drawdown": float(train_metrics["max_drawdown"]),
+                    "val_bets": int(val_metrics["bets"]),
+                    "val_roi": float(val_metrics["roi"]),
+                    "val_profit": float(val_metrics["total_profit"]),
+                    "val_drawdown": float(val_metrics["max_drawdown"]),
+                    "test_bets": int(test_metrics["bets"]),
+                    "test_roi": float(test_metrics["roi"]),
+                    "test_profit": float(test_metrics["total_profit"]),
+                    "test_drawdown": float(test_metrics["max_drawdown"]),
+                }
+            )
+            continue
+
+        rows.append(
+            {
+                "fold": fold_idx,
+                "train_start": fold["train_start"],
+                "train_end": fold["train_end"],
+                "val_start": fold["val_start"],
+                "val_end": fold["val_end"],
+                "test_start": fold["test_start"],
+                "test_end": fold["test_end"],
+                "status": "ok",
+                **best_candidate,
+                "train_bets": int(train_metrics["bets"]),
+                "train_roi": float(train_metrics["roi"]),
+                "train_profit": float(train_metrics["total_profit"]),
+                "train_drawdown": float(train_metrics["max_drawdown"]),
+                "val_bets": int(val_metrics["bets"]),
+                "val_roi": float(val_metrics["roi"]),
+                "val_profit": float(val_metrics["total_profit"]),
+                "val_drawdown": float(val_metrics["max_drawdown"]),
+                "test_bets": int(test_metrics["bets"]),
+                "test_roi": float(test_metrics["roi"]),
+                "test_profit": float(test_metrics["total_profit"]),
+                "test_drawdown": float(test_metrics["max_drawdown"]),
+            }
+        )
+
+    if not rows:
+        return pd.DataFrame()
+    return pd.DataFrame(rows)
 
 
 def render_backtesting(base_path: str) -> None:
@@ -621,6 +932,193 @@ def render_optimization(base_path: str) -> None:
     st.markdown("### Resumo da melhor combinacao")
     _render_league_summary(best_result_df, opt_leagues)
     _render_odds_band_summary(best_result_df)
+
+    with st.expander("Validação walk-forward", expanded=False):
+        st.caption(
+            "Aqui a gente separa treino, validação e teste em janelas sequenciais. "
+            "A configuração é escolhida pelo ROI da validação e depois medida fora da amostra."
+        )
+
+        wf1, wf2, wf3 = st.columns(3)
+        with wf1:
+            train_years = st.slider("Treino (anos)", min_value=1, max_value=5, value=2, step=1, key="wf_train_years")
+        with wf2:
+            val_months = st.slider("Validacao (meses)", min_value=1, max_value=12, value=3, step=1, key="wf_val_months")
+        with wf3:
+            test_months = st.slider("Teste (meses)", min_value=1, max_value=12, value=3, step=1, key="wf_test_months")
+
+        wf4, wf5, wf6 = st.columns(3)
+        with wf4:
+            step_months = st.slider("Passo (meses)", min_value=1, max_value=12, value=3, step=1, key="wf_step_months")
+        with wf5:
+            min_train_bets = st.slider("Min. apostas no treino", min_value=50, max_value=1000, value=300, step=50, key="wf_min_train_bets")
+        with wf6:
+            min_val_bets = st.slider("Min. apostas na validacao", min_value=20, max_value=500, value=100, step=20, key="wf_min_val_bets")
+
+        min_test_bets = st.slider("Min. apostas no teste", min_value=20, max_value=500, value=100, step=20, key="wf_min_test_bets")
+        wf_trials = st.slider("Numero de testes por fold", min_value=20, max_value=300, value=120, step=10, key="wf_trials")
+
+        run_walk_forward = st.button("Rodar walk-forward", key="wf_run_button")
+        if run_walk_forward:
+            wf_results = cached_walk_forward_validation(
+                base_path,
+                tuple(opt_leagues),
+                start_date,
+                end_date,
+                odd_range[0],
+                odd_range[1],
+                train_years,
+                val_months,
+                test_months,
+                step_months,
+                window_range[0],
+                window_range[1],
+                rho_range[0],
+                rho_range[1],
+                edge_range[0],
+                edge_range[1],
+                lambda_min_range[0],
+                lambda_min_range[1],
+                lambda_max_range[0],
+                lambda_max_range[1],
+                cv_range[0],
+                cv_range[1],
+                kelly_range[0],
+                kelly_range[1],
+                wf_trials,
+                min_train_bets,
+                min_val_bets,
+                min_test_bets,
+            )
+
+            if wf_results.empty:
+                st.info("Nenhum fold passou pelos filtros do walk-forward.")
+            else:
+                wf_results_display = wf_results.copy()
+                for col in ["train_start", "train_end", "val_start", "val_end", "test_start", "test_end"]:
+                    wf_results_display[col] = pd.to_datetime(wf_results_display[col]).dt.strftime("%d/%m/%Y")
+                numeric_cols = [
+                    "train_roi",
+                    "train_profit",
+                    "train_drawdown",
+                    "val_roi",
+                    "val_profit",
+                    "val_drawdown",
+                    "test_roi",
+                    "test_profit",
+                    "test_drawdown",
+                ]
+                for col in numeric_cols:
+                    if col in wf_results_display.columns:
+                        wf_results_display[col] = wf_results_display[col].map(lambda value: f"{value:.1%}" if "roi" in col else f"{value:.1f}")
+                if "status" in wf_results_display.columns:
+                    wf_results_display["status"] = wf_results_display["status"].astype(str)
+
+                ok_rows = wf_results[wf_results["status"].eq("ok")].copy()
+                if not ok_rows.empty:
+                    agg_roi = float(ok_rows["test_roi"].mean())
+                    agg_profit = float(ok_rows["test_profit"].mean())
+                    agg_drawdown = float(ok_rows["test_drawdown"].min())
+                    agg_bets = int(ok_rows["test_bets"].sum())
+
+                    top_config = (
+                        ok_rows.groupby(
+                            ["window", "rho", "edge_buffer", "lambda_min", "lambda_max", "cv_max", "kelly_fraction"],
+                            as_index=False,
+                        )
+                        .agg(
+                            folds=("fold", "count"),
+                            val_roi=("val_roi", "mean"),
+                            test_roi=("test_roi", "mean"),
+                            test_profit=("test_profit", "mean"),
+                            test_drawdown=("test_drawdown", "mean"),
+                            test_bets=("test_bets", "mean"),
+                        )
+                        .sort_values(["val_roi", "test_roi", "folds"], ascending=[False, False, False])
+                    )
+
+                    st.markdown("#### Melhor configuração recorrente")
+                    c1, c2, c3, c4 = st.columns(4)
+                    c1.metric("ROI medio no teste", f"{agg_roi:.2%}")
+                    c2.metric("Lucro medio no teste", f"{agg_profit:.1f}")
+                    c3.metric("Apostas no teste", f"{agg_bets}")
+                    c4.metric("Pior drawdown", f"{agg_drawdown:.1f}")
+
+                    best_config = top_config.iloc[0]
+                    st.dataframe(
+                        pd.DataFrame(
+                            [
+                                {
+                                    "Janela": int(best_config["window"]),
+                                    "Rho": float(best_config["rho"]),
+                                    "Edge": float(best_config["edge_buffer"]),
+                                    "Lambda min": float(best_config["lambda_min"]),
+                                    "Lambda max": float(best_config["lambda_max"]),
+                                    "CV max": float(best_config["cv_max"]),
+                                    "Kelly": float(best_config["kelly_fraction"]),
+                                    "Folds": int(best_config["folds"]),
+                                    "ROI validacao": float(best_config["val_roi"]),
+                                    "ROI teste": float(best_config["test_roi"]),
+                                    "Lucro teste": float(best_config["test_profit"]),
+                                }
+                            ]
+                        ).assign(
+                            **{
+                                "ROI validacao": lambda df: df["ROI validacao"].map(lambda value: f"{value:.1%}"),
+                                "ROI teste": lambda df: df["ROI teste"].map(lambda value: f"{value:.1%}"),
+                                "Lucro teste": lambda df: df["Lucro teste"].map(lambda value: f"{value:.1f}"),
+                            }
+                        ),
+                        use_container_width=True,
+                        hide_index=True,
+                    )
+
+                    st.markdown("#### Ranking das configuracoes")
+                    ranking_display = top_config.head(20).copy()
+                    ranking_display = ranking_display.rename(
+                        columns={
+                            "window": "Janela",
+                            "rho": "Rho",
+                            "edge_buffer": "Edge",
+                            "lambda_min": "Lambda min",
+                            "lambda_max": "Lambda max",
+                            "cv_max": "CV max",
+                            "kelly_fraction": "Kelly",
+                            "folds": "Folds",
+                            "val_roi": "ROI validacao",
+                            "test_roi": "ROI teste",
+                            "test_profit": "Lucro teste",
+                            "test_drawdown": "Drawdown teste",
+                            "test_bets": "Apostas teste",
+                        }
+                    )
+                    for col in ["ROI validacao", "ROI teste"]:
+                        ranking_display[col] = ranking_display[col].map(lambda value: f"{value:.1%}")
+                    for col in ["Lucro teste", "Drawdown teste", "Apostas teste"]:
+                        ranking_display[col] = ranking_display[col].map(lambda value: f"{value:.1f}" if col != "Apostas teste" else f"{int(round(value))}")
+                    st.dataframe(
+                        ranking_display[
+                            [
+                                "Janela",
+                                "Rho",
+                                "Edge",
+                                "Lambda min",
+                                "Lambda max",
+                                "CV max",
+                                "Kelly",
+                                "Folds",
+                                "ROI validacao",
+                                "ROI teste",
+                                "Lucro teste",
+                                "Drawdown teste",
+                                "Apostas teste",
+                            ]
+                        ],
+                        use_container_width=True,
+                        hide_index=True,
+                    )
+                st.markdown("#### Resultado por fold")
+                st.dataframe(wf_results_display, use_container_width=True, hide_index=True)
 
 
 def render_live_dashboard() -> None:
