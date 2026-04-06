@@ -232,6 +232,8 @@ def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
         return scored
 
     matched = scored.copy()
+    matched["legacy_home_team"] = pd.NA
+    matched["legacy_away_team"] = pd.NA
     for league_key, league_frame in matched.groupby("league_key", sort=False):
         legacy_league = legacy[legacy["league_key"].eq(league_key)]
         if legacy_league.empty:
@@ -251,36 +253,21 @@ def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
     )
     legacy_mask = merged["legacy_prob_under25"].notna()
     merged["legacy_reference_found"] = legacy_mask.fillna(False)
-    if not legacy_mask.any():
-        return scored
-
-    merged.loc[legacy_mask, "lambda_total"] = merged.loc[legacy_mask, "legacy_lambda_total"]
-    merged.loc[legacy_mask, "p_under25"] = merged.loc[legacy_mask, "legacy_prob_under25"].clip(lower=0.0, upper=1.0)
-    merged.loc[legacy_mask, "fair_odds"] = np.where(
-        merged.loc[legacy_mask, "p_under25"] > 0,
-        1.0 / merged.loc[legacy_mask, "p_under25"],
-        np.nan,
+    return merged.drop(
+        columns=[
+            c
+            for c in [
+                "legacy_lambda_total",
+                "legacy_prob_under25",
+                "legacy_entry_under25",
+                "legacy_home_team",
+                "legacy_away_team",
+                "home_team_legacy",
+                "away_team_legacy",
+            ]
+            if c in merged.columns
+        ]
     )
-    merged.loc[legacy_mask, "delta_p"] = (merged.loc[legacy_mask, "p_under25"] - merged.loc[legacy_mask, "prob_liga"]) * 100.0
-    merged.loc[legacy_mask, "edge_pct"] = ((merged.loc[legacy_mask, "under25_odds"] / merged.loc[legacy_mask, "fair_odds"]) - 1.0) * 100.0
-    merged.loc[legacy_mask, "selection_ok"] = (
-        merged.loc[legacy_mask, "legacy_entry_under25"].astype(str).str.strip().str.lower().eq("entrar")
-    )
-    merged.loc[legacy_mask, "cv_ok"] = True
-    merged.loc[legacy_mask, "lambda_ok"] = merged.loc[legacy_mask, "legacy_lambda_total"].between(
-        merged.loc[legacy_mask, "lambda_min"], merged.loc[legacy_mask, "lambda_max"], inclusive="both"
-    )
-    merged.loc[legacy_mask, "edge_ok"] = True
-    merged["bet_eligible"] = (
-        merged["features_ready"]
-        & merged["league_history_ready"]
-        & merged["odds_eligible"]
-        & merged["selection_ok"]
-        & merged["cv_ok"]
-        & merged["lambda_ok"]
-        & merged["stake_fraction"].gt(0)
-    )
-    return merged.drop(columns=[c for c in ["legacy_lambda_total", "legacy_prob_under25", "legacy_entry_under25", "legacy_home_team", "legacy_away_team"] if c in merged.columns])
 
 
 def _finalize_scored_frame(
@@ -296,7 +283,6 @@ def _finalize_scored_frame(
     lambda_max: float,
     kelly_fraction: float,
     stake_amount: float,
-    lambda_liga_padrao: float,
 ) -> pd.DataFrame:
     scored["lambda_home"] = lambda_home
     scored["lambda_away"] = lambda_away
@@ -304,8 +290,6 @@ def _finalize_scored_frame(
     scored["p_under25"] = p_under25.clip(lower=0.0, upper=1.0)
     scored["fair_odds"] = np.where(scored["p_under25"] > 0, 1.0 / scored["p_under25"], np.nan)
     scored["edge_pct"] = ((scored["under25_odds"] / scored["fair_odds"]) - 1.0) * 100.0
-    scored["prob_liga"] = float(poisson.cdf(2, lambda_liga_padrao))
-    scored["delta_p"] = (scored["p_under25"] - scored["prob_liga"]) * 100.0
     scored["edge_buffer"] = float(edge_buffer)
     scored["lambda_min"] = float(lambda_min)
     scored["lambda_max"] = float(lambda_max)
@@ -336,16 +320,12 @@ def _poisson_model(
 
 def _excel_model(
     scored: pd.DataFrame,
-    *,
-    lambda_liga_padrao: float,
-) -> tuple[pd.Series, pd.Series, pd.Series, pd.Series, pd.Series]:
+) -> tuple[pd.Series, pd.Series, pd.Series, pd.Series]:
     home_lambda = (scored["home_gf_mean_10"] + scored["away_ga_mean_10"]) / 2.0
     away_lambda = (scored["away_gf_mean_10"] + scored["home_ga_mean_10"]) / 2.0
     total_lambda = home_lambda + away_lambda
     p_under25 = pd.Series(poisson.cdf(2, total_lambda), index=scored.index)
-    prob_liga = float(poisson.cdf(2, lambda_liga_padrao))
-    delta_p = (p_under25 - prob_liga) * 100.0
-    return home_lambda, away_lambda, total_lambda, p_under25, delta_p
+    return home_lambda, away_lambda, total_lambda, p_under25
 
 
 def score_under25(
@@ -377,7 +357,7 @@ def score_under25(
     model_key = (model or "poisson").strip().lower()
 
     poisson_home, poisson_away, poisson_total, poisson_prob = _poisson_model(scored, rho=rho)
-    excel_home, excel_away, excel_total, excel_prob, excel_delta = _excel_model(scored, lambda_liga_padrao=lambda_liga_padrao)
+    excel_home, excel_away, excel_total, excel_prob = _excel_model(scored)
 
     if model_key in {"poisson", "poisson atual", "poisson_dc", "poisson-dc"}:
         selection_ok = scored["under25_odds"] > (1.0 / poisson_prob.clip(lower=np.finfo(float).eps)) * (1.0 + edge_buffer)
@@ -393,24 +373,22 @@ def score_under25(
             lambda_max=lambda_max,
             kelly_fraction=kelly_fraction,
             stake_amount=stake_amount,
-            lambda_liga_padrao=lambda_liga_padrao,
         )
 
     if model_key in {"excel", "modelo excel", "heuristic", "heuristico"}:
-        selection_ok = excel_delta >= float(delta_p_min)
+        selection_ok = scored["under25_odds"] > (1.0 / excel_prob.clip(lower=np.finfo(float).eps)) * (1.0 + edge_buffer)
         scored = _finalize_scored_frame(
             scored,
             lambda_home=excel_home,
             lambda_away=excel_away,
             p_under25=excel_prob,
             selection_ok=selection_ok,
-            edge_buffer=0.0,
+            edge_buffer=edge_buffer,
             cv_max=cv_max,
             lambda_min=lambda_min,
             lambda_max=lambda_max,
             kelly_fraction=kelly_fraction,
             stake_amount=stake_amount,
-            lambda_liga_padrao=lambda_liga_padrao,
         )
         return _apply_legacy_excel_reference(scored)
 
@@ -418,9 +396,7 @@ def score_under25(
     hybrid_away = (blend_weight * poisson_away) + ((1.0 - blend_weight) * excel_away)
     hybrid_prob = (blend_weight * poisson_prob) + ((1.0 - blend_weight) * excel_prob)
     hybrid_fair_odds = np.where(hybrid_prob > 0, 1.0 / hybrid_prob, np.nan)
-    hybrid_edge_ok = scored["under25_odds"] > (hybrid_fair_odds * (1.0 + edge_buffer))
-    hybrid_delta_ok = ((hybrid_prob - float(poisson.cdf(2, lambda_liga_padrao))) * 100.0) >= float(delta_p_min)
-    selection_ok = hybrid_edge_ok & hybrid_delta_ok
+    selection_ok = scored["under25_odds"] > (hybrid_fair_odds * (1.0 + edge_buffer))
     return _finalize_scored_frame(
         scored,
         lambda_home=hybrid_home,
@@ -433,7 +409,6 @@ def score_under25(
         lambda_max=lambda_max,
         kelly_fraction=kelly_fraction,
         stake_amount=stake_amount,
-        lambda_liga_padrao=lambda_liga_padrao,
     )
 
 

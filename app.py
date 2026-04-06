@@ -125,12 +125,8 @@ def _render_model_sidebar() -> None:
 
     if model in {"Poisson atual", "Híbrido"}:
         st.sidebar.slider("Dixon-Coles rho", min_value=-0.20, max_value=0.20, value=-0.02 if model == "Híbrido" else 0.02, step=0.01, key="model_rho")
-        st.sidebar.slider("Edge mínimo", min_value=0.00, max_value=0.20, value=0.09 if model == "Híbrido" else 0.10, step=0.01, key="model_edge_buffer")
-    else:
-        st.sidebar.slider("DeltaP mínimo", min_value=0.0, max_value=25.0, value=10.0, step=0.5, key="model_delta_p_min")
 
-    if model in {"Modelo Excel", "Híbrido"}:
-        st.sidebar.slider("Lambda liga padrão", min_value=1.50, max_value=4.00, value=2.60, step=0.05, key="model_lambda_liga_padrao")
+    st.sidebar.slider("Edge mínimo", min_value=0.00, max_value=0.20, value=0.09 if model == "Híbrido" else 0.10, step=0.01, key="model_edge_buffer")
 
     if model == "Híbrido":
         st.sidebar.slider("Peso Poisson", min_value=0.0, max_value=1.0, value=0.50, step=0.05, key="model_blend_weight")
@@ -419,8 +415,6 @@ def cached_parameter_search(
     lambda_min_candidates = _candidate_values(lambda_min_min, lambda_min_max, 4)
     lambda_max_candidates = _candidate_values(lambda_max_min, lambda_max_max, 4)
     cv_candidates = _candidate_values(cv_min, cv_max, 4)
-    delta_p_candidates = _candidate_values(delta_p_min_min, delta_p_min_max, 4)
-    lambda_liga_candidates = _candidate_values(lambda_liga_min, lambda_liga_max, 4)
     blend_candidates = _candidate_values(blend_weight_min, blend_weight_max, 4)
 
     rows: list[dict[str, float | int | str]] = []
@@ -438,16 +432,14 @@ def cached_parameter_search(
         model_key = (model_name or "poisson").strip().lower()
         rho = float(rng.choice(rho_candidates))
         edge_buffer = float(rng.choice(edge_candidates))
-        delta_p_min = float(rng.choice(delta_p_candidates))
-        lambda_liga_padrao = float(rng.choice(lambda_liga_candidates))
         blend_weight = float(rng.choice(blend_candidates))
 
         if model_key in {"poisson", "poisson atual", "poisson_dc", "poisson-dc"}:
             config_key = (model_key, window, rho, edge_buffer, lambda_min, lambda_max, cv_cut, kelly_fraction)
         elif model_key in {"excel", "modelo excel", "heuristic", "heuristico"}:
-            config_key = (model_key, window, delta_p_min, lambda_liga_padrao, lambda_min, lambda_max, cv_cut, kelly_fraction)
+            config_key = (model_key, window, edge_buffer, lambda_min, lambda_max, cv_cut, stake_amount)
         else:
-            config_key = (model_key, window, rho, edge_buffer, delta_p_min, lambda_liga_padrao, blend_weight, lambda_min, lambda_max, cv_cut, kelly_fraction)
+            config_key = (model_key, window, rho, edge_buffer, blend_weight, lambda_min, lambda_max, cv_cut, kelly_fraction)
         if config_key in seen:
             continue
         seen.add(config_key)
@@ -461,8 +453,6 @@ def cached_parameter_search(
             model=model_name,
             rho=rho,
             edge_buffer=edge_buffer,
-            delta_p_min=delta_p_min,
-            lambda_liga_padrao=lambda_liga_padrao,
             blend_weight=blend_weight,
             stake_amount=stake_amount,
             lambda_min=lambda_min,
@@ -486,8 +476,6 @@ def cached_parameter_search(
                 "model_name": model_name,
                 "rho": rho,
                 "edge_buffer": edge_buffer,
-                "delta_p_min": delta_p_min,
-                "lambda_liga_padrao": lambda_liga_padrao,
                 "blend_weight": blend_weight,
                 "lambda_min": lambda_min,
                 "lambda_max": lambda_max,
@@ -568,8 +556,6 @@ def cached_walk_forward_validation(
     lambda_min_candidates = _candidate_values(lambda_min_min, lambda_min_max, 4)
     lambda_max_candidates = _candidate_values(lambda_max_min, lambda_max_max, 4)
     cv_candidates = _candidate_values(cv_min, cv_max, 4)
-    delta_p_candidates = _candidate_values(delta_p_min_min, delta_p_min_max, 4)
-    lambda_liga_candidates = _candidate_values(lambda_liga_min, lambda_liga_max, 4)
     blend_candidates = _candidate_values(blend_weight_min, blend_weight_max, 4)
 
     selected_set = set(selected_leagues)
@@ -589,16 +575,12 @@ def cached_walk_forward_validation(
             kelly_fraction = float(stake_amount)
             rho = float(rng.choice(rho_candidates))
             edge_buffer = float(rng.choice(edge_candidates))
-            delta_p_min = float(rng.choice(delta_p_candidates))
-            lambda_liga_padrao = float(rng.choice(lambda_liga_candidates))
             blend_weight = float(rng.choice(blend_candidates))
             config = {
                 "model_name": model_name,
                 "window": window,
                 "rho": rho,
                 "edge_buffer": edge_buffer,
-                "delta_p_min": delta_p_min,
-                "lambda_liga_padrao": lambda_liga_padrao,
                 "blend_weight": blend_weight,
                 "lambda_min": lambda_min,
                 "lambda_max": lambda_max,
@@ -615,8 +597,6 @@ def cached_walk_forward_validation(
                 model=model_name,
                 rho=rho,
                 edge_buffer=edge_buffer,
-                delta_p_min=delta_p_min,
-                lambda_liga_padrao=lambda_liga_padrao,
                 blend_weight=blend_weight,
                 stake_amount=stake_amount,
                 lambda_min=lambda_min,
@@ -672,8 +652,6 @@ def cached_walk_forward_validation(
             model=model_name,
             rho=float(best_candidate["rho"]),
             edge_buffer=float(best_candidate["edge_buffer"]),
-            delta_p_min=float(best_candidate["delta_p_min"]),
-            lambda_liga_padrao=float(best_candidate["lambda_liga_padrao"]),
             blend_weight=float(best_candidate["blend_weight"]),
             stake_amount=stake_amount,
             lambda_min=float(best_candidate["lambda_min"]),
