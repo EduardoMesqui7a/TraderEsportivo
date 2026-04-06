@@ -18,6 +18,8 @@ st.set_page_config(page_title="Quant-Bet Under 2.5", layout="wide")
 
 DATA_PATH = BASE_PATH
 
+MODEL_OPTIONS = ("Poisson atual", "Modelo Excel", "Híbrido")
+
 CARD_STYLE = """
 <style>
 .quant-card {
@@ -66,9 +68,13 @@ def cached_matches(base_path: str) -> pd.DataFrame:
 @st.cache_data(show_spinner=True)
 def cached_feature_frame(
     base_path: str,
+    model_name: str,
     window: int,
     rho: float,
     edge_buffer: float,
+    delta_p_min: float,
+    lambda_liga_padrao: float,
+    blend_weight: float,
     lambda_min: float,
     lambda_max: float,
     cv_max: float,
@@ -82,8 +88,12 @@ def cached_feature_frame(
         return features.copy()
     return score_under25(
         features,
+        model=model_name,
         rho=rho,
         edge_buffer=edge_buffer,
+        delta_p_min=delta_p_min,
+        lambda_liga_padrao=lambda_liga_padrao,
+        blend_weight=blend_weight,
         lambda_min=lambda_min,
         lambda_max=lambda_max,
         cv_max=cv_max,
@@ -95,6 +105,48 @@ def cached_feature_frame(
 def cached_sofascore_daily_matches(target_date: date) -> pd.DataFrame:
     client = APIClient()
     return client.fetch_sofascore_daily_matches(target_date)
+
+
+def _render_model_sidebar() -> None:
+    st.sidebar.markdown("### Modelo matemático")
+    model = st.sidebar.selectbox("Modelo", MODEL_OPTIONS, key="model_name")
+    st.sidebar.caption("Os parâmetros abaixo mudam conforme o modelo selecionado.")
+
+    window_default = 5 if model == "Modelo Excel" else 6 if model == "Híbrido" else 10
+    st.sidebar.slider("Janela de jogos", min_value=4, max_value=20, value=window_default, step=1, key="model_window")
+
+    if model in {"Poisson atual", "Híbrido"}:
+        st.sidebar.slider("Dixon-Coles rho", min_value=-0.20, max_value=0.20, value=-0.02 if model == "Híbrido" else 0.02, step=0.01, key="model_rho")
+        st.sidebar.slider("Edge mínimo", min_value=0.00, max_value=0.20, value=0.09 if model == "Híbrido" else 0.10, step=0.01, key="model_edge_buffer")
+    else:
+        st.sidebar.slider("DeltaP mínimo", min_value=0.0, max_value=25.0, value=10.0, step=0.5, key="model_delta_p_min")
+
+    if model in {"Modelo Excel", "Híbrido"}:
+        st.sidebar.slider("Lambda liga padrão", min_value=1.50, max_value=4.00, value=2.60, step=0.05, key="model_lambda_liga_padrao")
+
+    if model == "Híbrido":
+        st.sidebar.slider("Peso Poisson", min_value=0.0, max_value=1.0, value=0.50, step=0.05, key="model_blend_weight")
+
+    st.sidebar.slider("Lambda mínimo", min_value=0.50, max_value=1.50, value=0.70 if model != "Modelo Excel" else 1.20, step=0.05, key="model_lambda_min")
+    st.sidebar.slider("Lambda máximo", min_value=1.50, max_value=4.00, value=2.40 if model != "Modelo Excel" else 2.20, step=0.05, key="model_lambda_max")
+    st.sidebar.slider("CV máximo", min_value=0.50, max_value=2.00, value=1.10 if model != "Modelo Excel" else 0.70, step=0.05, key="model_cv_max")
+    st.sidebar.slider("Kelly fracionado", min_value=0.05, max_value=0.50, value=0.20 if model != "Modelo Excel" else 0.35, step=0.05, key="model_kelly_fraction")
+
+
+def _get_model_settings() -> dict[str, float | int | str]:
+    return {
+        "model_name": str(st.session_state.get("model_name", MODEL_OPTIONS[0])),
+        "window": int(st.session_state.get("model_window", 10)),
+        "rho": float(st.session_state.get("model_rho", 0.02)),
+        "edge_buffer": float(st.session_state.get("model_edge_buffer", 0.10)),
+        "delta_p_min": float(st.session_state.get("model_delta_p_min", 10.0)),
+        "lambda_liga_padrao": float(st.session_state.get("model_lambda_liga_padrao", 2.6)),
+        "blend_weight": float(st.session_state.get("model_blend_weight", 0.5)),
+        "lambda_min": float(st.session_state.get("model_lambda_min", 0.70)),
+        "lambda_max": float(st.session_state.get("model_lambda_max", 2.40)),
+        "cv_max": float(st.session_state.get("model_cv_max", 1.10)),
+        "kelly_fraction": float(st.session_state.get("model_kelly_fraction", 0.20)),
+    }
 
 
 def _shift_period_to_cap(period: tuple[date, date], cap_end: date) -> tuple[date, date]:
@@ -312,6 +364,7 @@ def _evaluate_config(
 @st.cache_data(show_spinner=True)
 def cached_parameter_search(
     base_path: str,
+    model_name: str,
     selected_leagues: tuple[str, ...],
     start_date: date,
     end_date: date,
@@ -331,6 +384,12 @@ def cached_parameter_search(
     cv_max: float,
     kelly_min: float,
     kelly_max: float,
+    delta_p_min_min: float,
+    delta_p_min_max: float,
+    lambda_liga_min: float,
+    lambda_liga_max: float,
+    blend_weight_min: float,
+    blend_weight_max: float,
     n_trials: int,
     min_bets: int,
 ) -> pd.DataFrame:
@@ -346,6 +405,9 @@ def cached_parameter_search(
     lambda_max_candidates = _candidate_values(lambda_max_min, lambda_max_max, 4)
     cv_candidates = _candidate_values(cv_min, cv_max, 4)
     kelly_candidates = _candidate_values(kelly_min, kelly_max, 4)
+    delta_p_candidates = _candidate_values(delta_p_min_min, delta_p_min_max, 4)
+    lambda_liga_candidates = _candidate_values(lambda_liga_min, lambda_liga_max, 4)
+    blend_candidates = _candidate_values(blend_weight_min, blend_weight_max, 4)
 
     feature_cache: dict[int, pd.DataFrame] = {}
     rows: list[dict[str, float | int | str]] = []
@@ -354,15 +416,25 @@ def cached_parameter_search(
 
     for _ in range(n_trials):
         window = int(rng.choice(window_candidates))
-        rho = float(rng.choice(rho_candidates))
-        edge_buffer = float(rng.choice(edge_candidates))
         lambda_min = float(rng.choice(lambda_min_candidates))
         lambda_max = float(rng.choice(lambda_max_candidates))
         if lambda_min >= lambda_max:
             continue
         cv_cut = float(rng.choice(cv_candidates))
         kelly_fraction = float(rng.choice(kelly_candidates))
-        config_key = (window, rho, edge_buffer, lambda_min, lambda_max, cv_cut, kelly_fraction)
+        model_key = (model_name or "poisson").strip().lower()
+        rho = float(rng.choice(rho_candidates))
+        edge_buffer = float(rng.choice(edge_candidates))
+        delta_p_min = float(rng.choice(delta_p_candidates))
+        lambda_liga_padrao = float(rng.choice(lambda_liga_candidates))
+        blend_weight = float(rng.choice(blend_candidates))
+
+        if model_key in {"poisson", "poisson atual", "poisson_dc", "poisson-dc"}:
+            config_key = (model_key, window, rho, edge_buffer, lambda_min, lambda_max, cv_cut, kelly_fraction)
+        elif model_key in {"excel", "modelo excel", "heuristic", "heuristico"}:
+            config_key = (model_key, window, delta_p_min, lambda_liga_padrao, lambda_min, lambda_max, cv_cut, kelly_fraction)
+        else:
+            config_key = (model_key, window, rho, edge_buffer, delta_p_min, lambda_liga_padrao, blend_weight, lambda_min, lambda_max, cv_cut, kelly_fraction)
         if config_key in seen:
             continue
         seen.add(config_key)
@@ -375,8 +447,12 @@ def cached_parameter_search(
 
         scored = score_under25(
             features,
+            model=model_name,
             rho=rho,
             edge_buffer=edge_buffer,
+            delta_p_min=delta_p_min,
+            lambda_liga_padrao=lambda_liga_padrao,
+            blend_weight=blend_weight,
             lambda_min=lambda_min,
             lambda_max=lambda_max,
             cv_max=cv_cut,
@@ -395,8 +471,12 @@ def cached_parameter_search(
         rows.append(
             {
                 "window": window,
+                "model_name": model_name,
                 "rho": rho,
                 "edge_buffer": edge_buffer,
+                "delta_p_min": delta_p_min,
+                "lambda_liga_padrao": lambda_liga_padrao,
+                "blend_weight": blend_weight,
                 "lambda_min": lambda_min,
                 "lambda_max": lambda_max,
                 "cv_max": cv_cut,
@@ -418,6 +498,7 @@ def cached_parameter_search(
 @st.cache_data(show_spinner=True)
 def cached_walk_forward_validation(
     base_path: str,
+    model_name: str,
     selected_leagues: tuple[str, ...],
     start_date: date,
     end_date: date,
@@ -441,6 +522,12 @@ def cached_walk_forward_validation(
     cv_max: float,
     kelly_min: float,
     kelly_max: float,
+    delta_p_min_min: float,
+    delta_p_min_max: float,
+    lambda_liga_min: float,
+    lambda_liga_max: float,
+    blend_weight_min: float,
+    blend_weight_max: float,
     n_trials: int,
     min_train_bets: int,
     min_val_bets: int,
@@ -469,6 +556,9 @@ def cached_walk_forward_validation(
     lambda_max_candidates = _candidate_values(lambda_max_min, lambda_max_max, 4)
     cv_candidates = _candidate_values(cv_min, cv_max, 4)
     kelly_candidates = _candidate_values(kelly_min, kelly_max, 4)
+    delta_p_candidates = _candidate_values(delta_p_min_min, delta_p_min_max, 4)
+    lambda_liga_candidates = _candidate_values(lambda_liga_min, lambda_liga_max, 4)
+    blend_candidates = _candidate_values(blend_weight_min, blend_weight_max, 4)
 
     feature_cache: dict[int, pd.DataFrame] = {}
     selected_set = set(selected_leagues)
@@ -480,18 +570,25 @@ def cached_walk_forward_validation(
 
         for _ in range(n_trials):
             window = int(rng.choice(window_candidates))
-            rho = float(rng.choice(rho_candidates))
-            edge_buffer = float(rng.choice(edge_candidates))
             lambda_min = float(rng.choice(lambda_min_candidates))
             lambda_max = float(rng.choice(lambda_max_candidates))
             if lambda_min >= lambda_max:
                 continue
             cv_cut = float(rng.choice(cv_candidates))
             kelly_fraction = float(rng.choice(kelly_candidates))
+            rho = float(rng.choice(rho_candidates))
+            edge_buffer = float(rng.choice(edge_candidates))
+            delta_p_min = float(rng.choice(delta_p_candidates))
+            lambda_liga_padrao = float(rng.choice(lambda_liga_candidates))
+            blend_weight = float(rng.choice(blend_candidates))
             config = {
+                "model_name": model_name,
                 "window": window,
                 "rho": rho,
                 "edge_buffer": edge_buffer,
+                "delta_p_min": delta_p_min,
+                "lambda_liga_padrao": lambda_liga_padrao,
+                "blend_weight": blend_weight,
                 "lambda_min": lambda_min,
                 "lambda_max": lambda_max,
                 "cv_max": cv_cut,
@@ -506,8 +603,12 @@ def cached_walk_forward_validation(
 
             scored = score_under25(
                 features,
+                model=model_name,
                 rho=rho,
                 edge_buffer=edge_buffer,
+                delta_p_min=delta_p_min,
+                lambda_liga_padrao=lambda_liga_padrao,
+                blend_weight=blend_weight,
                 lambda_min=lambda_min,
                 lambda_max=lambda_max,
                 cv_max=cv_cut,
@@ -558,8 +659,12 @@ def cached_walk_forward_validation(
         features = feature_cache[int(best_candidate["window"])]
         scored = score_under25(
             features,
+            model=model_name,
             rho=float(best_candidate["rho"]),
             edge_buffer=float(best_candidate["edge_buffer"]),
+            delta_p_min=float(best_candidate["delta_p_min"]),
+            lambda_liga_padrao=float(best_candidate["lambda_liga_padrao"]),
+            blend_weight=float(best_candidate["blend_weight"]),
             lambda_min=float(best_candidate["lambda_min"]),
             lambda_max=float(best_candidate["lambda_max"]),
             cv_max=float(best_candidate["cv_max"]),
@@ -671,25 +776,21 @@ def render_backtesting(base_path: str) -> None:
         key="backtest_leagues",
     )
 
-    st.sidebar.markdown("### Parâmetros do método")
-    st.sidebar.caption("Defaults calibrados na validação de 2025-01-01 a 2026-04-02.")
-    window = st.sidebar.slider("Janela de jogos", min_value=5, max_value=20, value=15, step=1)
-    rho = st.sidebar.slider("Dixon-Coles rho", min_value=-0.20, max_value=0.20, value=0.02, step=0.01)
-    edge_buffer = st.sidebar.slider("Edge mínimo", min_value=0.00, max_value=0.20, value=0.10, step=0.01)
-    lambda_min = st.sidebar.slider("Lambda mínimo", min_value=0.50, max_value=1.50, value=0.70, step=0.05)
-    lambda_max = st.sidebar.slider("Lambda máximo", min_value=1.50, max_value=4.00, value=2.40, step=0.05)
-    cv_max = st.sidebar.slider("CV máximo", min_value=0.50, max_value=2.00, value=1.10, step=0.05)
-    kelly_fraction = st.sidebar.slider("Kelly fracionado", min_value=0.05, max_value=0.50, value=0.20, step=0.05)
+    settings = _get_model_settings()
 
     scored = cached_feature_frame(
         base_path,
-        window,
-        rho,
-        edge_buffer,
-        lambda_min,
-        lambda_max,
-        cv_max,
-        kelly_fraction,
+        settings["model_name"],
+        settings["window"],
+        settings["rho"],
+        settings["edge_buffer"],
+        settings["delta_p_min"],
+        settings["lambda_liga_padrao"],
+        settings["blend_weight"],
+        settings["lambda_min"],
+        settings["lambda_max"],
+        settings["cv_max"],
+        settings["kelly_fraction"],
     )
 
     if scored.empty:
@@ -805,6 +906,8 @@ def render_optimization(base_path: str) -> None:
     if opt_default_start > cap_end:
         opt_default_start = min_date
 
+    settings = _get_model_settings()
+
     c1, c2 = st.columns(2)
     with c1:
         opt_period = st.date_input(
@@ -852,6 +955,7 @@ def render_optimization(base_path: str) -> None:
 
     results = cached_parameter_search(
         base_path,
+        settings["model_name"],
         tuple(opt_leagues),
         start_date,
         end_date,
@@ -871,6 +975,12 @@ def render_optimization(base_path: str) -> None:
         cv_range[1],
         kelly_range[0],
         kelly_range[1],
+        0.0,
+        20.0,
+        1.50,
+        4.00,
+        0.0,
+        1.0,
         n_trials,
         min_bets,
     )
@@ -913,8 +1023,12 @@ def render_optimization(base_path: str) -> None:
     features = build_feature_frame(matches, window=int(best["window"]))
     best_scored = score_under25(
         features,
+        model=settings["model_name"],
         rho=float(best["rho"]),
         edge_buffer=float(best["edge_buffer"]),
+        delta_p_min=float(best.get("delta_p_min", 10.0)),
+        lambda_liga_padrao=float(best.get("lambda_liga_padrao", 2.6)),
+        blend_weight=float(best.get("blend_weight", 0.5)),
         lambda_min=float(best["lambda_min"]),
         lambda_max=float(best["lambda_max"]),
         cv_max=float(best["cv_max"]),
@@ -959,6 +1073,7 @@ def render_optimization(base_path: str) -> None:
         if run_walk_forward:
             wf_results = cached_walk_forward_validation(
                 base_path,
+                settings["model_name"],
                 tuple(opt_leagues),
                 start_date,
                 end_date,
@@ -982,6 +1097,12 @@ def render_optimization(base_path: str) -> None:
                 cv_range[1],
                 kelly_range[0],
                 kelly_range[1],
+                0.0,
+                20.0,
+                1.50,
+                4.00,
+                0.0,
+                1.0,
                 wf_trials,
                 min_train_bets,
                 min_val_bets,
@@ -1156,6 +1277,7 @@ def render_live_dashboard() -> None:
 def main() -> None:
     st.title("Quant-Bet Under 2.5")
     base_path = st.sidebar.text_input("Base historica", value=str(DATA_PATH))
+    _render_model_sidebar()
     resolved_base = str(resolve_football_data_root(base_path))
     tab_backtest, tab_optimization, tab_live = st.tabs(["Backtesting", "Otimização", "Dashboard Live"])
 
