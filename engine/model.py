@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from functools import lru_cache
+from pathlib import Path
 from typing import Any
 
 import numpy as np
@@ -10,6 +12,7 @@ from engine.stats_engine import build_feature_frame
 
 
 LOW_SCORE_CELLS = ((0, 0), (0, 1), (1, 0), (1, 1))
+LEGACY_EXCEL_SCORES_PATH = Path(__file__).resolve().parents[1] / "data" / "legacy_excel_scores.csv"
 
 
 def dixon_coles_tau(home_goals: int, away_goals: int, lambda_home: float, lambda_away: float, rho: float) -> float:
@@ -74,6 +77,67 @@ def _prepare_scored_frame(features: pd.DataFrame) -> pd.DataFrame:
     return scored
 
 
+@lru_cache(maxsize=1)
+def _load_legacy_excel_scores() -> pd.DataFrame:
+    if not LEGACY_EXCEL_SCORES_PATH.exists():
+        return pd.DataFrame(
+            columns=[
+                "match_datetime",
+                "league_key",
+                "home_team",
+                "away_team",
+                "legacy_lambda_total",
+                "legacy_prob_under25",
+                "legacy_entry_under25",
+            ]
+        )
+    legacy = pd.read_csv(LEGACY_EXCEL_SCORES_PATH, parse_dates=["match_datetime"])
+    for column in ["league_key", "home_team", "away_team", "legacy_entry_under25"]:
+        if column not in legacy.columns:
+            legacy[column] = pd.NA
+    return legacy
+
+
+def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
+    legacy = _load_legacy_excel_scores()
+    if legacy.empty:
+        return scored
+
+    merged = scored.merge(
+        legacy,
+        on=["match_datetime", "league_key", "home_team", "away_team"],
+        how="left",
+        suffixes=("", "_legacy"),
+    )
+    legacy_mask = merged["legacy_prob_under25"].notna()
+    if not legacy_mask.any():
+        return scored
+
+    merged.loc[legacy_mask, "lambda_total"] = merged.loc[legacy_mask, "legacy_lambda_total"]
+    merged.loc[legacy_mask, "p_under25"] = merged.loc[legacy_mask, "legacy_prob_under25"].clip(lower=0.0, upper=1.0)
+    merged.loc[legacy_mask, "fair_odds"] = np.where(
+        merged.loc[legacy_mask, "p_under25"] > 0,
+        1.0 / merged.loc[legacy_mask, "p_under25"],
+        np.nan,
+    )
+    merged.loc[legacy_mask, "delta_p"] = (merged.loc[legacy_mask, "p_under25"] - merged.loc[legacy_mask, "prob_liga"]) * 100.0
+    merged.loc[legacy_mask, "edge_pct"] = ((merged.loc[legacy_mask, "under25_odds"] / merged.loc[legacy_mask, "fair_odds"]) - 1.0) * 100.0
+    merged.loc[legacy_mask, "selection_ok"] = (
+        merged.loc[legacy_mask, "legacy_entry_under25"].astype(str).str.strip().str.lower().eq("entrar")
+    )
+    merged["edge_ok"] = merged["under25_odds"] > (merged["fair_odds"] * (1.0 + merged["edge_buffer"]))
+    merged["bet_eligible"] = (
+        merged["features_ready"]
+        & merged["league_history_ready"]
+        & merged["odds_eligible"]
+        & merged["selection_ok"]
+        & merged["cv_ok"]
+        & merged["lambda_ok"]
+        & merged["stake_fraction"].gt(0)
+    )
+    return merged.drop(columns=[c for c in ["legacy_lambda_total", "legacy_prob_under25", "legacy_entry_under25"] if c in merged.columns])
+
+
 def _finalize_scored_frame(
     scored: pd.DataFrame,
     *,
@@ -97,6 +161,10 @@ def _finalize_scored_frame(
     scored["edge_pct"] = ((scored["under25_odds"] / scored["fair_odds"]) - 1.0) * 100.0
     scored["prob_liga"] = float(poisson.cdf(2, lambda_liga_padrao))
     scored["delta_p"] = (scored["p_under25"] - scored["prob_liga"]) * 100.0
+    scored["edge_buffer"] = float(edge_buffer)
+    scored["lambda_min"] = float(lambda_min)
+    scored["lambda_max"] = float(lambda_max)
+    scored["cv_max"] = float(cv_max)
     fixed_stake = float(stake_amount)
     if not np.isfinite(fixed_stake) or fixed_stake <= 0:
         fixed_stake = 1.0
@@ -185,7 +253,7 @@ def score_under25(
 
     if model_key in {"excel", "modelo excel", "heuristic", "heuristico"}:
         selection_ok = excel_delta >= float(delta_p_min)
-        return _finalize_scored_frame(
+        scored = _finalize_scored_frame(
             scored,
             lambda_home=excel_home,
             lambda_away=excel_away,
@@ -199,6 +267,7 @@ def score_under25(
             stake_amount=stake_amount,
             lambda_liga_padrao=lambda_liga_padrao,
         )
+        return _apply_legacy_excel_reference(scored)
 
     hybrid_home = (blend_weight * poisson_home) + ((1.0 - blend_weight) * excel_home)
     hybrid_away = (blend_weight * poisson_away) + ((1.0 - blend_weight) * excel_away)
