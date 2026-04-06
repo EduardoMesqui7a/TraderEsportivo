@@ -62,14 +62,31 @@ def cached_matches(base_path: str) -> pd.DataFrame:
 
 
 @st.cache_data(show_spinner=True)
-def cached_feature_frame(base_path: str) -> pd.DataFrame:
+def cached_feature_frame(
+    base_path: str,
+    window: int,
+    rho: float,
+    edge_buffer: float,
+    lambda_min: float,
+    lambda_max: float,
+    cv_max: float,
+    kelly_fraction: float,
+) -> pd.DataFrame:
     matches = cached_matches(base_path)
     if matches.empty:
         return matches.copy()
-    features = build_feature_frame(matches, window=10)
+    features = build_feature_frame(matches, window=window)
     if features.empty:
         return features.copy()
-    return score_under25(features)
+    return score_under25(
+        features,
+        rho=rho,
+        edge_buffer=edge_buffer,
+        lambda_min=lambda_min,
+        lambda_max=lambda_max,
+        cv_max=cv_max,
+        kelly_fraction=kelly_fraction,
+    )
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
@@ -174,14 +191,6 @@ def render_backtesting(base_path: str) -> None:
         )
         return
 
-    scored = cached_feature_frame(base_path)
-
-    if scored.empty:
-        st.info(
-            "Os CSVs foram carregados, mas ainda nao ha jogos elegiveis para scoring com a janela atual."
-        )
-        return
-
     league_options = leagues["league_key"].tolist()
     leagues_key = "backtest_leagues"
     if leagues_key not in st.session_state:
@@ -192,6 +201,32 @@ def render_backtesting(base_path: str) -> None:
         key=leagues_key,
         default=league_options,
     )
+
+    st.sidebar.markdown("### Parâmetros do método")
+    window = st.sidebar.slider("Janela de jogos", min_value=5, max_value=20, value=10, step=1)
+    rho = st.sidebar.slider("Dixon-Coles rho", min_value=-0.20, max_value=0.20, value=-0.08, step=0.01)
+    edge_buffer = st.sidebar.slider("Edge mínimo", min_value=0.00, max_value=0.20, value=0.10, step=0.01)
+    lambda_min = st.sidebar.slider("Lambda mínimo", min_value=0.50, max_value=1.50, value=0.80, step=0.05)
+    lambda_max = st.sidebar.slider("Lambda máximo", min_value=1.50, max_value=4.00, value=2.60, step=0.05)
+    cv_max = st.sidebar.slider("CV máximo", min_value=0.50, max_value=2.00, value=1.35, step=0.05)
+    kelly_fraction = st.sidebar.slider("Kelly fracionado", min_value=0.05, max_value=0.50, value=0.25, step=0.05)
+
+    scored = cached_feature_frame(
+        base_path,
+        window,
+        rho,
+        edge_buffer,
+        lambda_min,
+        lambda_max,
+        cv_max,
+        kelly_fraction,
+    )
+
+    if scored.empty:
+        st.info(
+            "Os CSVs foram carregados, mas ainda nao ha jogos elegiveis para scoring com os parametros atuais."
+        )
+        return
     min_date = pd.to_datetime(scored["match_datetime"]).min().date()
     max_date = pd.to_datetime(scored["match_datetime"]).max().date()
     cap_end = min(max_date, date.today() - timedelta(days=3))
