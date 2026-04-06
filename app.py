@@ -139,40 +139,26 @@ def _render_league_summary(result_df: pd.DataFrame, selected_leagues: list[str])
         axis=1,
     )
     summary = summary.sort_values("roi", ascending=True)
-    rows = []
-    for _, row in summary.iterrows():
-        color = "#16a34a" if row["roi"] >= 0 else "#dc2626"
-        rows.append(
-            f"""
-            <tr>
-                <td style="padding:4px 8px;">{row['league_key']}</td>
-                <td style="padding:4px 8px; text-align:right; color:{color};">{row['roi']:.1%}</td>
-                <td style="padding:4px 8px; text-align:right; color:{color};">{row['lucro']:.1f}</td>
-            </tr>
-            """
-        )
+    summary_display = summary.rename(
+        columns={
+            "league_key": "Liga",
+            "roi": "ROI",
+            "lucro": "Lucro",
+        }
+    )[["Liga", "ROI", "Lucro"]]
+    summary_display["Liga"] = summary_display["Liga"].astype(str)
+    summary_display["ROI"] = summary_display["ROI"].map(lambda value: f"{value:.1%}")
+    summary_display["Lucro"] = summary_display["Lucro"].map(lambda value: f"{value:.1f}")
 
     st.markdown(
-        """
-        <div style="margin-top: 0.5rem; padding: 0.6rem 0.8rem; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; background: #fff;">
-            <div style="font-size: 0.92rem; font-weight: 600; margin-bottom: 0.35rem;">Resumo por liga</div>
-            <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
-                <thead>
-                    <tr style="color: #6b7280; text-align: left;">
-                        <th style="padding:4px 8px;">Liga</th>
-                        <th style="padding:4px 8px; text-align:right;">ROI</th>
-                        <th style="padding:4px 8px; text-align:right;">Lucro</th>
-                    </tr>
-                </thead>
-                <tbody>
-        """
-        + "".join(rows)
-        + """
-                </tbody>
-            </table>
-        </div>
-        """,
+        '<div style="margin-top: 0.5rem; font-size: 0.92rem; font-weight: 600;">Resumo por liga</div>',
         unsafe_allow_html=True,
+    )
+    st.dataframe(
+        summary_display,
+        use_container_width=True,
+        hide_index=True,
+        height=min(35 + 38 * len(summary_display), 280),
     )
 
 
