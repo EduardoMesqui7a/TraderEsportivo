@@ -145,7 +145,9 @@ def score_under25(
     delta_p_min: float = 10.0,
     lambda_liga_padrao: float = 2.6,
     blend_weight: float = 0.5,
+    **extra: Any,
 ) -> pd.DataFrame:
+    model = str(extra.get("model_name", model))
     if features.empty:
         return features.copy()
 
