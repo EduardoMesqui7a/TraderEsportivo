@@ -116,6 +116,66 @@ def _render_result_card(label: str, value: str, is_positive: bool) -> None:
     )
 
 
+def _render_league_summary(result_df: pd.DataFrame, selected_leagues: list[str]) -> None:
+    if result_df.empty:
+        st.info("Sem resultados para resumir nas ligas selecionadas.")
+        return
+
+    summary = (
+        result_df[result_df["league_key"].isin(selected_leagues)]
+        .groupby("league_key", as_index=False)
+        .agg(
+            apostas=("bet_eligible", "sum"),
+            lucro=("profit", "sum"),
+            stake=("stake", "sum"),
+        )
+    )
+    if summary.empty:
+        st.info("Sem resultados para as ligas selecionadas.")
+        return
+
+    summary["roi"] = summary.apply(
+        lambda row: (row["lucro"] / row["stake"]) if row["stake"] else 0.0,
+        axis=1,
+    )
+    summary = summary.sort_values("roi", ascending=True)
+    rows = []
+    for _, row in summary.iterrows():
+        color = "#16a34a" if row["roi"] >= 0 else "#dc2626"
+        rows.append(
+            f"""
+            <tr>
+                <td style="padding:4px 8px;">{row['league_key']}</td>
+                <td style="padding:4px 8px; text-align:right; color:{color};">{row['roi']:.1%}</td>
+                <td style="padding:4px 8px; text-align:right; color:{color};">{row['lucro']:.1f}</td>
+            </tr>
+            """
+        )
+
+    st.markdown(
+        """
+        <div style="margin-top: 0.5rem; padding: 0.6rem 0.8rem; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; background: #fff;">
+            <div style="font-size: 0.92rem; font-weight: 600; margin-bottom: 0.35rem;">Resumo por liga</div>
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem;">
+                <thead>
+                    <tr style="color: #6b7280; text-align: left;">
+                        <th style="padding:4px 8px;">Liga</th>
+                        <th style="padding:4px 8px; text-align:right;">ROI</th>
+                        <th style="padding:4px 8px; text-align:right;">Lucro</th>
+                    </tr>
+                </thead>
+                <tbody>
+        """
+        + "".join(rows)
+        + """
+                </tbody>
+            </table>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def render_backtesting(base_path: str) -> None:
     st.markdown(CARD_STYLE, unsafe_allow_html=True)
     st.subheader("Backtesting")
@@ -196,6 +256,7 @@ def render_backtesting(base_path: str) -> None:
     col4.metric("Max Drawdown (stakes)", f"{metrics['max_drawdown']:.1f}")
 
     st.line_chart(result_df.set_index("match_datetime")["cumulative_profit"], use_container_width=True)
+    _render_league_summary(result_df, selected_leagues)
     table_df = result_df[
         [
             "match_datetime",
