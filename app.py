@@ -37,6 +37,10 @@ CARD_STYLE = """
     border-color: rgba(239, 68, 68, 0.45);
     background: rgba(239, 68, 68, 0.08);
 }
+.quant-card-neutral {
+    border-color: rgba(148, 163, 184, 0.35);
+    background: rgba(148, 163, 184, 0.10);
+}
 .quant-card-label {
     font-size: 0.84rem;
     font-weight: 600;
@@ -184,8 +188,13 @@ def _normalize_period_selection(
     return adjusted_period, adjusted_period != period
 
 
-def _render_result_card(label: str, value: str, is_positive: bool) -> None:
-    card_class = "quant-card-positive" if is_positive else "quant-card-negative"
+def _render_result_card(label: str, value: str, status: str = "neutral") -> None:
+    if status == "positive":
+        card_class = "quant-card-positive"
+    elif status == "negative":
+        card_class = "quant-card-negative"
+    else:
+        card_class = "quant-card-neutral"
     st.markdown(
         f"""
         <div class="quant-card {card_class}">
@@ -832,15 +841,15 @@ def render_backtesting(base_path: str) -> None:
     col1, col2, col3, col4 = st.columns(4)
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
-        _render_result_card("Apostas", f"{metrics['bets']}", True)
+        _render_result_card("Apostas", f"{metrics['bets']}", "neutral")
     with col2:
-        _render_result_card("ROI", f"{metrics['roi']:.2%}", metrics["roi"] >= 0)
+        _render_result_card("ROI", f"{metrics['roi']:.2%}", "positive" if metrics["roi"] >= 0 else "negative")
     with col3:
-        _render_result_card("Lucro (stakes)", f"{metrics['total_profit']:.1f}", metrics["total_profit"] >= 0)
+        _render_result_card("Lucro (stakes)", f"{metrics['total_profit']:.1f}", "positive" if metrics["total_profit"] >= 0 else "negative")
     with col4:
-        _render_result_card("Winrate", f"{metrics['win_rate']:.1%}", metrics["win_rate"] >= 0.5)
+        _render_result_card("Winrate", f"{metrics['win_rate']:.1%}", "neutral")
     with col5:
-        _render_result_card("Max Drawdown (stakes)", f"{metrics['max_drawdown']:.1f}", metrics["max_drawdown"] >= 0)
+        _render_result_card("Max Drawdown (stakes)", f"{metrics['max_drawdown']:.1f}", "positive" if metrics["max_drawdown"] >= 0 else "negative")
 
     st.line_chart(result_df.set_index("match_datetime")["cumulative_profit"], width="stretch")
     _render_league_summary(result_df, selected_leagues)
