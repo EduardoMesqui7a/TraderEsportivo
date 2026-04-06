@@ -3,10 +3,18 @@ from __future__ import annotations
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
+import unicodedata
+from difflib import SequenceMatcher
 
 import numpy as np
 import pandas as pd
 from scipy.stats import poisson
+
+try:  # pragma: no cover - optional dependency
+    from thefuzz import fuzz, process  # type: ignore
+except Exception:  # pragma: no cover
+    fuzz = None
+    process = None
 
 from engine.stats_engine import build_feature_frame
 
@@ -95,7 +103,39 @@ def _load_legacy_excel_scores() -> pd.DataFrame:
     for column in ["league_key", "home_team", "away_team", "legacy_entry_under25"]:
         if column not in legacy.columns:
             legacy[column] = pd.NA
+    legacy = legacy.drop_duplicates(subset=["match_datetime", "league_key", "home_team", "away_team"]).reset_index(drop=True)
     return legacy
+
+
+def _normalize_team_name(value: Any) -> str:
+    text = str(value or "").strip().lower()
+    normalized = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
+    normalized = "".join(ch if ch.isalnum() else " " for ch in normalized)
+    return " ".join(normalized.split())
+
+
+def _best_team_match(name: str, candidates: list[str]) -> str:
+    if not candidates:
+        return name
+    normalized_candidates = {candidate: _normalize_team_name(candidate) for candidate in candidates}
+    normalized_name = _normalize_team_name(name)
+    for candidate, candidate_normalized in normalized_candidates.items():
+        if candidate_normalized == normalized_name:
+            return candidate
+        if normalized_name and (normalized_name in candidate_normalized or candidate_normalized in normalized_name):
+            return candidate
+    if process is not None and fuzz is not None:
+        match = process.extractOne(name, candidates, scorer=fuzz.token_sort_ratio)
+        if match and match[1] >= 80:
+            return match[0]
+    scored_candidates = sorted(
+        ((candidate, SequenceMatcher(None, normalized_name, _normalize_team_name(candidate)).ratio()) for candidate in candidates),
+        key=lambda item: item[1],
+        reverse=True,
+    )
+    if scored_candidates and scored_candidates[0][1] >= 0.72:
+        return scored_candidates[0][0]
+    return name
 
 
 def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
@@ -103,9 +143,21 @@ def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
     if legacy.empty:
         return scored
 
-    merged = scored.merge(
+    matched = scored.copy()
+    for league_key, league_frame in matched.groupby("league_key", sort=False):
+        legacy_league = legacy[legacy["league_key"].eq(league_key)]
+        if legacy_league.empty:
+            continue
+        candidates = sorted(set(legacy_league["home_team"].astype(str)).union(set(legacy_league["away_team"].astype(str))))
+        current_names = sorted(set(league_frame["home_team"].astype(str)).union(set(league_frame["away_team"].astype(str))))
+        mapping = {name: _best_team_match(name, candidates) for name in current_names}
+        matched.loc[matched["league_key"].eq(league_key), "legacy_home_team"] = matched.loc[matched["league_key"].eq(league_key), "home_team"].map(mapping)
+        matched.loc[matched["league_key"].eq(league_key), "legacy_away_team"] = matched.loc[matched["league_key"].eq(league_key), "away_team"].map(mapping)
+
+    merged = matched.merge(
         legacy,
-        on=["match_datetime", "league_key", "home_team", "away_team"],
+        left_on=["match_datetime", "league_key", "legacy_home_team", "legacy_away_team"],
+        right_on=["match_datetime", "league_key", "home_team", "away_team"],
         how="left",
         suffixes=("", "_legacy"),
     )
@@ -125,7 +177,11 @@ def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
     merged.loc[legacy_mask, "selection_ok"] = (
         merged.loc[legacy_mask, "legacy_entry_under25"].astype(str).str.strip().str.lower().eq("entrar")
     )
-    merged["edge_ok"] = merged["under25_odds"] > (merged["fair_odds"] * (1.0 + merged["edge_buffer"]))
+    merged.loc[legacy_mask, "cv_ok"] = True
+    merged.loc[legacy_mask, "lambda_ok"] = merged.loc[legacy_mask, "legacy_lambda_total"].between(
+        merged.loc[legacy_mask, "lambda_min"], merged.loc[legacy_mask, "lambda_max"], inclusive="both"
+    )
+    merged.loc[legacy_mask, "edge_ok"] = True
     merged["bet_eligible"] = (
         merged["features_ready"]
         & merged["league_history_ready"]
@@ -135,7 +191,7 @@ def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
         & merged["lambda_ok"]
         & merged["stake_fraction"].gt(0)
     )
-    return merged.drop(columns=[c for c in ["legacy_lambda_total", "legacy_prob_under25", "legacy_entry_under25"] if c in merged.columns])
+    return merged.drop(columns=[c for c in ["legacy_lambda_total", "legacy_prob_under25", "legacy_entry_under25", "legacy_home_team", "legacy_away_team"] if c in merged.columns])
 
 
 def _finalize_scored_frame(
