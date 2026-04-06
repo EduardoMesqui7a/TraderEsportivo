@@ -942,6 +942,7 @@ def render_optimization(base_path: str) -> None:
         n_trials = st.slider("Numero de testes", min_value=20, max_value=300, value=120, step=10)
 
     min_bets = st.slider("Minimo de apostas para validar", min_value=50, max_value=1000, value=300, step=50)
+    run_optimization = st.button("Rodar otimização", key="opt_run_button")
 
     if not isinstance(opt_period, tuple) or len(opt_period) != 2:
         st.info("Selecione um intervalo de validacao.")
@@ -953,8 +954,7 @@ def render_optimization(base_path: str) -> None:
     if start_date < min_date:
         start_date = min_date
 
-    results = cached_parameter_search(
-        base_path,
+    search_params = (
         settings["model_name"],
         tuple(opt_leagues),
         start_date,
@@ -984,6 +984,49 @@ def render_optimization(base_path: str) -> None:
         n_trials,
         min_bets,
     )
+    cached_opt_key = "optimization_results_cache"
+    cached_opt_params = st.session_state.get("optimization_params_cache")
+    if run_optimization or cached_opt_params != search_params:
+        if run_optimization:
+            with st.spinner("Rodando otimização..."):
+                results = cached_parameter_search(
+                    base_path,
+                    settings["model_name"],
+                    tuple(opt_leagues),
+                    start_date,
+                    end_date,
+                    odd_range[0],
+                    odd_range[1],
+                    window_range[0],
+                    window_range[1],
+                    rho_range[0],
+                    rho_range[1],
+                    edge_range[0],
+                    edge_range[1],
+                    lambda_min_range[0],
+                    lambda_min_range[1],
+                    lambda_max_range[0],
+                    lambda_max_range[1],
+                    cv_range[0],
+                    cv_range[1],
+                    kelly_range[0],
+                    kelly_range[1],
+                    0.0,
+                    20.0,
+                    1.50,
+                    4.00,
+                    0.0,
+                    1.0,
+                    n_trials,
+                    min_bets,
+                )
+            st.session_state[cached_opt_key] = results
+            st.session_state["optimization_params_cache"] = search_params
+        else:
+            st.info("Ajuste os parâmetros e clique em Rodar otimização para calcular a busca.")
+            return
+    else:
+        results = st.session_state.get(cached_opt_key, pd.DataFrame())
 
     if results.empty:
         st.info("Nenhuma combinacao passou pelos filtros da busca.")
