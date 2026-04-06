@@ -139,6 +139,10 @@ def _render_model_sidebar() -> None:
     st.sidebar.slider("Lambda máximo", min_value=1.50, max_value=4.00, value=2.40 if model != "Modelo Excel" else 2.20, step=0.05, key="model_lambda_max")
     st.sidebar.slider("CV máximo", min_value=0.50, max_value=2.00, value=1.10 if model != "Modelo Excel" else 0.70, step=0.05, key="model_cv_max")
     st.sidebar.number_input("Stake fixa", min_value=0.10, max_value=10.00, value=1.0, step=0.10, key="model_stake_amount")
+    if model != "Modelo Excel":
+        st.sidebar.slider("Kelly fracionado", min_value=0.05, max_value=0.50, value=0.20, step=0.05, key="model_kelly_fraction")
+    else:
+        st.sidebar.caption("Kelly fracionado não é usado no Modelo Excel; o backtest usa stake fixa.")
 
 
 def _get_model_settings() -> dict[str, float | int | str]:
@@ -155,7 +159,7 @@ def _get_model_settings() -> dict[str, float | int | str]:
         "lambda_min": float(st.session_state.get("model_lambda_min", 0.70)),
         "lambda_max": float(st.session_state.get("model_lambda_max", 2.40)),
         "cv_max": float(st.session_state.get("model_cv_max", 1.10)),
-        "kelly_fraction": float(st.session_state.get("model_kelly_fraction", 0.20)),
+        "kelly_fraction": float(st.session_state.get("model_kelly_fraction", 0.20 if model_name != "Modelo Excel" else 1.0)),
     }
 
 
