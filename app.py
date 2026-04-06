@@ -145,7 +145,7 @@ def _get_model_settings() -> dict[str, float | int | str]:
     model_name = str(st.session_state.get("model_name", MODEL_OPTIONS[0]))
     return {
         "model_name": model_name,
-        "window": 5 if model_name == "Modelo Excel" else int(st.session_state.get("model_window", 10)),
+        "window": int(st.session_state.get("model_window", 5 if model_name == "Modelo Excel" else 10)),
         "rho": float(st.session_state.get("model_rho", 0.02)),
         "edge_buffer": float(st.session_state.get("model_edge_buffer", 0.10)),
         "delta_p_min": float(st.session_state.get("model_delta_p_min", 10.0)),
