@@ -271,17 +271,6 @@ def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
         merged.loc[legacy_mask, "lambda_min"], merged.loc[legacy_mask, "lambda_max"], inclusive="both"
     )
     merged.loc[legacy_mask, "edge_ok"] = True
-    unmatched_mask = ~legacy_mask
-    if unmatched_mask.any():
-        for column in ["lambda_home", "lambda_away", "lambda_total", "p_under25", "fair_odds", "edge_pct", "delta_p"]:
-            if column in merged.columns:
-                merged.loc[unmatched_mask, column] = np.nan
-        merged.loc[unmatched_mask, "selection_ok"] = False
-        merged.loc[unmatched_mask, "cv_ok"] = False
-        merged.loc[unmatched_mask, "lambda_ok"] = False
-        merged.loc[unmatched_mask, "edge_ok"] = False
-        merged.loc[unmatched_mask, "stake_fraction"] = 0.0
-        merged.loc[unmatched_mask, "stake"] = 0.0
     merged["bet_eligible"] = (
         merged["features_ready"]
         & merged["league_history_ready"]
