@@ -4,11 +4,9 @@ import numpy as np
 import pandas as pd
 
 
-WMA_WEIGHTS = np.arange(1, 11, dtype=float)
-
-
 def _weighted_mean(values: np.ndarray) -> float:
-    return float(np.dot(values, WMA_WEIGHTS) / WMA_WEIGHTS.sum())
+    weights = np.arange(1, len(values) + 1, dtype=float)
+    return float(np.dot(values, weights) / weights.sum())
 
 
 def _team_long_frame(matches: pd.DataFrame) -> pd.DataFrame:
@@ -40,8 +38,6 @@ def _team_long_frame(matches: pd.DataFrame) -> pd.DataFrame:
 def _add_team_rolling_features(long_df: pd.DataFrame, window: int) -> pd.DataFrame:
     history = long_df.copy()
     group_cols = ["league_key", "team"]
-    shifted_gf = history.groupby(group_cols)["goals_for"].shift(1)
-    shifted_ga = history.groupby(group_cols)["goals_against"].shift(1)
     history["gf_mean_10"] = history.groupby(group_cols)["goals_for"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=window).mean())
     history["ga_mean_10"] = history.groupby(group_cols)["goals_against"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=window).mean())
     history["ga_std_10"] = history.groupby(group_cols)["goals_against"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=window).std(ddof=1))
