@@ -35,23 +35,28 @@ def _team_long_frame(matches: pd.DataFrame) -> pd.DataFrame:
     return pd.concat([home, away], ignore_index=True).sort_values(["team", "match_datetime", "match_id"]).reset_index(drop=True)
 
 
-def _add_team_rolling_features(long_df: pd.DataFrame, window: int) -> pd.DataFrame:
+def _add_team_rolling_features(long_df: pd.DataFrame, window: int, min_periods: int | None = None) -> pd.DataFrame:
     history = long_df.copy()
+    min_periods = window if min_periods is None else int(min_periods)
+    min_periods = max(1, min(min_periods, window))
     group_cols = ["league_key", "team"]
-    history["gf_mean_10"] = history.groupby(group_cols)["goals_for"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=window).mean())
-    history["ga_mean_10"] = history.groupby(group_cols)["goals_against"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=window).mean())
-    history["ga_std_10"] = history.groupby(group_cols)["goals_against"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=window).std(ddof=1))
-    history["gf_wma_10"] = history.groupby(group_cols)["goals_for"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=window).apply(_weighted_mean, raw=True))
-    history["ga_wma_10"] = history.groupby(group_cols)["goals_against"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=window).apply(_weighted_mean, raw=True))
+    history["gf_mean_10"] = history.groupby(group_cols)["goals_for"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=min_periods).mean())
+    history["ga_mean_10"] = history.groupby(group_cols)["goals_against"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=min_periods).mean())
+    history["ga_std_10"] = history.groupby(group_cols)["goals_against"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=min_periods).std(ddof=1))
+    history["gf_wma_10"] = history.groupby(group_cols)["goals_for"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=min_periods).apply(_weighted_mean, raw=True))
+    history["ga_wma_10"] = history.groupby(group_cols)["goals_against"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=min_periods).apply(_weighted_mean, raw=True))
+    history["ga_std_10"] = history["ga_std_10"].fillna(0.0)
     history["defense_cv_10"] = np.where(history["ga_mean_10"] > 0, history["ga_std_10"] / history["ga_mean_10"], np.nan)
     return history
 
 
-def _add_league_averages(matches: pd.DataFrame) -> pd.DataFrame:
+def _add_league_averages(matches: pd.DataFrame, min_periods: int | None = None) -> pd.DataFrame:
     league_df = matches.sort_values(["league_key", "match_datetime", "match_id"]).copy()
+    min_periods = 10 if min_periods is None else int(min_periods)
+    min_periods = max(1, min(min_periods, 10))
     league_df["league_prior_matches"] = league_df.groupby("league_key").cumcount()
-    home_rolling = league_df.groupby("league_key")["home_goals"].transform(lambda s: s.shift(1).rolling(window=10, min_periods=10).mean())
-    away_rolling = league_df.groupby("league_key")["away_goals"].transform(lambda s: s.shift(1).rolling(window=10, min_periods=10).mean())
+    home_rolling = league_df.groupby("league_key")["home_goals"].transform(lambda s: s.shift(1).rolling(window=10, min_periods=min_periods).mean())
+    away_rolling = league_df.groupby("league_key")["away_goals"].transform(lambda s: s.shift(1).rolling(window=10, min_periods=min_periods).mean())
     home_expanding = league_df.groupby("league_key")["home_goals"].transform(lambda s: s.shift(1).expanding().mean())
     away_expanding = league_df.groupby("league_key")["away_goals"].transform(lambda s: s.shift(1).expanding().mean())
     league_df["league_home_goals_avg"] = home_rolling.fillna(home_expanding)
@@ -59,11 +64,13 @@ def _add_league_averages(matches: pd.DataFrame) -> pd.DataFrame:
     return league_df
 
 
-def build_feature_frame(matches: pd.DataFrame, window: int = 10) -> pd.DataFrame:
+def build_feature_frame(matches: pd.DataFrame, window: int = 10, min_periods: int | None = None) -> pd.DataFrame:
     if matches.empty:
         return matches.copy()
+    min_periods = window if min_periods is None else int(min_periods)
+    min_periods = max(1, min(min_periods, window))
     base_matches = matches.sort_values(["league_key", "match_datetime", "match_id"]).copy()
-    history = _add_team_rolling_features(_team_long_frame(base_matches), window=window)
+    history = _add_team_rolling_features(_team_long_frame(base_matches), window=window, min_periods=min_periods)
     home_features = history[history["venue"].eq("home")].rename(
         columns={
             "team": "home_team",
@@ -86,7 +93,7 @@ def build_feature_frame(matches: pd.DataFrame, window: int = 10) -> pd.DataFrame
             "defense_cv_10": "away_defense_cv_10",
         }
     )
-    feature_df = _add_league_averages(base_matches)
+    feature_df = _add_league_averages(base_matches, min_periods=min_periods)
     feature_df = feature_df.merge(home_features[["match_id", "home_team", "home_gf_mean_10", "home_ga_mean_10", "home_ga_std_10", "home_gf_wma_10", "home_ga_wma_10", "home_defense_cv_10"]], on=["match_id", "home_team"], how="left")
     feature_df = feature_df.merge(away_features[["match_id", "away_team", "away_gf_mean_10", "away_ga_mean_10", "away_ga_std_10", "away_gf_wma_10", "away_ga_wma_10", "away_defense_cv_10"]], on=["match_id", "away_team"], how="left")
     feature_df["home_attack_strength"] = feature_df["home_gf_wma_10"] / feature_df["league_home_goals_avg"]

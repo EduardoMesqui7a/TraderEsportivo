@@ -66,11 +66,12 @@ def cached_matches(base_path: str) -> pd.DataFrame:
 
 
 @st.cache_data(show_spinner=True)
-def cached_features(base_path: str, window: int) -> pd.DataFrame:
+def cached_features(base_path: str, window: int, model_name: str) -> pd.DataFrame:
     matches = cached_matches(base_path)
     if matches.empty:
         return matches.copy()
-    return build_feature_frame(matches, window=window)
+    min_periods = 1 if model_name in {"Modelo Excel", "Híbrido"} else window
+    return build_feature_frame(matches, window=window, min_periods=min_periods)
 
 
 @st.cache_data(show_spinner=True)
@@ -89,7 +90,7 @@ def cached_feature_frame(
     cv_max: float,
     kelly_fraction: float,
 ) -> pd.DataFrame:
-    features = cached_features(base_path, window)
+    features = cached_features(base_path, window, model_name)
     if features.empty:
         return features.copy()
     return score_under25(
@@ -447,7 +448,7 @@ def cached_parameter_search(
             continue
         seen.add(config_key)
 
-        features = cached_features(base_path, window)
+        features = cached_features(base_path, window, model_name)
         if features.empty:
             continue
 
@@ -601,7 +602,7 @@ def cached_walk_forward_validation(
                 "kelly_fraction": kelly_fraction,
             }
 
-            features = cached_features(base_path, window)
+            features = cached_features(base_path, window, model_name)
             if features.empty:
                 continue
 
@@ -661,7 +662,7 @@ def cached_walk_forward_validation(
             )
             continue
 
-        features = cached_features(base_path, int(best_candidate["window"]))
+        features = cached_features(base_path, int(best_candidate["window"]), model_name)
         scored = score_under25(
             features,
             model=model_name,
@@ -1071,7 +1072,7 @@ def render_optimization(base_path: str) -> None:
     display_results["Drawdown"] = display_results["Drawdown"].map(lambda value: f"{value:.1f}")
     st.dataframe(display_results, width="stretch", hide_index=True)
 
-    features = cached_features(base_path, int(best["window"]))
+    features = cached_features(base_path, int(best["window"]), settings["model_name"])
     best_scored = score_under25(
         features,
         model=settings["model_name"],

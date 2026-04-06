@@ -151,7 +151,7 @@ def _ensure_features_frame(features: pd.DataFrame) -> pd.DataFrame:
     }
     if required_columns.issubset(features.columns):
         return features.copy()
-    return build_feature_frame(features, window=10)
+    return build_feature_frame(features, window=10, min_periods=1)
 
 
 def _prepare_scored_frame(features: pd.DataFrame) -> pd.DataFrame:
