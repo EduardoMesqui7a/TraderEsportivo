@@ -244,7 +244,6 @@ def _render_league_summary(result_df: pd.DataFrame, selected_leagues: list[str])
         '<div style="margin-top: 0.5rem; font-size: 0.92rem; font-weight: 600;">Resumo por liga</div>',
         unsafe_allow_html=True,
     )
-    table_df["Data/Hora"] = pd.to_datetime(table_df["Data/Hora"]).dt.strftime("%d/%m/%Y %H:%M:%S")
     st.dataframe(
         summary_display,
         width="stretch",
