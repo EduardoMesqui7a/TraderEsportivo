@@ -115,7 +115,7 @@ def render_backtesting(base_path: str) -> None:
         st.session_state[period_key] = default_period
 
     period = st.date_input(
-        "Periodo",
+        "Escolha um intervalo de datas",
         value=st.session_state[period_key],
         key=period_key,
         min_value=min_date,
@@ -148,22 +148,37 @@ def render_backtesting(base_path: str) -> None:
     col4.metric("Max Drawdown (stakes)", f"{metrics['max_drawdown']:.1f}")
 
     st.line_chart(result_df.set_index("match_datetime")["cumulative_profit"], use_container_width=True)
+    table_df = result_df[
+        [
+            "match_datetime",
+            "league_key",
+            "home_team",
+            "away_team",
+            "under25_odds",
+            "fair_odds",
+            "edge_pct",
+            "stake_fraction",
+            "bet_eligible",
+            "under25_hit",
+            "profit",
+        ]
+    ].sort_values("match_datetime", ascending=False).rename(
+        columns={
+            "match_datetime": "Data/Hora",
+            "league_key": "Liga",
+            "home_team": "Time Casa",
+            "away_team": "Time Fora",
+            "under25_odds": "Odd Mercado",
+            "fair_odds": "Odd Justa",
+            "edge_pct": "Edge (%)",
+            "stake_fraction": "Stake",
+            "bet_eligible": "Elegível",
+            "under25_hit": "Under 2.5",
+            "profit": "Lucro (stakes)",
+        }
+    )
     st.dataframe(
-        result_df[
-            [
-                "match_datetime",
-                "league_key",
-                "home_team",
-                "away_team",
-                "under25_odds",
-                "fair_odds",
-                "edge_pct",
-                "stake_fraction",
-                "bet_eligible",
-                "under25_hit",
-                "profit",
-            ]
-        ].sort_values("match_datetime", ascending=False),
+        table_df,
         use_container_width=True,
         hide_index=True,
     )
