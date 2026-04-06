@@ -66,6 +66,14 @@ def cached_matches(base_path: str) -> pd.DataFrame:
 
 
 @st.cache_data(show_spinner=True)
+def cached_features(base_path: str, window: int) -> pd.DataFrame:
+    matches = cached_matches(base_path)
+    if matches.empty:
+        return matches.copy()
+    return build_feature_frame(matches, window=window)
+
+
+@st.cache_data(show_spinner=True)
 def cached_feature_frame(
     base_path: str,
     model_name: str,
@@ -80,10 +88,7 @@ def cached_feature_frame(
     cv_max: float,
     kelly_fraction: float,
 ) -> pd.DataFrame:
-    matches = cached_matches(base_path)
-    if matches.empty:
-        return matches.copy()
-    features = build_feature_frame(matches, window=window)
+    features = cached_features(base_path, window)
     if features.empty:
         return features.copy()
     return score_under25(
@@ -409,7 +414,6 @@ def cached_parameter_search(
     lambda_liga_candidates = _candidate_values(lambda_liga_min, lambda_liga_max, 4)
     blend_candidates = _candidate_values(blend_weight_min, blend_weight_max, 4)
 
-    feature_cache: dict[int, pd.DataFrame] = {}
     rows: list[dict[str, float | int | str]] = []
     seen: set[tuple[object, ...]] = set()
     selected_set = set(selected_leagues)
@@ -439,9 +443,7 @@ def cached_parameter_search(
             continue
         seen.add(config_key)
 
-        if window not in feature_cache:
-            feature_cache[window] = build_feature_frame(matches, window=window)
-        features = feature_cache[window]
+        features = cached_features(base_path, window)
         if features.empty:
             continue
 
@@ -560,7 +562,6 @@ def cached_walk_forward_validation(
     lambda_liga_candidates = _candidate_values(lambda_liga_min, lambda_liga_max, 4)
     blend_candidates = _candidate_values(blend_weight_min, blend_weight_max, 4)
 
-    feature_cache: dict[int, pd.DataFrame] = {}
     selected_set = set(selected_leagues)
     rows: list[dict[str, float | int | str | date]] = []
 
@@ -595,9 +596,7 @@ def cached_walk_forward_validation(
                 "kelly_fraction": kelly_fraction,
             }
 
-            if window not in feature_cache:
-                feature_cache[window] = build_feature_frame(matches, window=window)
-            features = feature_cache[window]
+            features = cached_features(base_path, window)
             if features.empty:
                 continue
 
@@ -656,7 +655,7 @@ def cached_walk_forward_validation(
             )
             continue
 
-        features = feature_cache[int(best_candidate["window"])]
+        features = cached_features(base_path, int(best_candidate["window"]))
         scored = score_under25(
             features,
             model=model_name,
@@ -1062,8 +1061,7 @@ def render_optimization(base_path: str) -> None:
     display_results["Drawdown"] = display_results["Drawdown"].map(lambda value: f"{value:.1f}")
     st.dataframe(display_results, width="stretch", hide_index=True)
 
-    matches = cached_matches(base_path)
-    features = build_feature_frame(matches, window=int(best["window"]))
+    features = cached_features(base_path, int(best["window"]))
     best_scored = score_under25(
         features,
         model=settings["model_name"],

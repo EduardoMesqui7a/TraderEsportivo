@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import json
 from pathlib import Path
 from typing import Iterable
 
@@ -9,6 +10,10 @@ import pandas as pd
 
 
 BASE_PATH = Path(__file__).resolve().parent / "football-data"
+CACHE_DIR_NAME = "_cache"
+HISTORICAL_CACHE_NAME = "historical_matches.parquet"
+HISTORICAL_META_NAME = "historical_matches.meta.json"
+CACHE_SCHEMA_VERSION = 1
 
 REQUIRED_ALIASES = {
     "home_team": ("HomeTeam", "Home"),
@@ -47,6 +52,55 @@ def _iter_league_folders(base_path: Path) -> Iterable[LeagueFolder]:
             csv_files = tuple(sorted(division_dir.glob("*.csv")))
             if csv_files:
                 yield LeagueFolder(country=country_dir.name, division=division_dir.name, csv_files=csv_files)
+
+
+def _cache_paths(base_path: Path) -> tuple[Path, Path]:
+    cache_dir = base_path / CACHE_DIR_NAME
+    return cache_dir / HISTORICAL_CACHE_NAME, cache_dir / HISTORICAL_META_NAME
+
+
+def _source_signature(base_path: Path) -> dict[str, object]:
+    files: list[dict[str, object]] = []
+    for folder in _iter_league_folders(base_path):
+        for csv_path in folder.csv_files:
+            stat = csv_path.stat()
+            files.append(
+                {
+                    "path": str(csv_path.relative_to(base_path)),
+                    "size": stat.st_size,
+                    "mtime_ns": stat.st_mtime_ns,
+                }
+            )
+    return {
+        "schema_version": CACHE_SCHEMA_VERSION,
+        "base_path": str(base_path),
+        "file_count": len(files),
+        "files": files,
+    }
+
+
+def _load_cached_matches(base_path: Path) -> pd.DataFrame | None:
+    parquet_path, meta_path = _cache_paths(base_path)
+    if not parquet_path.exists() or not meta_path.exists():
+        return None
+    try:
+        metadata = json.loads(meta_path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    if metadata != _source_signature(base_path):
+        return None
+    try:
+        cached = pd.read_parquet(parquet_path)
+    except Exception:
+        return None
+    return cached
+
+
+def _store_cached_matches(base_path: Path, matches: pd.DataFrame) -> None:
+    parquet_path, meta_path = _cache_paths(base_path)
+    parquet_path.parent.mkdir(parents=True, exist_ok=True)
+    matches.to_parquet(parquet_path, index=False)
+    meta_path.write_text(json.dumps(_source_signature(base_path), ensure_ascii=False), encoding="utf-8")
 
 
 def list_available_leagues(base_path: str | Path = BASE_PATH) -> pd.DataFrame:
@@ -164,6 +218,11 @@ def load_historical_data(base_path: str | Path = BASE_PATH) -> pd.DataFrame:
                 "odds_eligible",
             ]
         )
+    cached = _load_cached_matches(base)
+    if cached is not None and not cached.empty:
+        cached = cached.sort_values(["league_key", "match_datetime", "home_team", "away_team"]).reset_index(drop=True)
+        return cached
+
     frames: list[pd.DataFrame] = []
     for folder in _iter_league_folders(base):
         for csv_path in folder.csv_files:
@@ -201,4 +260,8 @@ def load_historical_data(base_path: str | Path = BASE_PATH) -> pd.DataFrame:
     matches = matches.drop_duplicates(subset=["league_key", "match_datetime", "home_team", "away_team", "home_goals", "away_goals"])
     matches = matches.sort_values(["league_key", "match_datetime", "home_team", "away_team"]).reset_index(drop=True)
     matches["match_id"] = matches["league_key"] + "::" + matches["season_key"] + "::" + matches.index.astype("string")
+    try:
+        _store_cached_matches(base, matches)
+    except Exception:
+        pass
     return matches
