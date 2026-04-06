@@ -39,21 +39,27 @@ def _team_long_frame(matches: pd.DataFrame) -> pd.DataFrame:
 
 def _add_team_rolling_features(long_df: pd.DataFrame, window: int) -> pd.DataFrame:
     history = long_df.copy()
-    shifted_gf = history.groupby(["team", "venue"])["goals_for"].shift(1)
-    shifted_ga = history.groupby(["team", "venue"])["goals_against"].shift(1)
-    history["gf_mean_10"] = shifted_gf.groupby([history["team"], history["venue"]]).transform(lambda s: s.rolling(window=window, min_periods=window).mean())
-    history["ga_mean_10"] = shifted_ga.groupby([history["team"], history["venue"]]).transform(lambda s: s.rolling(window=window, min_periods=window).mean())
-    history["ga_std_10"] = shifted_ga.groupby([history["team"], history["venue"]]).transform(lambda s: s.rolling(window=window, min_periods=window).std(ddof=1))
-    history["gf_wma_10"] = shifted_gf.groupby([history["team"], history["venue"]]).transform(lambda s: s.rolling(window=window, min_periods=window).apply(_weighted_mean, raw=True))
-    history["ga_wma_10"] = shifted_ga.groupby([history["team"], history["venue"]]).transform(lambda s: s.rolling(window=window, min_periods=window).apply(_weighted_mean, raw=True))
+    group_cols = ["league_key", "team"]
+    shifted_gf = history.groupby(group_cols)["goals_for"].shift(1)
+    shifted_ga = history.groupby(group_cols)["goals_against"].shift(1)
+    history["gf_mean_10"] = history.groupby(group_cols)["goals_for"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=window).mean())
+    history["ga_mean_10"] = history.groupby(group_cols)["goals_against"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=window).mean())
+    history["ga_std_10"] = history.groupby(group_cols)["goals_against"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=window).std(ddof=1))
+    history["gf_wma_10"] = history.groupby(group_cols)["goals_for"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=window).apply(_weighted_mean, raw=True))
+    history["ga_wma_10"] = history.groupby(group_cols)["goals_against"].transform(lambda s: s.shift(1).rolling(window=window, min_periods=window).apply(_weighted_mean, raw=True))
     history["defense_cv_10"] = np.where(history["ga_mean_10"] > 0, history["ga_std_10"] / history["ga_mean_10"], np.nan)
     return history
 
 
 def _add_league_averages(matches: pd.DataFrame) -> pd.DataFrame:
     league_df = matches.sort_values(["league_key", "match_datetime", "match_id"]).copy()
-    league_df["league_home_goals_avg"] = league_df.groupby("league_key")["home_goals"].transform(lambda s: s.shift(1).expanding().mean())
-    league_df["league_away_goals_avg"] = league_df.groupby("league_key")["away_goals"].transform(lambda s: s.shift(1).expanding().mean())
+    league_df["league_prior_matches"] = league_df.groupby("league_key").cumcount()
+    home_rolling = league_df.groupby("league_key")["home_goals"].transform(lambda s: s.shift(1).rolling(window=10, min_periods=10).mean())
+    away_rolling = league_df.groupby("league_key")["away_goals"].transform(lambda s: s.shift(1).rolling(window=10, min_periods=10).mean())
+    home_expanding = league_df.groupby("league_key")["home_goals"].transform(lambda s: s.shift(1).expanding().mean())
+    away_expanding = league_df.groupby("league_key")["away_goals"].transform(lambda s: s.shift(1).expanding().mean())
+    league_df["league_home_goals_avg"] = home_rolling.fillna(home_expanding)
+    league_df["league_away_goals_avg"] = away_rolling.fillna(away_expanding)
     return league_df
 
 
@@ -93,4 +99,5 @@ def build_feature_frame(matches: pd.DataFrame, window: int = 10) -> pd.DataFrame
     feature_df["away_defense_strength"] = feature_df["away_ga_wma_10"] / feature_df["league_home_goals_avg"]
     feature_df["defense_cv_10"] = feature_df[["home_defense_cv_10", "away_defense_cv_10"]].max(axis=1)
     feature_df["features_ready"] = feature_df[["home_gf_wma_10", "away_gf_wma_10", "home_ga_wma_10", "away_ga_wma_10", "league_home_goals_avg", "league_away_goals_avg"]].notna().all(axis=1)
+    feature_df["league_history_ready"] = feature_df["league_prior_matches"] >= window
     return feature_df

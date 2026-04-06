@@ -24,6 +24,24 @@ def dixon_coles_tau(home_goals: int, away_goals: int, lambda_home: float, lambda
     return 1.0
 
 
+def _under25_probability_dc(lambda_home: pd.Series, lambda_away: pd.Series, rho: float) -> pd.Series:
+    p00 = poisson.pmf(0, lambda_home) * poisson.pmf(0, lambda_away)
+    p01 = poisson.pmf(0, lambda_home) * poisson.pmf(1, lambda_away)
+    p10 = poisson.pmf(1, lambda_home) * poisson.pmf(0, lambda_away)
+    p11 = poisson.pmf(1, lambda_home) * poisson.pmf(1, lambda_away)
+    p02 = poisson.pmf(0, lambda_home) * poisson.pmf(2, lambda_away)
+    p20 = poisson.pmf(2, lambda_home) * poisson.pmf(0, lambda_away)
+
+    t00 = 1 - (lambda_home * lambda_away * rho)
+    t01 = 1 + (lambda_home * rho)
+    t10 = 1 + (lambda_away * rho)
+    t11 = 1 - rho
+
+    numerator = (p00 * t00) + (p01 * t01) + (p10 * t10) + (p11 * t11) + p02 + p20
+    normalizer = 1 + (p00 * (t00 - 1)) + (p01 * (t01 - 1)) + (p10 * (t10 - 1)) + (p11 * (t11 - 1))
+    return numerator / normalizer
+
+
 def score_under25(
     features: pd.DataFrame,
     *,
@@ -59,16 +77,12 @@ def score_under25(
         scored["features_ready"] = False
     if "odds_eligible" not in scored.columns:
         scored["odds_eligible"] = False
+    if "league_history_ready" not in scored.columns:
+        scored["league_history_ready"] = False
     scored["lambda_home"] = scored["home_attack_strength"] * scored["away_defense_strength"] * scored["league_home_goals_avg"]
     scored["lambda_away"] = scored["away_attack_strength"] * scored["home_defense_strength"] * scored["league_away_goals_avg"]
     scored["lambda_total"] = scored["lambda_home"] + scored["lambda_away"]
-    base_under25 = poisson.cdf(2, scored["lambda_total"])
-    p0h = poisson.pmf(0, scored["lambda_home"])
-    p1h = poisson.pmf(1, scored["lambda_home"])
-    p0a = poisson.pmf(0, scored["lambda_away"])
-    p1a = poisson.pmf(1, scored["lambda_away"])
-    delta = ((p0h * p0a) * (-scored["lambda_home"] * scored["lambda_away"] * rho) + (p0h * p1a) * (scored["lambda_home"] * rho) + (p1h * p0a) * (scored["lambda_away"] * rho) + (p1h * p1a) * (-rho))
-    scored["p_under25"] = (base_under25 + delta).clip(lower=0.0, upper=1.0)
+    scored["p_under25"] = _under25_probability_dc(scored["lambda_home"], scored["lambda_away"], rho).clip(lower=0.0, upper=1.0)
     scored["fair_odds"] = np.where(scored["p_under25"] > 0, 1.0 / scored["p_under25"], np.nan)
     scored["edge_pct"] = ((scored["under25_odds"] / scored["fair_odds"]) - 1.0) * 100.0
     net_odds = scored["under25_odds"] - 1.0
@@ -77,7 +91,7 @@ def score_under25(
     scored["edge_ok"] = scored["under25_odds"] > (scored["fair_odds"] * (1.0 + edge_buffer))
     scored["cv_ok"] = scored["defense_cv_10"] <= cv_max
     scored["lambda_ok"] = scored["lambda_total"].between(lambda_min, lambda_max, inclusive="both")
-    scored["bet_eligible"] = scored["features_ready"] & scored["odds_eligible"] & scored["edge_ok"] & scored["cv_ok"] & scored["lambda_ok"] & scored["stake_fraction"].gt(0)
+    scored["bet_eligible"] = scored["features_ready"] & scored["league_history_ready"] & scored["odds_eligible"] & scored["edge_ok"] & scored["cv_ok"] & scored["lambda_ok"] & scored["stake_fraction"].gt(0)
     return scored
 
 
