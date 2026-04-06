@@ -16,6 +16,38 @@ st.set_page_config(page_title="Quant-Bet Under 2.5", layout="wide")
 
 DATA_PATH = BASE_PATH
 
+CARD_STYLE = """
+<style>
+.quant-card {
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 18px;
+    padding: 1rem 1.1rem;
+    background: #ffffff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+.quant-card-positive {
+    border-color: rgba(34, 197, 94, 0.45);
+    background: rgba(34, 197, 94, 0.08);
+}
+.quant-card-negative {
+    border-color: rgba(239, 68, 68, 0.45);
+    background: rgba(239, 68, 68, 0.08);
+}
+.quant-card-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.35rem;
+}
+.quant-card-value {
+    font-size: 2rem;
+    line-height: 1.1;
+    font-weight: 700;
+    color: #111827;
+}
+</style>
+"""
+
 
 @st.cache_data(show_spinner=False)
 def cached_leagues(base_path: str) -> pd.DataFrame:
@@ -71,7 +103,21 @@ def _normalize_period_selection(
     return adjusted_period, adjusted_period != period
 
 
+def _render_result_card(label: str, value: str, is_positive: bool) -> None:
+    card_class = "quant-card-positive" if is_positive else "quant-card-negative"
+    st.markdown(
+        f"""
+        <div class="quant-card {card_class}">
+            <div class="quant-card-label">{label}</div>
+            <div class="quant-card-value">{value}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def render_backtesting(base_path: str) -> None:
+    st.markdown(CARD_STYLE, unsafe_allow_html=True)
     st.subheader("Backtesting")
     leagues = cached_leagues(base_path)
     matches = cached_matches(base_path)
@@ -143,8 +189,10 @@ def render_backtesting(base_path: str) -> None:
 
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Apostas", f"{metrics['bets']}")
-    col2.metric("ROI", f"{metrics['roi']:.2%}")
-    col3.metric("Lucro (stakes)", f"{metrics['total_profit']:.1f}")
+    with col2:
+        _render_result_card("ROI", f"{metrics['roi']:.2%}", metrics["roi"] >= 0)
+    with col3:
+        _render_result_card("Lucro (stakes)", f"{metrics['total_profit']:.1f}", metrics["total_profit"] >= 0)
     col4.metric("Max Drawdown (stakes)", f"{metrics['max_drawdown']:.1f}")
 
     st.line_chart(result_df.set_index("match_datetime")["cumulative_profit"], use_container_width=True)
