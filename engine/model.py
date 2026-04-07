@@ -413,6 +413,37 @@ def _excel_model(
     return home_lambda, away_lambda, total_lambda, p_under25
 
 
+def _modern_model(
+    scored: pd.DataFrame,
+    *,
+    rho: float,
+) -> tuple[pd.Series, pd.Series, pd.Series, pd.Series]:
+    # O modelo Moderno usa um xG proxy composto:
+    # - forma recente do próprio time (WMA de gols feitos);
+    # - tendência recente do adversário (WMA de gols sofridos / feitos);
+    # - ancoragem na média da liga com shrinkage em direção a ela.
+    # Isso mantém a leitura estatística do Poisson, mas evita usar gols brutos
+    # como se fossem xG real.
+    eps = np.finfo(float).eps
+    league_home = scored["league_home_goals_avg"].clip(lower=eps)
+    league_away = scored["league_away_goals_avg"].clip(lower=eps)
+
+    home_xg = scored["home_xg_proxy_10"].fillna(scored["home_gf_mean_10"]).fillna(league_home)
+    away_xg = scored["away_xg_proxy_10"].fillna(scored["away_gf_mean_10"]).fillna(league_away)
+    home_xga = scored["home_xga_proxy_10"].fillna(scored["home_ga_mean_10"]).fillna(league_away)
+    away_xga = scored["away_xga_proxy_10"].fillna(scored["away_ga_mean_10"]).fillna(league_home)
+
+    home_attack = home_xg / league_home
+    away_attack = away_xg / league_away
+    home_defense = home_xga / league_away
+    away_defense = away_xga / league_home
+
+    lambda_home = league_home * home_attack * away_defense
+    lambda_away = league_away * away_attack * home_defense
+    p_under25 = _under25_probability_dc(lambda_home, lambda_away, rho)
+    return lambda_home, lambda_away, lambda_home + lambda_away, p_under25
+
+
 def score_under25(
     features: pd.DataFrame,
     *,
@@ -442,6 +473,7 @@ def score_under25(
 
     poisson_home, poisson_away, poisson_total, poisson_prob = _poisson_model(scored, rho=rho)
     excel_home, excel_away, excel_total, excel_prob = _excel_model(scored)
+    modern_home, modern_away, modern_total, modern_prob = _modern_model(scored, rho=rho)
 
     if model_key in {"poisson", "poisson atual", "poisson_dc", "poisson-dc"}:
         selection_ok = scored["under25_odds"] > (1.0 / poisson_prob.clip(lower=np.finfo(float).eps)) * (1.0 + edge_buffer)
@@ -459,10 +491,47 @@ def score_under25(
             stake_amount=stake_amount,
         )
 
+    if model_key in {"moderno", "modern", "moderno dc", "dc moderno"}:
+        market_prob = pd.Series(
+            np.where(scored["under25_odds"] > 0, 1.0 / scored["under25_odds"], np.nan),
+            index=scored.index,
+        )
+        scored["prob_market"] = market_prob
+        scored["prob_edge"] = modern_prob - market_prob
+        selection_ok = scored["prob_edge"] >= float(edge_buffer)
+        scored = _finalize_scored_frame(
+            scored,
+            lambda_home=modern_home,
+            lambda_away=modern_away,
+            p_under25=modern_prob,
+            selection_ok=selection_ok,
+            edge_buffer=edge_buffer,
+            cv_max=cv_max,
+            lambda_min=lambda_min,
+            lambda_max=lambda_max,
+            kelly_fraction=1.0,
+            stake_amount=stake_amount,
+        )
+        scored["edge_pct"] = scored["prob_edge"] * 100.0
+        scored["edge_ok"] = scored["prob_edge"] >= float(edge_buffer)
+        return scored
+
     if model_key in {"excel", "modelo excel", "heuristic", "heuristico"}:
-        league_reference_prob = float(poisson.cdf(2, 2.6))
-        scored["prob_liga"] = league_reference_prob
-        scored["delta_p"] = (excel_prob - league_reference_prob) * 100.0
+        market_prob = pd.Series(
+            np.where(scored["under25_odds"] > 0, 1.0 / scored["under25_odds"], np.nan),
+            index=scored.index,
+        )
+        scored["prob_market"] = market_prob
+        if "legacy_prob_under25" in scored.columns and scored["legacy_prob_under25"].notna().any():
+            # Quando a linha existe no workbook legado, a probabilidade legada é soberana.
+            scored["prob_liga"] = pd.NA
+            scored["delta_p"] = (excel_prob - market_prob) * 100.0
+        else:
+            # Fallback técnico: mantém o comparador legado para linhas fora da referência.
+            league_reference_prob = float(poisson.cdf(2, 2.6))
+            scored["prob_liga"] = league_reference_prob
+            scored["delta_p"] = (excel_prob - league_reference_prob) * 100.0
+        scored["delta_p_market"] = (excel_prob - market_prob) * 100.0
         selection_ok = scored["delta_p"] >= float(delta_p_min)
         scored = _finalize_scored_frame(
             scored,

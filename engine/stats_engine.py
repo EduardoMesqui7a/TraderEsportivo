@@ -26,6 +26,41 @@ def _finalize_feature_frame(feature_df: pd.DataFrame, window: int) -> pd.DataFra
     feature_df["home_defense_strength"] = feature_df["home_ga_wma_10"] / feature_df["league_away_goals_avg"]
     feature_df["away_defense_strength"] = feature_df["away_ga_wma_10"] / feature_df["league_home_goals_avg"]
     feature_df["defense_cv_10"] = feature_df[["home_defense_cv_10", "away_defense_cv_10"]].max(axis=1)
+
+    # Moderno: proxy xG/xGA compósito.
+    # O objetivo não é renomear gols como xG, e sim combinar:
+    # - forma recente do próprio time;
+    # - tendência recente do adversário;
+    # - ancoragem na média da liga;
+    # com shrinkage em direção à média da liga para reduzir ruído em amostras pequenas.
+    own_weight = 0.55
+    opp_weight = 0.25
+    league_weight = 0.20
+    shrink_pseudo_matches = 8.0  # oito "jogos fictícios" para suavizar amostras curtas sem achatar demais a série.
+
+    home_history = feature_df.get("home_team_prior_matches", pd.Series(0, index=feature_df.index)).fillna(0.0)
+    away_history = feature_df.get("away_team_prior_matches", pd.Series(0, index=feature_df.index)).fillna(0.0)
+    sample_size = pd.concat([home_history, away_history], axis=1).min(axis=1).fillna(0.0)
+    shrink = sample_size / (sample_size + shrink_pseudo_matches)
+
+    league_home = feature_df["league_home_goals_avg"].clip(lower=1e-6)
+    league_away = feature_df["league_away_goals_avg"].clip(lower=1e-6)
+    home_gf_signal = feature_df["home_gf_wma_10"].fillna(feature_df["home_gf_mean_10"]).fillna(league_home)
+    home_ga_signal = feature_df["home_ga_wma_10"].fillna(feature_df["home_ga_mean_10"]).fillna(league_away)
+    away_gf_signal = feature_df["away_gf_wma_10"].fillna(feature_df["away_gf_mean_10"]).fillna(league_away)
+    away_ga_signal = feature_df["away_ga_wma_10"].fillna(feature_df["away_ga_mean_10"]).fillna(league_home)
+
+    home_xg_raw = (own_weight * home_gf_signal) + (opp_weight * away_ga_signal) + (league_weight * league_home)
+    home_xga_raw = (own_weight * home_ga_signal) + (opp_weight * away_gf_signal) + (league_weight * league_away)
+    away_xg_raw = (own_weight * away_gf_signal) + (opp_weight * home_ga_signal) + (league_weight * league_away)
+    away_xga_raw = (own_weight * away_ga_signal) + (opp_weight * home_gf_signal) + (league_weight * league_home)
+
+    feature_df["home_xg_proxy_10"] = (shrink * home_xg_raw) + ((1.0 - shrink) * league_home)
+    feature_df["home_xga_proxy_10"] = (shrink * home_xga_raw) + ((1.0 - shrink) * league_away)
+    feature_df["away_xg_proxy_10"] = (shrink * away_xg_raw) + ((1.0 - shrink) * league_away)
+    feature_df["away_xga_proxy_10"] = (shrink * away_xga_raw) + ((1.0 - shrink) * league_home)
+    feature_df["modern_cv_total_10"] = feature_df["defense_cv_10"]
+
     feature_df["features_ready"] = feature_df[
         [
             "home_gf_wma_10",
@@ -44,6 +79,7 @@ def _add_team_rolling_features_pandas(long_df: pd.DataFrame, window: int, min_pe
     history = long_df.copy()
     min_periods = _normalize_min_periods(window, min_periods)
     group_cols = ["league_key", "team"]
+    history["team_prior_matches"] = history.groupby(group_cols).cumcount()
     history["gf_mean_10"] = history.groupby(group_cols)["goals_for"].transform(
         lambda s: s.shift(1).rolling(window=window, min_periods=min_periods).mean()
     )
@@ -93,6 +129,7 @@ def _build_feature_frame_pandas(matches: pd.DataFrame, window: int, min_periods:
             "gf_wma_10": "home_gf_wma_10",
             "ga_wma_10": "home_ga_wma_10",
             "defense_cv_10": "home_defense_cv_10",
+            "team_prior_matches": "home_team_prior_matches",
         }
     )
     away_features = history[history["venue"].eq("away")].rename(
@@ -104,6 +141,7 @@ def _build_feature_frame_pandas(matches: pd.DataFrame, window: int, min_periods:
             "gf_wma_10": "away_gf_wma_10",
             "ga_wma_10": "away_ga_wma_10",
             "defense_cv_10": "away_defense_cv_10",
+            "team_prior_matches": "away_team_prior_matches",
         }
     )
     feature_df = _add_league_averages_pandas(base_matches, min_periods=min_periods)
@@ -118,6 +156,7 @@ def _build_feature_frame_pandas(matches: pd.DataFrame, window: int, min_periods:
                 "home_gf_wma_10",
                 "home_ga_wma_10",
                 "home_defense_cv_10",
+                "home_team_prior_matches",
             ]
         ],
         on=["match_id", "home_team"],
@@ -134,6 +173,7 @@ def _build_feature_frame_pandas(matches: pd.DataFrame, window: int, min_periods:
                 "away_gf_wma_10",
                 "away_ga_wma_10",
                 "away_defense_cv_10",
+                "away_team_prior_matches",
             ]
         ],
         on=["match_id", "away_team"],
@@ -202,6 +242,7 @@ def _build_feature_frame_duckdb(matches: pd.DataFrame, window: int, min_periods:
             goals_for,
             goals_against,
             count(goals_for) OVER w AS hist_count,
+            count(*) OVER w_full AS team_prior_matches,
             avg(goals_for) OVER w AS gf_mean_roll,
             avg(goals_against) OVER w AS ga_mean_roll,
             stddev_samp(goals_against) OVER w AS ga_std_roll,
@@ -251,12 +292,14 @@ def _build_feature_frame_duckdb(matches: pd.DataFrame, window: int, min_periods:
         hf.gf_wma_10 AS home_gf_wma_10,
         hf.ga_wma_10 AS home_ga_wma_10,
         CASE WHEN hf.ga_mean_10 > 0 THEN hf.ga_std_10 / hf.ga_mean_10 END AS home_defense_cv_10,
+        hf.team_prior_matches AS home_team_prior_matches,
         af.gf_mean_10 AS away_gf_mean_10,
         af.ga_mean_10 AS away_ga_mean_10,
         af.ga_std_10 AS away_ga_std_10,
         af.gf_wma_10 AS away_gf_wma_10,
         af.ga_wma_10 AS away_ga_wma_10,
-        CASE WHEN af.ga_mean_10 > 0 THEN af.ga_std_10 / af.ga_mean_10 END AS away_defense_cv_10
+        CASE WHEN af.ga_mean_10 > 0 THEN af.ga_std_10 / af.ga_mean_10 END AS away_defense_cv_10,
+        af.team_prior_matches AS away_team_prior_matches
     FROM matches_df AS bm
     LEFT JOIN league_features AS lf USING (match_id)
     LEFT JOIN team_scored AS hf ON hf.match_id = bm.match_id AND hf.venue = 'home'

@@ -18,7 +18,7 @@ st.set_page_config(page_title="Quant-Bet Under 2.5", layout="wide")
 
 DATA_PATH = BASE_PATH
 
-MODEL_OPTIONS = ("Poisson atual", "Modelo Excel", "Híbrido")
+MODEL_OPTIONS = ("Poisson atual", "Modelo Excel", "Moderno", "Hibrido")
 
 CARD_STYLE = """
 <style>
@@ -74,7 +74,7 @@ def cached_features(base_path: str, window: int, model_name: str) -> pd.DataFram
     matches = cached_matches(base_path)
     if matches.empty:
         return matches.copy()
-    min_periods = 1 if model_name in {"Modelo Excel", "Híbrido"} else window
+    min_periods = 1 if model_name in {"Modelo Excel", "Moderno", "Hibrido"} else window
     return build_feature_frame(matches, window=window, min_periods=min_periods)
 
 
@@ -122,26 +122,33 @@ def _render_model_sidebar() -> None:
     model = st.sidebar.selectbox("Modelo", MODEL_OPTIONS, key="model_name")
     st.sidebar.caption("Os parâmetros abaixo mudam conforme o modelo selecionado.")
 
-    window_default = 5 if model == "Modelo Excel" else 6 if model == "Híbrido" else 10
+    window_default = 10 if model == "Moderno" else 5 if model == "Modelo Excel" else 6 if model == "Hibrido" else 10
     st.sidebar.slider("Janela de jogos", min_value=4, max_value=20, value=window_default, step=1, key="model_window")
+    if model == "Moderno":
+        st.sidebar.caption(
+            "Defaults do Moderno: janela de 10 jogos, Dixon-Coles leve, filtros conservadores e stake fixa "
+            "para manter a leitura estatística estável."
+        )
 
-    if model in {"Poisson atual", "Híbrido"}:
-        st.sidebar.slider("Dixon-Coles rho", min_value=-0.20, max_value=0.20, value=-0.02 if model == "Híbrido" else 0.02, step=0.01, key="model_rho")
-        st.sidebar.slider("Edge mínimo", min_value=0.00, max_value=0.20, value=0.09 if model == "Híbrido" else 0.10, step=0.01, key="model_edge_buffer")
+    if model in {"Poisson atual", "Moderno", "Hibrido"}:
+        rho_default = -0.04 if model == "Moderno" else (-0.02 if model == "Hibrido" else 0.02)
+        edge_default = 0.05 if model == "Moderno" else (0.09 if model == "Hibrido" else 0.10)
+        st.sidebar.slider("Dixon-Coles rho", min_value=-0.20, max_value=0.20, value=rho_default, step=0.01, key="model_rho")
+        st.sidebar.slider("Edge mínimo", min_value=0.00, max_value=0.20, value=edge_default, step=0.01, key="model_edge_buffer")
     else:
         st.sidebar.slider("DeltaP mínimo", min_value=0.0, max_value=25.0, value=10.0, step=0.5, key="model_delta_p_min")
 
-    if model == "Híbrido":
+    if model == "Hibrido":
         st.sidebar.slider("Peso Poisson", min_value=0.0, max_value=1.0, value=0.50, step=0.05, key="model_blend_weight")
 
     st.sidebar.slider("Lambda mínimo", min_value=0.50, max_value=1.50, value=0.70 if model != "Modelo Excel" else 1.20, step=0.05, key="model_lambda_min")
     st.sidebar.slider("Lambda máximo", min_value=1.50, max_value=4.00, value=2.40 if model != "Modelo Excel" else 2.20, step=0.05, key="model_lambda_max")
     st.sidebar.slider("CV máximo", min_value=0.50, max_value=2.00, value=1.10 if model != "Modelo Excel" else 0.70, step=0.05, key="model_cv_max")
     st.sidebar.number_input("Stake fixa", min_value=0.10, max_value=10.00, value=1.0, step=0.10, key="model_stake_amount")
-    if model != "Modelo Excel":
+    if model in {"Poisson atual", "Hibrido"}:
         st.sidebar.slider("Kelly fracionado", min_value=0.05, max_value=0.50, value=0.20, step=0.05, key="model_kelly_fraction")
     else:
-        st.sidebar.caption("Kelly fracionado não é usado no Modelo Excel; o backtest usa stake fixa.")
+        st.sidebar.caption("Kelly fracionado não é usado no Modelo Excel nem no Modelo Moderno; o backtest usa stake fixa.")
 
 
 def _get_model_settings() -> dict[str, float | int | str]:
@@ -157,7 +164,7 @@ def _get_model_settings() -> dict[str, float | int | str]:
         "lambda_min": float(st.session_state.get("model_lambda_min", 0.70)),
         "lambda_max": float(st.session_state.get("model_lambda_max", 2.40)),
         "cv_max": float(st.session_state.get("model_cv_max", 1.10)),
-        "kelly_fraction": float(st.session_state.get("model_kelly_fraction", 0.20 if model_name != "Modelo Excel" else 1.0)),
+        "kelly_fraction": float(st.session_state.get("model_kelly_fraction", 0.20 if model_name not in {"Modelo Excel", "Moderno"} else 1.0)),
     }
 
 
@@ -443,7 +450,7 @@ def cached_parameter_search(
         delta_p_min = float(rng.choice(delta_p_candidates))
         blend_weight = float(rng.choice(blend_candidates))
 
-        if model_key in {"poisson", "poisson atual", "poisson_dc", "poisson-dc"}:
+        if model_key in {"poisson", "poisson atual", "poisson_dc", "poisson-dc", "moderno", "modern", "moderno dc", "dc moderno"}:
             config_key = (model_key, window, rho, edge_buffer, lambda_min, lambda_max, cv_cut, kelly_fraction)
         elif model_key in {"excel", "modelo excel", "heuristic", "heuristico"}:
             config_key = (model_key, window, delta_p_min, lambda_min, lambda_max, cv_cut, stake_amount)
@@ -945,13 +952,13 @@ def render_optimization(base_path: str) -> None:
         cv_range = st.slider("CV maximo", min_value=0.50, max_value=2.00, value=(1.10, 1.35), step=0.05)
 
     k1, k2 = st.columns(2)
-    show_kelly_search = settings["model_name"] != "Modelo Excel"
+    show_kelly_search = settings["model_name"] not in {"Modelo Excel", "Moderno"}
     with k1:
         if show_kelly_search:
             kelly_range = st.slider("Kelly fracionado", min_value=0.05, max_value=0.50, value=(0.10, 0.25), step=0.05)
         else:
             kelly_range = (1.0, 1.0)
-            st.caption("Kelly fracionado oculto no Modelo Excel; a otimização usa stake fixa.")
+            st.caption("Kelly fracionado oculto no Modelo Excel e no Modelo Moderno; a otimiza??o usa stake fixa.")
     with k2:
         n_trials = st.slider("Numero de testes", min_value=20, max_value=300, value=120, step=10)
 
@@ -1057,22 +1064,38 @@ def render_optimization(base_path: str) -> None:
     b4.metric("Drawdown", f"{best['drawdown']:.1f}")
 
     display_results = results.head(20).copy()
-    if settings["model_name"] == "Modelo Excel":
-        display_results = display_results.rename(
-            columns={
-                "window": "Janela",
-                "delta_p_min": "DeltaP mínimo",
-                "lambda_min": "Lambda min",
-                "lambda_max": "Lambda max",
-                "cv_max": "CV max",
-                "kelly_fraction": "Kelly",
-                "bets": "Apostas",
-                "win_rate": "Acerto",
-                "roi": "ROI",
-                "profit": "Lucro",
-                "drawdown": "Drawdown",
-            }
-        )
+    if settings["model_name"] in {"Modelo Excel", "Moderno"}:
+        if settings["model_name"] == "Modelo Excel":
+            display_results = display_results.rename(
+                columns={
+                    "window": "Janela",
+                    "delta_p_min": "DeltaP m?nimo",
+                    "lambda_min": "Lambda min",
+                    "lambda_max": "Lambda max",
+                    "cv_max": "CV max",
+                    "bets": "Apostas",
+                    "win_rate": "Acerto",
+                    "roi": "ROI",
+                    "profit": "Lucro",
+                    "drawdown": "Drawdown",
+                }
+            )
+        else:
+            display_results = display_results.rename(
+                columns={
+                    "window": "Janela",
+                    "rho": "Rho",
+                    "edge_buffer": "Edge",
+                    "lambda_min": "Lambda min",
+                    "lambda_max": "Lambda max",
+                    "cv_max": "CV max",
+                    "bets": "Apostas",
+                    "win_rate": "Acerto",
+                    "roi": "ROI",
+                    "profit": "Lucro",
+                    "drawdown": "Drawdown",
+                }
+            )
     else:
         display_results = display_results.rename(
             columns={
@@ -1095,7 +1118,9 @@ def render_optimization(base_path: str) -> None:
     display_results["Lucro"] = display_results["Lucro"].map(lambda value: f"{value:.1f}")
     display_results["Drawdown"] = display_results["Drawdown"].map(lambda value: f"{value:.1f}")
     if settings["model_name"] == "Modelo Excel":
-        display_columns = ["Janela", "DeltaP mínimo", "Lambda min", "Lambda max", "CV max", "Kelly", "Apostas", "Acerto", "ROI", "Lucro", "Drawdown"]
+        display_columns = ["Janela", "DeltaP m?nimo", "Lambda min", "Lambda max", "CV max", "Apostas", "Acerto", "ROI", "Lucro", "Drawdown"]
+    elif settings["model_name"] == "Moderno":
+        display_columns = ["Janela", "Rho", "Edge", "Lambda min", "Lambda max", "CV max", "Apostas", "Acerto", "ROI", "Lucro", "Drawdown"]
     else:
         display_columns = ["Janela", "Rho", "Edge", "Lambda min", "Lambda max", "CV max", "Kelly", "Apostas", "Acerto", "ROI", "Lucro", "Drawdown"]
     st.dataframe(display_results[display_columns], width="stretch", hide_index=True)
@@ -1220,9 +1245,12 @@ def render_optimization(base_path: str) -> None:
                     agg_drawdown = float(ok_rows["test_drawdown"].min())
                     agg_bets = int(ok_rows["test_bets"].sum())
 
-                    is_excel_model = settings["model_name"] == "Modelo Excel"
-                    if is_excel_model:
-                        group_cols = ["window", "delta_p_min", "lambda_min", "lambda_max", "cv_max", "kelly_fraction"]
+                    is_fixed_stake_model = settings["model_name"] in {"Modelo Excel", "Moderno"}
+                    if is_fixed_stake_model:
+                        if settings["model_name"] == "Modelo Excel":
+                            group_cols = ["window", "delta_p_min", "lambda_min", "lambda_max", "cv_max"]
+                        else:
+                            group_cols = ["window", "rho", "edge_buffer", "lambda_min", "lambda_max", "cv_max"]
                     else:
                         group_cols = ["window", "rho", "edge_buffer", "lambda_min", "lambda_max", "cv_max", "kelly_fraction"]
 
@@ -1258,7 +1286,6 @@ def render_optimization(base_path: str) -> None:
                                     "Lambda min": float(best_config["lambda_min"]),
                                     "Lambda max": float(best_config["lambda_max"]),
                                     "CV max": float(best_config["cv_max"]),
-                                    "Kelly": float(best_config["kelly_fraction"]),
                                     "Folds": int(best_config["folds"]),
                                     "ROI validacao": float(best_config["val_roi"]),
                                     "ROI teste": float(best_config["test_roi"]),
@@ -1278,15 +1305,31 @@ def render_optimization(base_path: str) -> None:
 
                     st.markdown("#### Ranking das configuracoes")
                     ranking_display = top_config.head(20).copy()
-                    if is_excel_model:
+                    if settings["model_name"] == "Modelo Excel":
                         ranking_display = ranking_display.rename(
                             columns={
                                 "window": "Janela",
-                                "delta_p_min": "DeltaP mínimo",
+                                "delta_p_min": "DeltaP m?nimo",
                                 "lambda_min": "Lambda min",
                                 "lambda_max": "Lambda max",
                                 "cv_max": "CV max",
-                                "kelly_fraction": "Kelly",
+                                "folds": "Folds",
+                                "val_roi": "ROI validacao",
+                                "test_roi": "ROI teste",
+                                "test_profit": "Lucro teste",
+                                "test_drawdown": "Drawdown teste",
+                                "test_bets": "Apostas teste",
+                            }
+                        )
+                    elif settings["model_name"] == "Moderno":
+                        ranking_display = ranking_display.rename(
+                            columns={
+                                "window": "Janela",
+                                "rho": "Rho",
+                                "edge_buffer": "Edge",
+                                "lambda_min": "Lambda min",
+                                "lambda_max": "Lambda max",
+                                "cv_max": "CV max",
                                 "folds": "Folds",
                                 "val_roi": "ROI validacao",
                                 "test_roi": "ROI teste",
