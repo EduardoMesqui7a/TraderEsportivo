@@ -28,12 +28,15 @@ LEGACY_TEAM_ALIASES: dict[str, dict[str, str]] = {
         "vallecano": "Rayo Vallecano",
         "ath bilbao": "Athletic Club",
         "athletic bilbao": "Athletic Club",
-        "ath madrid": "Atletico Madrid",
-        "atleti": "Atletico Madrid",
+        "athletic club": "Athletic Club",
+        "ath madrid": "Atlético Madrid",
+        "atletico madrid": "Atlético Madrid",
+        "atleti": "Atlético Madrid",
         "espanol": "Espanyol",
         "sociedad": "Real Sociedad",
         "betis": "Real Betis",
         "alaves": "Deportivo Alaves",
+        "deportivo alaves": "Deportivo Alaves",
         "malaga": "Malaga",
         "la coruna": "Deportivo La Coruna",
         "las palmas": "Las Palmas",
@@ -62,22 +65,50 @@ LEGACY_TEAM_ALIASES: dict[str, dict[str, str]] = {
         "sheffield weds": "Sheffield Wednesday",
     },
     "germany/bundesliga": {
+        "bayern munich": "Bayern Munich",
+        "dortmund": "Borussia Dortmund",
         "ein frankfurt": "Eintracht Frankfurt",
+        "eintracht frankfurt": "Eintracht Frankfurt",
         "fc koln": "1. FC Koln",
-        "m'gladbach": "Borussia Monchengladbach",
-        "dusseldorf": "Fortuna Dusseldorf",
+        "1 fc koln": "1. FC Koln",
+        "m'gladbach": "Borussia Mönchengladbach",
+        "monchengladbach": "Borussia Mönchengladbach",
+        "dusseldorf": "Fortuna Düsseldorf",
         "nurnberg": "FC Nurnberg",
         "greuther furth": "Greuther Furth",
-        "leverkusen": "Bayer Leverkusen",
+        "leverkusen": "Bayer 04 Leverkusen",
+        "bayer 04 leverkusen": "Bayer 04 Leverkusen",
         "munich 1860": "Munich 1860",
+        "st pauli": "FC St. Pauli",
+        "fc st pauli": "FC St. Pauli",
+        "stuttgart": "Stuttgart",
+        "mainz": "Mainz",
+        "union berlin": "Union Berlin",
     },
     "france/ligue_1": {
-        "psg": "Paris SG",
-        "paris sg": "Paris SG",
-        "st etienne": "St Etienne",
-        "saint etienne": "St Etienne",
-        "marseille": "Marseille",
-        "lyon": "Lyon",
+        "angers": "Angers",
+        "auxerre": "Auxerre",
+        "brest": "Stade Brestois",
+        "psg": "Paris Saint-Germain",
+        "paris sg": "Paris Saint-Germain",
+        "paris saint germain": "Paris Saint-Germain",
+        "st etienne": "Saint-Étienne",
+        "saint etienne": "Saint-Étienne",
+        "stade rennais": "Stade Rennais",
+        "rennes": "Stade Rennais",
+        "lyon": "Olympique Lyonnais",
+        "olympique lyonnais": "Olympique Lyonnais",
+        "marseille": "Olympique de Marseille",
+        "olympique de marseille": "Olympique de Marseille",
+        "monaco": "AS Monaco",
+        "as monaco": "AS Monaco",
+        "montpellier": "Montpellier",
+        "nantes": "Nantes",
+        "nice": "Nice",
+        "reims": "Stade de Reims",
+        "strasbourg": "RC Strasbourg",
+        "rc strasbourg": "RC Strasbourg",
+        "toulouse": "Toulouse",
     },
     "portugal/primeira_liga": {
         "pacos ferreira": "Pacos Ferreira",
@@ -232,6 +263,7 @@ def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
         return scored
 
     matched = scored.copy()
+    matched["match_date"] = pd.to_datetime(matched["match_datetime"]).dt.date
     matched["legacy_home_team"] = pd.NA
     matched["legacy_away_team"] = pd.NA
     for league_key, league_frame in matched.groupby("league_key", sort=False):
@@ -244,6 +276,9 @@ def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
         matched.loc[matched["league_key"].eq(league_key), "legacy_home_team"] = matched.loc[matched["league_key"].eq(league_key), "home_team"].map(mapping)
         matched.loc[matched["league_key"].eq(league_key), "legacy_away_team"] = matched.loc[matched["league_key"].eq(league_key), "away_team"].map(mapping)
 
+    legacy = legacy.copy()
+    legacy["match_date"] = pd.to_datetime(legacy["match_datetime"]).dt.date
+
     merged = matched.merge(
         legacy,
         left_on=["match_datetime", "league_key", "legacy_home_team", "legacy_away_team"],
@@ -254,6 +289,28 @@ def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
     if "prob_market" not in merged.columns:
         merged["prob_market"] = np.where(merged["under25_odds"] > 0, 1.0 / merged["under25_odds"], np.nan)
     legacy_mask = merged["legacy_prob_under25"].notna()
+
+    if not legacy_mask.all():
+        fallback_idx = merged.index[~legacy_mask]
+        fallback = (
+            merged.loc[fallback_idx, ["match_date", "league_key", "legacy_home_team", "legacy_away_team"]]
+            .reset_index()
+            .merge(
+                legacy,
+                left_on=["match_date", "league_key", "legacy_home_team", "legacy_away_team"],
+                right_on=["match_date", "league_key", "home_team", "away_team"],
+                how="left",
+                suffixes=("", "_legacy"),
+            )
+            .set_index("index")
+        )
+        fallback_mask = fallback["legacy_prob_under25"].notna()
+        if fallback_mask.any():
+            fallback_rows = fallback.loc[fallback_mask]
+            for column in ["legacy_lambda_total", "legacy_prob_under25", "legacy_entry_under25"]:
+                merged.loc[fallback_rows.index, column] = fallback_rows[column].values
+            legacy_mask = merged["legacy_prob_under25"].notna()
+
     merged["legacy_reference_found"] = legacy_mask.fillna(False)
 
     if legacy_mask.any():
@@ -263,23 +320,19 @@ def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
             1.0 / merged.loc[legacy_mask, "p_under25"],
             np.nan,
         )
+        merged.loc[legacy_mask, "edge_pct"] = ((merged.loc[legacy_mask, "under25_odds"] / merged.loc[legacy_mask, "fair_odds"]) - 1.0) * 100.0
         merged.loc[legacy_mask, "selection_ok"] = merged.loc[legacy_mask, "legacy_entry_under25"].astype(str).eq("Entrar")
         if "legacy_lambda_total" in merged.columns:
             merged.loc[legacy_mask, "lambda_total"] = merged.loc[legacy_mask, "legacy_lambda_total"].astype(float)
-        merged.loc[legacy_mask, "lambda_ok"] = (
-            merged.loc[legacy_mask, "lambda_total"] >= merged.loc[legacy_mask, "lambda_min"]
-        ) & (
-            merged.loc[legacy_mask, "lambda_total"] <= merged.loc[legacy_mask, "lambda_max"]
-        )
-        merged.loc[legacy_mask, "cv_ok"] = merged.loc[legacy_mask, "defense_cv_10"] <= merged.loc[legacy_mask, "cv_max"]
+        merged.loc[legacy_mask, "features_ready"] = True
+        merged.loc[legacy_mask, "league_history_ready"] = True
+        merged.loc[legacy_mask, "lambda_ok"] = True
+        merged.loc[legacy_mask, "cv_ok"] = True
         merged.loc[legacy_mask, "edge_ok"] = merged.loc[legacy_mask, "under25_odds"].notna()
         merged.loc[legacy_mask, "bet_eligible"] = (
             merged.loc[legacy_mask, "features_ready"]
             & merged.loc[legacy_mask, "league_history_ready"]
-            & merged.loc[legacy_mask, "odds_eligible"]
             & merged.loc[legacy_mask, "selection_ok"]
-            & merged.loc[legacy_mask, "cv_ok"]
-            & merged.loc[legacy_mask, "lambda_ok"]
             & merged.loc[legacy_mask, "stake_fraction"].gt(0)
         )
         merged.loc[legacy_mask, "legacy_prob_under25"] = merged.loc[legacy_mask, "p_under25"]
@@ -450,11 +503,12 @@ def run_backtest(scored_matches: pd.DataFrame) -> dict[str, Any]:
     result_df = scored_matches.sort_values("match_datetime").copy()
     if "stake" not in result_df.columns:
         result_df["stake"] = np.where(result_df["bet_eligible"], result_df["stake_fraction"], 0.0)
-    result_df["stake"] = np.where(result_df["bet_eligible"], result_df["stake"], 0.0)
+    market_bet_eligible = result_df["bet_eligible"] & result_df["under25_odds"].notna()
+    result_df["stake"] = np.where(market_bet_eligible, result_df["stake"], 0.0)
     result_df["profit"] = np.where(
-        result_df["bet_eligible"] & result_df["under25_hit"].eq(1),
+        market_bet_eligible & result_df["under25_hit"].eq(1),
         result_df["stake"] * (result_df["under25_odds"] - 1.0),
-        np.where(result_df["bet_eligible"], -result_df["stake"], 0.0),
+        np.where(market_bet_eligible, -result_df["stake"], 0.0),
     )
     result_df["cumulative_profit"] = result_df["profit"].cumsum()
     peak = result_df["cumulative_profit"].cummax()
