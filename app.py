@@ -86,7 +86,6 @@ def cached_feature_frame(
     rho: float,
     edge_buffer: float,
     delta_p_min: float,
-    lambda_liga_padrao: float,
     blend_weight: float,
     stake_amount: float,
     lambda_min: float,
@@ -103,7 +102,6 @@ def cached_feature_frame(
         rho=rho,
         edge_buffer=edge_buffer,
         delta_p_min=delta_p_min,
-        lambda_liga_padrao=lambda_liga_padrao,
         blend_weight=blend_weight,
         stake_amount=stake_amount,
         lambda_min=lambda_min,
@@ -129,8 +127,9 @@ def _render_model_sidebar() -> None:
 
     if model in {"Poisson atual", "Híbrido"}:
         st.sidebar.slider("Dixon-Coles rho", min_value=-0.20, max_value=0.20, value=-0.02 if model == "Híbrido" else 0.02, step=0.01, key="model_rho")
-
-    st.sidebar.slider("Edge mínimo", min_value=0.00, max_value=0.20, value=0.09 if model == "Híbrido" else 0.10, step=0.01, key="model_edge_buffer")
+        st.sidebar.slider("Edge mínimo", min_value=0.00, max_value=0.20, value=0.09 if model == "Híbrido" else 0.10, step=0.01, key="model_edge_buffer")
+    else:
+        st.sidebar.slider("DeltaP mínimo", min_value=0.0, max_value=25.0, value=10.0, step=0.5, key="model_delta_p_min")
 
     if model == "Híbrido":
         st.sidebar.slider("Peso Poisson", min_value=0.0, max_value=1.0, value=0.50, step=0.05, key="model_blend_weight")
@@ -153,7 +152,6 @@ def _get_model_settings() -> dict[str, float | int | str]:
         "rho": float(st.session_state.get("model_rho", 0.02)),
         "edge_buffer": float(st.session_state.get("model_edge_buffer", 0.10)),
         "delta_p_min": float(st.session_state.get("model_delta_p_min", 10.0)),
-        "lambda_liga_padrao": float(st.session_state.get("model_lambda_liga_padrao", 2.6)),
         "blend_weight": float(st.session_state.get("model_blend_weight", 0.5)),
         "stake_amount": float(st.session_state.get("model_stake_amount", 1.0)),
         "lambda_min": float(st.session_state.get("model_lambda_min", 0.70)),
@@ -424,6 +422,7 @@ def cached_parameter_search(
     lambda_min_candidates = _candidate_values(lambda_min_min, lambda_min_max, 4)
     lambda_max_candidates = _candidate_values(lambda_max_min, lambda_max_max, 4)
     cv_candidates = _candidate_values(cv_min, cv_max, 4)
+    delta_p_candidates = _candidate_values(delta_p_min_min, delta_p_min_max, 4)
     blend_candidates = _candidate_values(blend_weight_min, blend_weight_max, 4)
 
     rows: list[dict[str, float | int | str]] = []
@@ -441,12 +440,13 @@ def cached_parameter_search(
         model_key = (model_name or "poisson").strip().lower()
         rho = float(rng.choice(rho_candidates))
         edge_buffer = float(rng.choice(edge_candidates))
+        delta_p_min = float(rng.choice(delta_p_candidates))
         blend_weight = float(rng.choice(blend_candidates))
 
         if model_key in {"poisson", "poisson atual", "poisson_dc", "poisson-dc"}:
             config_key = (model_key, window, rho, edge_buffer, lambda_min, lambda_max, cv_cut, kelly_fraction)
         elif model_key in {"excel", "modelo excel", "heuristic", "heuristico"}:
-            config_key = (model_key, window, edge_buffer, lambda_min, lambda_max, cv_cut, stake_amount)
+            config_key = (model_key, window, delta_p_min, lambda_min, lambda_max, cv_cut, stake_amount)
         else:
             config_key = (model_key, window, rho, edge_buffer, blend_weight, lambda_min, lambda_max, cv_cut, kelly_fraction)
         if config_key in seen:
@@ -462,6 +462,7 @@ def cached_parameter_search(
             model=model_name,
             rho=rho,
             edge_buffer=edge_buffer,
+            delta_p_min=delta_p_min,
             blend_weight=blend_weight,
             stake_amount=stake_amount,
             lambda_min=lambda_min,
@@ -565,6 +566,7 @@ def cached_walk_forward_validation(
     lambda_min_candidates = _candidate_values(lambda_min_min, lambda_min_max, 4)
     lambda_max_candidates = _candidate_values(lambda_max_min, lambda_max_max, 4)
     cv_candidates = _candidate_values(cv_min, cv_max, 4)
+    delta_p_candidates = _candidate_values(delta_p_min_min, delta_p_min_max, 4)
     blend_candidates = _candidate_values(blend_weight_min, blend_weight_max, 4)
 
     selected_set = set(selected_leagues)
@@ -584,12 +586,14 @@ def cached_walk_forward_validation(
             kelly_fraction = float(stake_amount)
             rho = float(rng.choice(rho_candidates))
             edge_buffer = float(rng.choice(edge_candidates))
+            delta_p_min = float(rng.choice(delta_p_candidates))
             blend_weight = float(rng.choice(blend_candidates))
             config = {
                 "model_name": model_name,
                 "window": window,
                 "rho": rho,
                 "edge_buffer": edge_buffer,
+                "delta_p_min": delta_p_min,
                 "blend_weight": blend_weight,
                 "lambda_min": lambda_min,
                 "lambda_max": lambda_max,
@@ -606,6 +610,7 @@ def cached_walk_forward_validation(
                 model=model_name,
                 rho=rho,
                 edge_buffer=edge_buffer,
+                delta_p_min=delta_p_min,
                 blend_weight=blend_weight,
                 stake_amount=stake_amount,
                 lambda_min=lambda_min,
@@ -661,6 +666,7 @@ def cached_walk_forward_validation(
             model=model_name,
             rho=float(best_candidate["rho"]),
             edge_buffer=float(best_candidate["edge_buffer"]),
+            delta_p_min=float(best_candidate["delta_p_min"]),
             blend_weight=float(best_candidate["blend_weight"]),
             stake_amount=stake_amount,
             lambda_min=float(best_candidate["lambda_min"]),
@@ -783,7 +789,6 @@ def render_backtesting(base_path: str) -> None:
         settings["rho"],
         settings["edge_buffer"],
         settings["delta_p_min"],
-        settings["lambda_liga_padrao"],
         settings["blend_weight"],
         settings["stake_amount"],
         settings["lambda_min"],
@@ -1051,27 +1056,49 @@ def render_optimization(base_path: str) -> None:
     b3.metric("Apostas", f"{int(best['bets'])}")
     b4.metric("Drawdown", f"{best['drawdown']:.1f}")
 
-    display_results = results.head(20).rename(
-        columns={
-            "window": "Janela",
-            "rho": "Rho",
-            "edge_buffer": "Edge",
-            "lambda_min": "Lambda min",
-            "lambda_max": "Lambda max",
-            "cv_max": "CV max",
-            "kelly_fraction": "Kelly",
-            "bets": "Apostas",
-            "win_rate": "Acerto",
-            "roi": "ROI",
-            "profit": "Lucro",
-            "drawdown": "Drawdown",
-        }
-    )
+    display_results = results.head(20).copy()
+    if settings["model_name"] == "Modelo Excel":
+        display_results = display_results.rename(
+            columns={
+                "window": "Janela",
+                "delta_p_min": "DeltaP mínimo",
+                "lambda_min": "Lambda min",
+                "lambda_max": "Lambda max",
+                "cv_max": "CV max",
+                "kelly_fraction": "Kelly",
+                "bets": "Apostas",
+                "win_rate": "Acerto",
+                "roi": "ROI",
+                "profit": "Lucro",
+                "drawdown": "Drawdown",
+            }
+        )
+    else:
+        display_results = display_results.rename(
+            columns={
+                "window": "Janela",
+                "rho": "Rho",
+                "edge_buffer": "Edge",
+                "lambda_min": "Lambda min",
+                "lambda_max": "Lambda max",
+                "cv_max": "CV max",
+                "kelly_fraction": "Kelly",
+                "bets": "Apostas",
+                "win_rate": "Acerto",
+                "roi": "ROI",
+                "profit": "Lucro",
+                "drawdown": "Drawdown",
+            }
+        )
     display_results["ROI"] = display_results["ROI"].map(lambda value: f"{value:.1%}")
     display_results["Acerto"] = display_results["Acerto"].map(lambda value: f"{value:.1%}")
     display_results["Lucro"] = display_results["Lucro"].map(lambda value: f"{value:.1f}")
     display_results["Drawdown"] = display_results["Drawdown"].map(lambda value: f"{value:.1f}")
-    st.dataframe(display_results, width="stretch", hide_index=True)
+    if settings["model_name"] == "Modelo Excel":
+        display_columns = ["Janela", "DeltaP mínimo", "Lambda min", "Lambda max", "CV max", "Kelly", "Apostas", "Acerto", "ROI", "Lucro", "Drawdown"]
+    else:
+        display_columns = ["Janela", "Rho", "Edge", "Lambda min", "Lambda max", "CV max", "Kelly", "Apostas", "Acerto", "ROI", "Lucro", "Drawdown"]
+    st.dataframe(display_results[display_columns], width="stretch", hide_index=True)
 
     features = cached_features(base_path, int(best["window"]), settings["model_name"])
     best_scored = score_under25(
@@ -1080,7 +1107,6 @@ def render_optimization(base_path: str) -> None:
         rho=float(best["rho"]),
         edge_buffer=float(best["edge_buffer"]),
         delta_p_min=float(best.get("delta_p_min", 10.0)),
-        lambda_liga_padrao=float(best.get("lambda_liga_padrao", 2.6)),
         blend_weight=float(best.get("blend_weight", 0.5)),
         stake_amount=float(settings["stake_amount"]),
         lambda_min=float(best["lambda_min"]),
@@ -1194,11 +1220,14 @@ def render_optimization(base_path: str) -> None:
                     agg_drawdown = float(ok_rows["test_drawdown"].min())
                     agg_bets = int(ok_rows["test_bets"].sum())
 
+                    is_excel_model = settings["model_name"] == "Modelo Excel"
+                    if is_excel_model:
+                        group_cols = ["window", "delta_p_min", "lambda_min", "lambda_max", "cv_max", "kelly_fraction"]
+                    else:
+                        group_cols = ["window", "rho", "edge_buffer", "lambda_min", "lambda_max", "cv_max", "kelly_fraction"]
+
                     top_config = (
-                        ok_rows.groupby(
-                            ["window", "rho", "edge_buffer", "lambda_min", "lambda_max", "cv_max", "kelly_fraction"],
-                            as_index=False,
-                        )
+                        ok_rows.groupby(group_cols, as_index=False)
                         .agg(
                             folds=("fold", "count"),
                             val_roi=("val_roi", "mean"),
@@ -1223,8 +1252,9 @@ def render_optimization(base_path: str) -> None:
                             [
                                 {
                                     "Janela": int(best_config["window"]),
-                                    "Rho": float(best_config["rho"]),
-                                    "Edge": float(best_config["edge_buffer"]),
+                                    "Rho": float(best_config["rho"]) if "rho" in best_config else np.nan,
+                                    "DeltaP mínimo": float(best_config["delta_p_min"]) if "delta_p_min" in best_config else np.nan,
+                                    "Edge": float(best_config["edge_buffer"]) if "edge_buffer" in best_config else np.nan,
                                     "Lambda min": float(best_config["lambda_min"]),
                                     "Lambda max": float(best_config["lambda_max"]),
                                     "CV max": float(best_config["cv_max"]),
@@ -1248,48 +1278,50 @@ def render_optimization(base_path: str) -> None:
 
                     st.markdown("#### Ranking das configuracoes")
                     ranking_display = top_config.head(20).copy()
-                    ranking_display = ranking_display.rename(
-                        columns={
-                            "window": "Janela",
-                            "rho": "Rho",
-                            "edge_buffer": "Edge",
-                            "lambda_min": "Lambda min",
-                            "lambda_max": "Lambda max",
-                            "cv_max": "CV max",
-                            "kelly_fraction": "Kelly",
-                            "folds": "Folds",
-                            "val_roi": "ROI validacao",
-                            "test_roi": "ROI teste",
-                            "test_profit": "Lucro teste",
-                            "test_drawdown": "Drawdown teste",
-                            "test_bets": "Apostas teste",
-                        }
-                    )
+                    if is_excel_model:
+                        ranking_display = ranking_display.rename(
+                            columns={
+                                "window": "Janela",
+                                "delta_p_min": "DeltaP mínimo",
+                                "lambda_min": "Lambda min",
+                                "lambda_max": "Lambda max",
+                                "cv_max": "CV max",
+                                "kelly_fraction": "Kelly",
+                                "folds": "Folds",
+                                "val_roi": "ROI validacao",
+                                "test_roi": "ROI teste",
+                                "test_profit": "Lucro teste",
+                                "test_drawdown": "Drawdown teste",
+                                "test_bets": "Apostas teste",
+                            }
+                        )
+                    else:
+                        ranking_display = ranking_display.rename(
+                            columns={
+                                "window": "Janela",
+                                "rho": "Rho",
+                                "edge_buffer": "Edge",
+                                "lambda_min": "Lambda min",
+                                "lambda_max": "Lambda max",
+                                "cv_max": "CV max",
+                                "kelly_fraction": "Kelly",
+                                "folds": "Folds",
+                                "val_roi": "ROI validacao",
+                                "test_roi": "ROI teste",
+                                "test_profit": "Lucro teste",
+                                "test_drawdown": "Drawdown teste",
+                                "test_bets": "Apostas teste",
+                            }
+                        )
                     for col in ["ROI validacao", "ROI teste"]:
                         ranking_display[col] = ranking_display[col].map(lambda value: f"{value:.1%}")
                     for col in ["Lucro teste", "Drawdown teste", "Apostas teste"]:
                         ranking_display[col] = ranking_display[col].map(lambda value: f"{value:.1f}" if col != "Apostas teste" else f"{int(round(value))}")
-                    st.dataframe(
-                        ranking_display[
-                            [
-                                "Janela",
-                                "Rho",
-                                "Edge",
-                                "Lambda min",
-                                "Lambda max",
-                                "CV max",
-                                "Kelly",
-                                "Folds",
-                                "ROI validacao",
-                                "ROI teste",
-                                "Lucro teste",
-                                "Drawdown teste",
-                                "Apostas teste",
-                            ]
-                        ],
-                        width="stretch",
-                        hide_index=True,
-                    )
+                    if is_excel_model:
+                        columns = ["Janela", "DeltaP mínimo", "Lambda min", "Lambda max", "CV max", "Kelly", "Folds", "ROI validacao", "ROI teste", "Lucro teste", "Drawdown teste", "Apostas teste"]
+                    else:
+                        columns = ["Janela", "Rho", "Edge", "Lambda min", "Lambda max", "CV max", "Kelly", "Folds", "ROI validacao", "ROI teste", "Lucro teste", "Drawdown teste", "Apostas teste"]
+                    st.dataframe(ranking_display[columns], width="stretch", hide_index=True)
                 st.markdown("#### Resultado por fold")
                 st.dataframe(wf_results_display, width="stretch", hide_index=True)
 

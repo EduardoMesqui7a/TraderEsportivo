@@ -340,7 +340,6 @@ def score_under25(
     kelly_fraction: float = 0.25,
     stake_amount: float = 1.0,
     delta_p_min: float = 10.0,
-    lambda_liga_padrao: float = 2.6,
     blend_weight: float = 0.5,
     **extra: Any,
 ) -> pd.DataFrame:
@@ -376,14 +375,20 @@ def score_under25(
         )
 
     if model_key in {"excel", "modelo excel", "heuristic", "heuristico"}:
-        selection_ok = scored["under25_odds"] > (1.0 / excel_prob.clip(lower=np.finfo(float).eps)) * (1.0 + edge_buffer)
+        market_prob = pd.Series(
+            np.where(scored["under25_odds"] > 0, 1.0 / scored["under25_odds"], np.nan),
+            index=scored.index,
+        )
+        scored["prob_market"] = market_prob
+        scored["delta_p"] = (excel_prob - market_prob) * 100.0
+        selection_ok = scored["delta_p"] >= float(delta_p_min)
         scored = _finalize_scored_frame(
             scored,
             lambda_home=excel_home,
             lambda_away=excel_away,
             p_under25=excel_prob,
             selection_ok=selection_ok,
-            edge_buffer=edge_buffer,
+            edge_buffer=0.0,
             cv_max=cv_max,
             lambda_min=lambda_min,
             lambda_max=lambda_max,
