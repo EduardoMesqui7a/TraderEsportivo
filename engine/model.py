@@ -251,8 +251,44 @@ def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
         how="left",
         suffixes=("", "_legacy"),
     )
+    if "prob_market" not in merged.columns:
+        merged["prob_market"] = np.where(merged["under25_odds"] > 0, 1.0 / merged["under25_odds"], np.nan)
     legacy_mask = merged["legacy_prob_under25"].notna()
     merged["legacy_reference_found"] = legacy_mask.fillna(False)
+
+    if legacy_mask.any():
+        merged.loc[legacy_mask, "p_under25"] = merged.loc[legacy_mask, "legacy_prob_under25"].astype(float)
+        merged.loc[legacy_mask, "fair_odds"] = np.where(
+            merged.loc[legacy_mask, "p_under25"] > 0,
+            1.0 / merged.loc[legacy_mask, "p_under25"],
+            np.nan,
+        )
+        merged.loc[legacy_mask, "selection_ok"] = merged.loc[legacy_mask, "legacy_entry_under25"].astype(str).eq("Entrar")
+        merged.loc[legacy_mask, "prob_market"] = merged.loc[legacy_mask, "prob_market"].astype(float)
+        merged.loc[legacy_mask, "delta_p"] = (
+            (merged.loc[legacy_mask, "p_under25"] - merged.loc[legacy_mask, "prob_market"]) * 100.0
+        )
+        if "legacy_lambda_total" in merged.columns:
+            merged.loc[legacy_mask, "lambda_total"] = merged.loc[legacy_mask, "legacy_lambda_total"].astype(float)
+        merged.loc[legacy_mask, "lambda_ok"] = (
+            merged.loc[legacy_mask, "lambda_total"] >= merged.loc[legacy_mask, "lambda_min"]
+        ) & (
+            merged.loc[legacy_mask, "lambda_total"] <= merged.loc[legacy_mask, "lambda_max"]
+        )
+        merged.loc[legacy_mask, "cv_ok"] = merged.loc[legacy_mask, "defense_cv_10"] <= merged.loc[legacy_mask, "cv_max"]
+        merged.loc[legacy_mask, "edge_ok"] = merged.loc[legacy_mask, "prob_market"].notna()
+        merged.loc[legacy_mask, "bet_eligible"] = (
+            merged.loc[legacy_mask, "features_ready"]
+            & merged.loc[legacy_mask, "league_history_ready"]
+            & merged.loc[legacy_mask, "odds_eligible"]
+            & merged.loc[legacy_mask, "selection_ok"]
+            & merged.loc[legacy_mask, "cv_ok"]
+            & merged.loc[legacy_mask, "lambda_ok"]
+            & merged.loc[legacy_mask, "stake_fraction"].gt(0)
+        )
+        merged.loc[legacy_mask, "legacy_prob_under25"] = merged.loc[legacy_mask, "p_under25"]
+        merged.loc[legacy_mask, "legacy_lambda_total"] = merged.loc[legacy_mask, "lambda_total"]
+
     return merged.drop(
         columns=[
             c
@@ -375,12 +411,9 @@ def score_under25(
         )
 
     if model_key in {"excel", "modelo excel", "heuristic", "heuristico"}:
-        market_prob = pd.Series(
-            np.where(scored["under25_odds"] > 0, 1.0 / scored["under25_odds"], np.nan),
-            index=scored.index,
-        )
-        scored["prob_market"] = market_prob
-        scored["delta_p"] = (excel_prob - market_prob) * 100.0
+        league_reference_prob = float(poisson.cdf(2, 2.6))
+        scored["prob_liga"] = league_reference_prob
+        scored["delta_p"] = (excel_prob - league_reference_prob) * 100.0
         selection_ok = scored["delta_p"] >= float(delta_p_min)
         scored = _finalize_scored_frame(
             scored,
