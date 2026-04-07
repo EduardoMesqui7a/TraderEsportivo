@@ -1,243 +1,991 @@
 match_datetime,league_key,home_team,away_team,legacy_lambda_total,legacy_prob_under25,legacy_entry_under25
-2025-11-22 12:30:00,england/premier_league,Burnley,Chelsea,2.6,0.5184295759360504,Nao entrar
-2025-11-22 15:00:00,england/premier_league,Bournemouth,West Ham United,2.9000000000000004,0.4459631985571805,Nao entrar
-2025-11-22 15:00:00,england/premier_league,Brighton & Hove Albion,Brentford,2.9,0.4459631985571806,Nao entrar
-2025-11-22 15:00:00,england/premier_league,Fulham,Sunderland,3.3000000000000003,0.3594264663250838,Nao entrar
-2025-11-22 15:00:00,england/premier_league,Liverpool,Nottingham Forest,3,0.42319008112684353,Nao entrar
-2025-11-22 15:00:00,england/premier_league,Wolverhampton,Crystal Palace,2.4,0.5697087466575106,Nao entrar
-2025-11-22 17:30:00,england/premier_league,Newcastle United,Manchester City,4,0.2381033055535443,Nao entrar
-2025-11-23 14:00:00,england/premier_league,Leeds United,Aston Villa,3.9,0.25312510262978394,Nao entrar
-2025-11-23 16:30:00,england/premier_league,Arsenal,Tottenham Hotspur,3.8000000000000003,0.2688966777111104,Nao entrar
-2025-11-22 14:00:00,italy/serie_a,Cagliari,Genoa,3.2,0.3799037410783731,Nao entrar
-2025-11-22 14:00:00,italy/serie_a,Udinese,Bologna,3.5,0.3208471988621341,Nao entrar
-2025-11-22 17:00:00,italy/serie_a,Fiorentina,Juventus,2.8,0.4694536834666827,Nao entrar
-2025-11-22 19:45:00,italy/serie_a,Napoli,Atalanta,2.9000000000000004,0.4459631985571805,Nao entrar
-2025-11-23 11:30:00,italy/serie_a,Hellas Verona,Parma,2.5,0.5438131158833295,Nao entrar
-2025-11-23 14:00:00,italy/serie_a,Cremonese,Roma,2.5,0.5438131158833295,Nao entrar
-2025-11-23 17:00:00,italy/serie_a,Lazio,Lecce,1.6,0.7833584898192629,Entrar
-2025-11-23 19:45:00,italy/serie_a,Inter,Milan,2.8,0.4694536834666827,Nao entrar
-2025-11-22 13:00:00,spain/la_liga,Deportivo Alavés,Celta Vigo,1.9,0.7037203534424978,Entrar
-2025-11-22 15:15:00,spain/la_liga,Barcelona,Athletic Club,3.3000000000000003,0.3594264663250838,Nao entrar
-2025-11-22 17:30:00,spain/la_liga,Osasuna,Real Sociedad,3.3000000000000003,0.3594264663250838,Nao entrar
-2025-11-22 20:00:00,spain/la_liga,Villarreal,Mallorca,2.6999999999999997,0.4936244910734621,Nao entrar
-2025-11-23 13:00:00,spain/la_liga,Real Oviedo,Rayo Vallecano,1.1,0.9004162814033052,Entrar
-2025-11-23 15:15:00,spain/la_liga,Real Betis,Girona FC,3.1,0.4011631473146322,Nao entrar
-2025-11-23 17:30:00,spain/la_liga,Getafe,Atlético Madrid,2,0.6766764161830635,Entrar
-2025-11-23 20:00:00,spain/la_liga,Elche,Real Madrid,3,0.42319008112684353,Nao entrar
-2025-11-22 14:30:00,germany/bundesliga,1. FC Heidenheim,Borussia M'gladbach,2.5,0.5438131158833295,Nao entrar
-2025-11-22 14:30:00,germany/bundesliga,Borussia Dortmund,VfB Stuttgart,3.6,0.30274684471600155,Nao entrar
-2025-11-22 14:30:00,germany/bundesliga,FC Augsburg,Hamburger SV,3,0.42319008112684353,Nao entrar
-2025-11-22 14:30:00,germany/bundesliga,FC Bayern München,SC Freiburg,4.300000000000001,0.19735469083246246,Nao entrar
-2025-11-22 14:30:00,germany/bundesliga,VfL Wolfsburg,Bayer 04 Leverkusen,3,0.42319008112684353,Nao entrar
-2025-11-22 17:30:00,germany/bundesliga,1. FC Köln,Eintracht Frankfurt,3.9,0.25312510262978394,Nao entrar
-2025-11-23 14:30:00,germany/bundesliga,RB Leipzig,SV Werder Bremen,3,0.42319008112684353,Nao entrar
-2025-11-23 16:30:00,germany/bundesliga,FC St. Pauli,1. FC Union Berlin,3,0.42319008112684353,Nao entrar
-2025-11-22 16:00:00,france/ligue_1,RC Lens,RC Strasbourg,2.5,0.5438131158833295,Nao entrar
-2025-11-22 18:00:00,france/ligue_1,Stade Rennais,AS Monaco,3.3,0.3594264663250839,Nao entrar
-2025-11-22 20:05:00,france/ligue_1,Paris Saint-Germain,Le Havre,2.8,0.4694536834666827,Nao entrar
-2025-11-23 14:00:00,france/ligue_1,Auxerre,Olympique Lyonnais,2.4,0.5697087466575106,Nao entrar
-2025-11-23 16:15:00,france/ligue_1,Nantes,Lorient,2.4,0.5697087466575106,Nao entrar
-2025-11-23 16:15:00,france/ligue_1,Stade Brestois,Metz,2.6999999999999997,0.4936244910734621,Nao entrar
-2025-11-23 16:15:00,france/ligue_1,Toulouse,Angers,1.6,0.7833584898192629,Entrar
-2025-11-23 19:45:00,france/ligue_1,Lille,Paris FC,2.4000000000000004,0.5697087466575104,Nao entrar
-2025-11-22 15:30:00,netherlands/eredivisie,NAC Breda,PSV Eindhoven,2.4,0.5697087466575106,Nao entrar
-2025-11-22 17:45:00,netherlands/eredivisie,AFC Ajax,Excelsior,2.6999999999999997,0.4936244910734621,Nao entrar
-2025-11-22 17:45:00,netherlands/eredivisie,FC Volendam,FC Twente,2.3,0.5960388259320683,Nao entrar
-2025-11-22 20:00:00,netherlands/eredivisie,Heracles Almelo,Go Ahead Eagles,4.4,0.18514228573827204,Nao entrar
-2025-11-22 20:00:00,netherlands/eredivisie,Sparta Rotterdam,Fortuna Sittard,2.5999999999999996,0.5184295759360505,Nao entrar
-2025-11-23 11:15:00,netherlands/eredivisie,SC Heerenveen,AZ Alkmaar,2.8,0.4694536834666827,Nao entrar
-2025-11-23 13:30:00,netherlands/eredivisie,Feyenoord,NEC Nijmegen,4.1,0.2238139813007857,Nao entrar
-2025-11-23 13:30:00,netherlands/eredivisie,SC Telstar,FC Utrecht,2.5,0.5438131158833295,Nao entrar
-2025-11-23 15:45:00,netherlands/eredivisie,FC Groningen,PEC Zwolle,3.8,0.26889667771111053,Nao entrar
-2025-11-22 16:00:00,austria/bundesliga,FC Blau Weiss Linz,Austria Wien,2.9000000000000004,0.4459631985571805,Nao entrar
-2025-11-22 16:00:00,austria/bundesliga,SC Rheindorf Altach,Wolfsberger AC,2.0999999999999996,0.6496313518820691,Entrar
-2025-11-22 16:00:00,austria/bundesliga,TSV Hartberg,SV Ried,2.7,0.49362449107346196,Nao entrar
-2025-11-23 13:30:00,austria/bundesliga,Red Bull Salzburg,WSG Tirol,3,0.42319008112684353,Nao entrar
-2025-11-23 13:30:00,austria/bundesliga,SK Sturm Graz,LASK,2.8,0.4694536834666827,Nao entrar
-2025-11-23 16:00:00,austria/bundesliga,SK Rapid Wien,Grazer AK 1902,2.9,0.4459631985571806,Nao entrar
-2025-11-22 11:00:00,england/premier_league,Orenburg,Baltika Kaliningrad,1.5,0.8088468305380581,Entrar
-2025-11-22 13:45:00,england/premier_league,FC Spartak Moscow,CSKA Moscow,2.4,0.5697087466575106,Nao entrar
-2025-11-22 16:30:00,england/premier_league,Rubin Kazan,Akhmat Grozny,1.4,0.8334977381226298,Entrar
-2025-11-23 10:00:00,england/premier_league,Krylya Sovetov Samara,FC Rostov,2.6,0.5184295759360504,Nao entrar
-2025-11-23 12:15:00,england/premier_league,Pari Nizhny Novgorod,Zenit St. Petersburg,1.6,0.7833584898192629,Entrar
-2025-11-23 14:30:00,england/premier_league,Dynamo Moscow,Dinamo Makhachkala,1.9999999999999998,0.6766764161830634,Entrar
-2025-11-23 16:45:00,england/premier_league,Lokomotiv Moscow,FC Krasnodar,3.5999999999999996,0.30274684471600166,Nao entrar
-2025-11-22 13:00:00,france/ligue_1,USM Khenchela,JS Saoura,2,0.6766764161830635,Entrar
-2025-11-22 11:00:00,england/premier_league,Araz Naxçıvan,Turan Tovuz,2.0999999999999996,0.6496313518820691,Entrar
-2025-11-22 13:30:00,england/premier_league,Zirə FK,Qəbələ FK,1.5,0.8088468305380581,Entrar
-2025-11-23 11:00:00,england/premier_league,Sabah FK,Şamaxı FK,1.9000000000000001,0.7037203534424978,Entrar
-2025-11-23 13:30:00,england/premier_league,Neftçi Baku PFK,İmişli FK,2.2,0.6227137499963165,Entrar
-2025-11-23 20:30:00,italy/serie_a,Barcelona SC,LDU,2.6999999999999997,0.4936244910734621,Nao entrar
-2025-11-23 23:00:00,italy/serie_a,Independiente del Valle,Orense SC,2.1,0.6496313518820691,Entrar
-2025-11-23 00:00:00,italy/serie_a,Emelec,Aucas,3.3000000000000003,0.3594264663250838,Nao entrar
-2025-11-23 18:00:00,italy/serie_a,Macará,Delfín,2.6,0.5184295759360504,Nao entrar
-2025-11-22 15:00:00,england/premier_league,Karela United,Basake Holy Stars FC,2.3,0.5960388259320683,Nao entrar
-2025-11-22 15:30:00,england/premier_league,Medeama SC,Bechem United,2.3,0.5960388259320683,Nao entrar
-2025-11-23 15:00:00,england/premier_league,Aduana Stars FC,Berekum Chelsea,1.8,0.7306210859394126,Entrar
-2025-11-23 15:00:00,england/premier_league,Hohoe United FC,Eleven Wonders,2.1,0.6496313518820691,Entrar
-2025-11-23 15:00:00,england/premier_league,Nations FC,Bibiani Gold Stars FC,1.9999999999999998,0.6766764161830634,Entrar
-2025-11-23 15:00:00,england/premier_league,Samartex,Asante Kotoko SC,1.7,0.7572232071985852,Entrar
-2025-11-23 15:00:00,england/premier_league,Vision FC,Heart of Lions,1.9000000000000001,0.7037203534424978,Entrar
-2025-11-23 15:00:00,england/premier_league,Young Apostles FC,Accra Hearts of Oak,0.9,0.937143065702081,Entrar
-2025-11-23 15:30:00,england/premier_league,Dreams,Swedru All Blacks United FC,2.0999999999999996,0.6496313518820691,Entrar
-2025-11-22 15:00:00,england/premier_league,Ħamrun Spartans FC,Valletta FC,2.3,0.5960388259320683,Nao entrar
-2025-11-23 15:00:00,england/premier_league,Floriana FC,Marsaxlokk FC,2.6999999999999997,0.4936244910734621,Nao entrar
-2025-11-23 17:15:00,england/premier_league,Sliema Wanderers,Birkirkara FC,3.2,0.3799037410783731,Nao entrar
-2025-11-23 11:00:00,portugal/segunda_liga,Chaves,Sporting CP B U21,1.5,0.8088468305380581,Entrar
-2025-11-23 11:00:00,portugal/segunda_liga,FC Porto B,Portimonense SAD,2.3,0.5960388259320683,Nao entrar
-2025-11-23 14:00:00,portugal/segunda_liga,Marítimo,Penafiel,2.3,0.5960388259320683,Nao entrar
-2025-11-22 13:00:00,france/ligue_1,Avenir Sportif De La Marsa,JS Omrane,1.9,0.7037203534424978,Entrar
-2025-11-22 13:00:00,france/ligue_1,ES Zarzis,CA Bizertin,2.0999999999999996,0.6496313518820691,Entrar
-2025-11-22 13:00:00,france/ligue_1,JS Kairouanaise,ES Métlaoui,2,0.6766764161830635,Entrar
-2025-11-23 13:00:00,france/ligue_1,AS Soliman,US Monastir,1.9,0.7037203534424978,Entrar
-2025-11-23 13:00:00,france/ligue_1,Etoile Sportive Du Sahel,CS Sfaxien,1.5,0.8088468305380581,Entrar
-2025-11-23 13:00:00,france/ligue_1,Olympique Béja,Club Africain,1.6,0.7833584898192629,Entrar
-2025-11-23 13:00:00,france/ligue_1,Stade Tunisien,Avenir Sportif De Gabes,1.6999999999999997,0.7572232071985852,Entrar
-2025-11-22 11:00:00,england/premier_league,Karpaty Lviv,Metalist 1925,2,0.6766764161830635,Entrar
-2025-11-22 13:30:00,england/premier_league,Kolos Kovalivka,Dynamo Kyiv,2.0999999999999996,0.6496313518820691,Entrar
-2025-11-22 16:00:00,england/premier_league,Obolon Kyiv,Shakhtar Donetsk,3.4,0.33973988819611944,Nao entrar
-2025-11-23 11:00:00,england/premier_league,FC Kryvbas Kryvyi Rih,NK Veres Rivne,2.5999999999999996,0.5184295759360505,Nao entrar
-2025-11-23 13:30:00,england/premier_league,Polissya Zhytomyr,FC Epicentr Dunaivtsi,1.7,0.7572232071985852,Entrar
-2025-11-23 16:00:00,england/premier_league,Rukh Lviv,Kudrivka,2.5,0.5438131158833295,Nao entrar
-2025-11-24 20:00:00,england/premier_league,Manchester United,Everton,2.6999999999999997,0.4936244910734621,Nao entrar
-2025-11-24 17:30:00,italy/serie_a,Torino,Como,3,0.42319008112684353,Nao entrar
-2025-11-24 19:45:00,italy/serie_a,Sassuolo,Pisa,2.8,0.4694536834666827,Nao entrar
-2025-11-24 20:00:00,spain/la_liga,Espanyol,Sevilla,1.9,0.7037203534424978,Entrar
-2025-11-24 17:30:00,england/premier_league,Gżira United FC,Mosta FC,3.1,0.4011631473146322,Nao entrar
-2025-11-24 20:00:00,england/premier_league,Zabbar Saint Patrick FC,Tarxien Rainbows FC,2,0.6766764161830635,Entrar
-2025-11-24 16:00:00,england/premier_league,Zorya Luhansk,Oleksandria,2.5,0.5438131158833295,Nao entrar
-2025-11-25 17:45:00,uefa/champions_league,AFC Ajax,Benfica,2.7,0.49362449107346196,Nao entrar
-2025-11-25 17:45:00,uefa/champions_league,Galatasaray,Royale Union Saint-Gilloise,2.3,0.5960388259320683,Nao entrar
-2025-11-25 20:00:00,uefa/champions_league,Bodø/Glimt,Juventus,3.4,0.33973988819611944,Nao entrar
-2025-11-25 20:00:00,uefa/champions_league,Borussia Dortmund,Villarreal,3,0.42319008112684353,Nao entrar
-2025-11-25 20:00:00,uefa/champions_league,Chelsea,Barcelona,3.4,0.33973988819611944,Nao entrar
-2025-11-25 20:00:00,uefa/champions_league,Manchester City,Bayer 04 Leverkusen,3.4,0.33973988819611944,Nao entrar
-2025-11-25 20:00:00,uefa/champions_league,Napoli,Qarabağ FK,2.7,0.49362449107346196,Nao entrar
-2025-11-25 20:00:00,uefa/champions_league,Olympique de Marseille,Newcastle United,3.5,0.3208471988621341,Nao entrar
-2025-11-25 20:00:00,uefa/champions_league,SK Slavia Praha,Athletic Club,2.8,0.4694536834666827,Nao entrar
-2025-11-25 19:30:00,england/premier_league,Hibernians,Naxxar Lions FC,3.2,0.3799037410783731,Nao entrar
-2025-11-26 17:45:00,uefa/champions_league,FC København,Kairat Almaty,2.7,0.49362449107346196,Nao entrar
-2025-11-26 17:45:00,uefa/champions_league,Pafos FC,AS Monaco,3.4,0.33973988819611944,Nao entrar
-2025-11-26 20:00:00,uefa/champions_league,Arsenal,FC Bayern München,4.2,0.21023798702309743,Nao entrar
-2025-11-26 20:00:00,uefa/champions_league,Atlético Madrid,Inter,2.7,0.49362449107346196,Nao entrar
-2025-11-26 20:00:00,uefa/champions_league,Eintracht Frankfurt,Atalanta,3.6000000000000005,0.30274684471600144,Nao entrar
-2025-11-26 20:00:00,uefa/champions_league,Liverpool,PSV Eindhoven,3.5,0.3208471988621341,Nao entrar
-2025-11-26 20:00:00,uefa/champions_league,Olympiacos FC,Real Madrid,3.9,0.25312510262978394,Nao entrar
-2025-11-26 20:00:00,uefa/champions_league,Paris Saint-Germain,Tottenham Hotspur,4.4,0.18514228573827204,Nao entrar
-2025-11-26 20:00:00,uefa/champions_league,Sporting CP,Club Brugge KV,2.8,0.4694536834666827,Nao entrar
-2025-11-26 15:00:00,england/premier_league,Basake Holy Stars FC,Asante Kotoko SC,2.4,0.5697087466575106,Nao entrar
-2025-11-28 10:00:00,england/premier_league,Kəpəz PFK,Zirə FK,2,0.6766764161830635,Entrar
-2025-11-28 19:45:00,italy/serie_a,Como,Sassuolo,2.8,0.4694536834666827,Nao entrar
-2025-11-28 20:00:00,spain/la_liga,Getafe,Elche,2.0999999999999996,0.6496313518820691,Entrar
-2025-11-28 19:30:00,germany/bundesliga,Borussia M'gladbach,RB Leipzig,2.4,0.5697087466575106,Nao entrar
-2025-11-28 19:45:00,france/ligue_1,Metz,Stade Rennais,3.2,0.3799037410783731,Nao entrar
-2025-11-28 20:15:00,portugal/primeira_liga,Vitória SC,AVS - Futebol SAD,2.6,0.5184295759360504,Nao entrar
-2025-11-28 19:00:00,netherlands/eredivisie,PEC Zwolle,SC Heerenveen,3.2,0.3799037410783731,Nao entrar
-2025-11-29 11:00:00,england/premier_league,Akron Togliatti,Pari Nizhny Novgorod,2.2,0.6227137499963165,Entrar
-2025-11-28 14:30:00,england/premier_league,Turan Tovuz,Neftçi Baku PFK,1.7,0.7572232071985852,Entrar
-2025-11-29 10:30:00,england/premier_league,İmişli FK,Sabah FK,2.4000000000000004,0.5697087466575104,Nao entrar
-2025-11-29 00:00:00,italy/serie_a,LDU,Independiente del Valle,2.5,0.5438131158833295,Nao entrar
-2025-11-29 11:00:00,portugal/segunda_liga,Académico Viseu FC,Penafiel,2.3,0.5960388259320683,Nao entrar
-2025-11-28 16:00:00,england/premier_league,Obolon Kyiv,Kolos Kovalivka,2.2,0.6227137499963165,Entrar
-2025-11-29 15:00:00,england/premier_league,Brentford,Burnley,3,0.42319008112684353,Nao entrar
-2025-11-29 15:00:00,england/premier_league,Manchester City,Leeds United,4.4,0.18514228573827204,Nao entrar
-2025-11-29 15:00:00,england/premier_league,Sunderland,Bournemouth,2.9000000000000004,0.4459631985571805,Nao entrar
-2025-11-29 17:30:00,england/premier_league,Everton,Newcastle United,3,0.42319008112684353,Nao entrar
-2025-11-29 20:00:00,england/premier_league,Tottenham Hotspur,Fulham,4,0.2381033055535443,Nao entrar
-2025-11-29 14:00:00,italy/serie_a,Genoa,Hellas Verona,3.3000000000000003,0.3594264663250838,Nao entrar
-2025-11-29 14:00:00,italy/serie_a,Parma,Udinese,3,0.42319008112684353,Nao entrar
-2025-11-29 17:00:00,italy/serie_a,Juventus,Cagliari,2.7,0.49362449107346196,Nao entrar
-2025-11-29 19:45:00,italy/serie_a,Milan,Lazio,2,0.6766764161830635,Entrar
-2025-11-30 11:30:00,italy/serie_a,Lecce,Torino,2.6,0.5184295759360504,Nao entrar
-2025-11-29 13:00:00,spain/la_liga,Mallorca,Osasuna,3.2,0.3799037410783731,Nao entrar
-2025-11-29 15:15:00,spain/la_liga,Barcelona,Deportivo Alavés,3.3,0.3594264663250839,Nao entrar
-2025-11-29 17:30:00,spain/la_liga,Levante UD,Athletic Club,2,0.6766764161830635,Entrar
-2025-11-29 20:00:00,spain/la_liga,Atlético Madrid,Real Oviedo,1.4,0.8334977381226298,Entrar
-2025-11-29 14:30:00,germany/bundesliga,1. FC Union Berlin,1. FC Heidenheim,3.4,0.33973988819611944,Nao entrar
-2025-11-29 14:30:00,germany/bundesliga,FC Bayern München,FC St. Pauli,3.9000000000000004,0.2531251026297838,Nao entrar
-2025-11-29 14:30:00,germany/bundesliga,SV Werder Bremen,1. FC Köln,3.4000000000000004,0.3397398881961194,Nao entrar
-2025-11-29 14:30:00,germany/bundesliga,TSG Hoffenheim,FC Augsburg,2.6,0.5184295759360504,Nao entrar
-2025-11-29 17:30:00,germany/bundesliga,Bayer 04 Leverkusen,Borussia Dortmund,2.8,0.4694536834666827,Nao entrar
-2025-11-29 16:00:00,france/ligue_1,AS Monaco,Paris Saint-Germain,3.8000000000000003,0.2688966777111104,Nao entrar
-2025-11-29 18:00:00,france/ligue_1,Paris FC,Auxerre,1.9,0.7037203534424978,Entrar
-2025-11-29 20:05:00,france/ligue_1,Olympique de Marseille,Toulouse,2.5,0.5438131158833295,Nao entrar
-2025-11-29 15:30:00,portugal/primeira_liga,Casa Pia,FC Alverca,3.1,0.4011631473146322,Nao entrar
-2025-11-29 15:30:00,portugal/primeira_liga,Moreirense,Famalicão,3,0.42319008112684353,Nao entrar
-2025-11-29 18:00:00,portugal/primeira_liga,CD Nacional,Benfica,2.6,0.5184295759360504,Nao entrar
-2025-11-29 20:30:00,portugal/primeira_liga,Gil Vicente,Tondela,1.6,0.7833584898192629,Entrar
-2025-11-29 15:30:00,netherlands/eredivisie,Excelsior,NAC Breda,2,0.6766764161830635,Entrar
-2025-11-29 17:45:00,netherlands/eredivisie,Fortuna Sittard,Heracles Almelo,4,0.2381033055535443,Nao entrar
-2025-11-29 20:00:00,netherlands/eredivisie,NEC Nijmegen,Sparta Rotterdam,2.6999999999999997,0.4936244910734621,Nao entrar
-2025-11-30 11:15:00,netherlands/eredivisie,PSV Eindhoven,FC Volendam,3.4000000000000004,0.3397398881961194,Nao entrar
-2025-11-29 16:00:00,austria/bundesliga,Austria Wien,WSG Tirol,2.8,0.4694536834666827,Nao entrar
-2025-11-29 16:00:00,austria/bundesliga,Grazer AK 1902,FC Blau Weiss Linz,2.8,0.4694536834666827,Nao entrar
-2025-11-29 16:00:00,austria/bundesliga,SV Ried,Wolfsberger AC,2.5,0.5438131158833295,Nao entrar
-2025-11-29 13:00:00,england/premier_league,Hapoel Haifa,Hapoel Be'er Sheva,4.1,0.2238139813007857,Nao entrar
-2025-11-29 15:30:00,england/premier_league,Hapoel Tel Aviv,Bnei Sakhnin,2.5999999999999996,0.5184295759360505,Nao entrar
-2025-11-29 16:30:00,england/premier_league,Hapoel Ironi Kiryat Shmona,Hapoel Jerusalem,2.5999999999999996,0.5184295759360505,Nao entrar
-2025-11-29 16:30:00,england/premier_league,Maccabi Bney Reine,Ironi Dorot Tiberias,3.1,0.4011631473146322,Nao entrar
-2025-11-29 17:30:00,england/premier_league,Hapoel Petach Tikva,Maccabi Haifa,2.8,0.4694536834666827,Nao entrar
-2025-11-29 13:30:00,england/premier_league,CSKA Moscow,Orenburg,2,0.6766764161830635,Entrar
-2025-11-29 16:30:00,england/premier_league,Baltika Kaliningrad,FC Spartak Moscow,1.9,0.7037203534424978,Entrar
-2025-11-30 11:00:00,england/premier_league,FC Krasnodar,Krylya Sovetov Samara,3.0999999999999996,0.4011631473146323,Nao entrar
-2025-11-29 13:00:00,england/premier_league,Qarabağ FK,FK Karvan Yevlax,2.9000000000000004,0.4459631985571805,Nao entrar
-2025-11-30 10:00:00,england/premier_league,Şamaxı FK,Sumqayıt FK,2.8,0.4694536834666827,Nao entrar
-2025-11-29 21:30:00,italy/serie_a,Universidad Católica del Ecuador,Orense SC,1.9,0.7037203534424978,Entrar
-2025-11-30 00:00:00,italy/serie_a,Libertad,Barcelona SC,2.7,0.49362449107346196,Nao entrar
-2025-11-29 16:00:00,england/premier_league,Accra Hearts of Oak,Vision FC,1.3,0.8571124890919696,Entrar
-2025-11-29 14:00:00,portugal/segunda_liga,UD Oliveirense,Leixões SC,2.1,0.6496313518820691,Entrar
-2025-11-30 11:00:00,portugal/segunda_liga,FC Porto B,Lusitânia Lourosa,2.8,0.4694536834666827,Nao entrar
-2025-11-30 11:00:00,portugal/segunda_liga,Torreense,Chaves,1.4,0.8334977381226298,Entrar
-2025-11-29 13:30:00,england/premier_league,LNZ Cherkasy,Kudrivka,2.3,0.5960388259320683,Nao entrar
-2025-11-29 16:00:00,england/premier_league,NK Veres Rivne,Karpaty Lviv,1.5999999999999999,0.7833584898192629,Entrar
-2025-11-30 11:00:00,england/premier_league,Oleksandria,Rukh Lviv,2.3,0.5960388259320683,Nao entrar
-2025-11-30 12:00:00,england/premier_league,Crystal Palace,Manchester United,2.6999999999999997,0.4936244910734621,Nao entrar
-2025-11-30 14:05:00,england/premier_league,Aston Villa,Wolverhampton,2.9000000000000004,0.4459631985571805,Nao entrar
-2025-11-30 14:05:00,england/premier_league,Nottingham Forest,Brighton & Hove Albion,2.5999999999999996,0.5184295759360505,Nao entrar
-2025-11-30 14:05:00,england/premier_league,West Ham United,Liverpool,3.3,0.3594264663250839,Nao entrar
-2025-11-30 16:30:00,england/premier_league,Chelsea,Arsenal,2.7,0.49362449107346196,Nao entrar
-2025-11-30 14:00:00,italy/serie_a,Pisa,Inter,2.8,0.4694536834666827,Nao entrar
-2025-11-30 17:00:00,italy/serie_a,Atalanta,Fiorentina,3,0.42319008112684353,Nao entrar
-2025-11-30 19:45:00,italy/serie_a,Roma,Napoli,2.3,0.5960388259320683,Nao entrar
-2025-11-30 13:00:00,spain/la_liga,Real Sociedad,Villarreal,2.8,0.4694536834666827,Nao entrar
-2025-11-30 15:15:00,spain/la_liga,Sevilla,Real Betis,3.0999999999999996,0.4011631473146323,Nao entrar
-2025-11-30 17:30:00,spain/la_liga,Celta Vigo,Espanyol,1.7000000000000002,0.7572232071985849,Entrar
-2025-11-30 20:00:00,spain/la_liga,Girona FC,Real Madrid,2.9000000000000004,0.4459631985571805,Nao entrar
-2025-11-30 14:30:00,germany/bundesliga,Hamburger SV,VfB Stuttgart,3.8,0.26889667771111053,Nao entrar
-2025-11-30 16:30:00,germany/bundesliga,Eintracht Frankfurt,VfL Wolfsburg,3.7,0.28543311310006825,Nao entrar
+2025-01-03 20:00:00,france/ligue_1,Nice,Stade Rennais,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-01-04 16:00:00,france/ligue_1,Saint-Étienne,Stade de Reims,2.1,0.6496313518820691,Entrar
+2025-01-04 18:00:00,france/ligue_1,Lille,Nantes,2.1,0.6496313518820691,Entrar
+2025-01-04 20:00:00,france/ligue_1,Olympique Lyonnais,Montpellier,1.5999999999999999,0.7833584898192629,Entrar
+2025-01-05 14:00:00,france/ligue_1,Angers,Stade Brestois,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-01-05 14:00:00,france/ligue_1,RC Lens,Toulouse,3.6,0.30274684471600155,Nao entrar
+2025-01-05 14:00:00,france/ligue_1,RC Strasbourg,Auxerre,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-01-05 19:45:00,france/ligue_1,Olympique de Marseille,Le Havre,2.1999999999999997,0.6227137499963165,Entrar
+2025-01-10 18:00:00,france/ligue_1,Nantes,AS Monaco,2.3,0.5960388259320683,Nao entrar
+2025-01-10 20:05:00,france/ligue_1,Auxerre,Lille,2.2,0.6227137499963165,Entrar
+2025-01-11 16:00:00,france/ligue_1,Stade Brestois,Olympique Lyonnais,2.2,0.6227137499963165,Entrar
+2025-01-11 18:00:00,france/ligue_1,Stade de Reims,Nice,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-01-11 20:05:00,france/ligue_1,Stade Rennais,Olympique de Marseille,2.7,0.49362449107346196,Nao entrar
+2025-01-12 14:00:00,france/ligue_1,Le Havre,RC Lens,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-01-12 16:15:00,france/ligue_1,Montpellier,Angers,2.0,0.6766764161830635,Entrar
+2025-01-12 16:15:00,france/ligue_1,Toulouse,RC Strasbourg,3.1,0.4011631473146322,Nao entrar
+2025-01-12 19:45:00,france/ligue_1,Paris Saint-Germain,Saint-Étienne,3.3000000000000003,0.3594264663250838,Nao entrar
+2025-01-17 18:00:00,france/ligue_1,Montpellier,AS Monaco,2.3,0.5960388259320683,Nao entrar
+2025-01-17 20:05:00,france/ligue_1,Lille,Nice,2.6,0.5184295759360504,Nao entrar
+2025-01-18 16:00:00,france/ligue_1,RC Lens,Paris Saint-Germain,4.1000000000000005,0.22381398130078553,Nao entrar
+2025-01-18 18:00:00,france/ligue_1,Stade Rennais,Stade Brestois,3.0,0.42319008112684353,Nao entrar
+2025-01-18 20:05:00,france/ligue_1,Olympique Lyonnais,Toulouse,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-01-19 14:00:00,france/ligue_1,Saint-Étienne,Nantes,2.0,0.6766764161830635,Entrar
+2025-01-19 16:15:00,france/ligue_1,Angers,Auxerre,2.1,0.6496313518820691,Entrar
+2025-01-19 16:15:00,france/ligue_1,Stade de Reims,Le Havre,2.0,0.6766764161830635,Entrar
+2025-01-19 19:45:00,france/ligue_1,Olympique de Marseille,RC Strasbourg,2.6,0.5184295759360504,Nao entrar
+2025-01-24 19:45:00,france/ligue_1,Auxerre,Saint-Étienne,2.0999999999999996,0.6496313518820691,Entrar
+2025-01-25 16:00:00,france/ligue_1,AS Monaco,Stade Rennais,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-01-25 18:00:00,france/ligue_1,RC Strasbourg,Lille,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-01-25 20:05:00,france/ligue_1,Paris Saint-Germain,Stade de Reims,3.2,0.3799037410783731,Nao entrar
+2025-01-26 14:00:00,france/ligue_1,Le Havre,Stade Brestois,2.5,0.5438131158833295,Nao entrar
+2025-01-26 16:15:00,france/ligue_1,Nantes,Olympique Lyonnais,1.6,0.7833584898192629,Entrar
+2025-01-26 16:15:00,france/ligue_1,RC Lens,Angers,3.0,0.42319008112684353,Nao entrar
+2025-01-26 16:15:00,france/ligue_1,Toulouse,Montpellier,2.6,0.5184295759360504,Nao entrar
+2025-01-26 19:45:00,france/ligue_1,Nice,Olympique de Marseille,2.6,0.5184295759360504,Nao entrar
+2025-01-31 19:45:00,france/ligue_1,Montpellier,RC Lens,2.8,0.4694536834666827,Nao entrar
+2025-02-01 16:00:00,france/ligue_1,Stade Brestois,Paris Saint-Germain,3.7,0.28543311310006825,Nao entrar
+2025-02-01 18:00:00,france/ligue_1,AS Monaco,Auxerre,2.4,0.5697087466575106,Nao entrar
+2025-02-01 20:05:00,france/ligue_1,Lille,Saint-Étienne,2.3,0.5960388259320683,Nao entrar
+2025-02-02 14:00:00,france/ligue_1,Toulouse,Nice,3.1,0.4011631473146322,Nao entrar
+2025-02-02 16:15:00,france/ligue_1,Angers,Le Havre,2.0999999999999996,0.6496313518820691,Entrar
+2025-02-02 16:15:00,france/ligue_1,Stade Rennais,RC Strasbourg,2.9,0.4459631985571806,Nao entrar
+2025-02-02 16:15:00,france/ligue_1,Stade de Reims,Nantes,1.9,0.7037203534424978,Entrar
+2025-02-02 19:45:00,france/ligue_1,Olympique de Marseille,Olympique Lyonnais,1.9000000000000001,0.7037203534424978,Entrar
+2025-02-07 18:00:00,france/ligue_1,Nantes,Stade Brestois,2.4,0.5697087466575106,Nao entrar
+2025-02-07 20:05:00,france/ligue_1,Paris Saint-Germain,AS Monaco,3.6000000000000005,0.30274684471600144,Nao entrar
+2025-02-08 16:00:00,france/ligue_1,Nice,RC Lens,3.3000000000000003,0.3594264663250838,Nao entrar
+2025-02-08 18:00:00,france/ligue_1,Lille,Le Havre,2.2,0.6227137499963165,Entrar
+2025-02-08 20:05:00,france/ligue_1,Saint-Étienne,Stade Rennais,2.6,0.5184295759360504,Nao entrar
+2025-02-09 14:00:00,france/ligue_1,Olympique Lyonnais,Stade de Reims,1.7,0.7572232071985852,Entrar
+2025-02-09 16:15:00,france/ligue_1,Auxerre,Toulouse,2.7,0.49362449107346196,Nao entrar
+2025-02-09 16:15:00,france/ligue_1,RC Strasbourg,Montpellier,2.3,0.5960388259320683,Nao entrar
+2025-02-09 19:45:00,france/ligue_1,Angers,Olympique de Marseille,2.3,0.5960388259320683,Nao entrar
+2025-02-14 19:45:00,france/ligue_1,Stade Brestois,Auxerre,2.5,0.5438131158833295,Nao entrar
+2025-02-15 16:00:00,france/ligue_1,Olympique de Marseille,Saint-Étienne,2.3,0.5960388259320683,Nao entrar
+2025-02-15 18:00:00,france/ligue_1,AS Monaco,Nantes,2.3,0.5960388259320683,Nao entrar
+2025-02-15 20:05:00,france/ligue_1,Toulouse,Paris Saint-Germain,3.9,0.25312510262978394,Nao entrar
+2025-02-16 14:00:00,france/ligue_1,Montpellier,Olympique Lyonnais,1.5999999999999999,0.7833584898192629,Entrar
+2025-02-16 16:15:00,france/ligue_1,Le Havre,Nice,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-02-16 16:15:00,france/ligue_1,RC Lens,RC Strasbourg,3.3000000000000003,0.3594264663250838,Nao entrar
+2025-02-16 16:15:00,france/ligue_1,Stade de Reims,Angers,2.0999999999999996,0.6496313518820691,Entrar
+2025-02-16 19:45:00,france/ligue_1,Stade Rennais,Lille,2.7,0.49362449107346196,Nao entrar
+2025-02-21 19:45:00,france/ligue_1,Stade Rennais,Stade de Reims,2.5,0.5438131158833295,Nao entrar
+2025-02-22 16:00:00,france/ligue_1,Lille,AS Monaco,2.6,0.5184295759360504,Nao entrar
+2025-02-22 18:00:00,france/ligue_1,Saint-Étienne,Angers,2.1999999999999997,0.6227137499963165,Entrar
+2025-02-22 20:05:00,france/ligue_1,Auxerre,Olympique de Marseille,2.2,0.6227137499963165,Entrar
+2025-02-23 14:00:00,france/ligue_1,Nantes,RC Lens,2.8000000000000003,0.4694536834666827,Nao entrar
+2025-02-23 16:15:00,france/ligue_1,Le Havre,Toulouse,2.7,0.49362449107346196,Nao entrar
+2025-02-23 16:15:00,france/ligue_1,Nice,Montpellier,2.3,0.5960388259320683,Nao entrar
+2025-02-23 16:15:00,france/ligue_1,RC Strasbourg,Stade Brestois,2.9,0.4459631985571806,Nao entrar
+2025-02-23 19:45:00,france/ligue_1,Olympique Lyonnais,Paris Saint-Germain,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-02-28 19:45:00,france/ligue_1,AS Monaco,Stade de Reims,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-03-01 16:00:00,france/ligue_1,Saint-Étienne,Nice,2.5,0.5438131158833295,Nao entrar
+2025-03-01 18:00:00,france/ligue_1,RC Lens,Le Havre,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-03-01 20:05:00,france/ligue_1,Paris Saint-Germain,Lille,3.4,0.33973988819611944,Nao entrar
+2025-03-02 14:00:00,france/ligue_1,Olympique Lyonnais,Stade Brestois,2.2,0.6227137499963165,Entrar
+2025-03-02 16:15:00,france/ligue_1,Angers,Toulouse,2.8000000000000003,0.4694536834666827,Nao entrar
+2025-03-02 16:15:00,france/ligue_1,Auxerre,RC Strasbourg,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-03-02 16:15:00,france/ligue_1,Montpellier,Stade Rennais,2.4,0.5697087466575106,Nao entrar
+2025-03-02 19:45:00,france/ligue_1,Olympique de Marseille,Nantes,2.1,0.6496313518820691,Entrar
+2025-03-07 19:45:00,france/ligue_1,Toulouse,AS Monaco,3.1,0.4011631473146322,Nao entrar
+2025-03-08 16:00:00,france/ligue_1,Stade Rennais,Paris Saint-Germain,3.7,0.28543311310006825,Nao entrar
+2025-03-08 18:00:00,france/ligue_1,Lille,Montpellier,2.0999999999999996,0.6496313518820691,Entrar
+2025-03-08 20:05:00,france/ligue_1,Olympique de Marseille,RC Lens,3.1,0.4011631473146322,Nao entrar
+2025-03-09 14:00:00,france/ligue_1,Stade Brestois,Angers,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-03-09 16:15:00,france/ligue_1,Le Havre,Saint-Étienne,2.1,0.6496313518820691,Entrar
+2025-03-09 16:15:00,france/ligue_1,Nantes,RC Strasbourg,2.3,0.5960388259320683,Nao entrar
+2025-03-09 16:15:00,france/ligue_1,Stade de Reims,Auxerre,2.0,0.6766764161830635,Entrar
+2025-03-09 19:45:00,france/ligue_1,Nice,Olympique Lyonnais,2.1,0.6496313518820691,Entrar
+2025-03-14 19:45:00,france/ligue_1,Nice,Auxerre,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-03-15 16:00:00,france/ligue_1,Nantes,Lille,2.1,0.6496313518820691,Entrar
+2025-03-15 18:00:00,france/ligue_1,Angers,AS Monaco,2.5,0.5438131158833295,Nao entrar
+2025-03-15 20:05:00,france/ligue_1,RC Lens,Stade Rennais,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-03-16 14:00:00,france/ligue_1,Olympique Lyonnais,Le Havre,1.7,0.7572232071985852,Entrar
+2025-03-16 16:15:00,france/ligue_1,Montpellier,Saint-Étienne,2.0,0.6766764161830635,Entrar
+2025-03-16 16:15:00,france/ligue_1,RC Strasbourg,Toulouse,3.1,0.4011631473146322,Nao entrar
+2025-03-16 16:15:00,france/ligue_1,Stade Brestois,Stade de Reims,2.5,0.5438131158833295,Nao entrar
+2025-03-16 19:45:00,france/ligue_1,Paris Saint-Germain,Olympique de Marseille,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-03-28 19:45:00,france/ligue_1,RC Strasbourg,Olympique Lyonnais,2.0999999999999996,0.6496313518820691,Entrar
+2025-03-29 16:00:00,france/ligue_1,Stade de Reims,Olympique de Marseille,2.2,0.6227137499963165,Entrar
+2025-03-29 18:00:00,france/ligue_1,Saint-Étienne,Paris Saint-Germain,3.3000000000000003,0.3594264663250838,Nao entrar
+2025-03-29 20:05:00,france/ligue_1,AS Monaco,Nice,2.8000000000000003,0.4694536834666827,Nao entrar
+2025-03-30 13:00:00,france/ligue_1,Toulouse,Stade Brestois,3.2,0.3799037410783731,Nao entrar
+2025-03-30 15:15:00,france/ligue_1,Angers,Stade Rennais,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-03-30 15:15:00,france/ligue_1,Auxerre,Montpellier,1.9,0.7037203534424978,Entrar
+2025-03-30 15:15:00,france/ligue_1,Le Havre,Nantes,1.9000000000000001,0.7037203534424978,Entrar
+2025-03-30 18:45:00,france/ligue_1,Lille,RC Lens,3.1,0.4011631473146322,Nao entrar
+2025-04-04 18:45:00,france/ligue_1,Nice,Nantes,2.3,0.5960388259320683,Nao entrar
+2025-04-05 15:00:00,france/ligue_1,Paris Saint-Germain,Angers,3.3,0.3594264663250839,Nao entrar
+2025-04-05 17:00:00,france/ligue_1,Stade Brestois,AS Monaco,2.9,0.4459631985571806,Nao entrar
+2025-04-05 19:05:00,france/ligue_1,Olympique Lyonnais,Lille,1.9,0.7037203534424978,Entrar
+2025-04-06 13:00:00,france/ligue_1,RC Lens,Saint-Étienne,3.0,0.42319008112684353,Nao entrar
+2025-04-06 15:15:00,france/ligue_1,Montpellier,Le Havre,1.9,0.7037203534424978,Entrar
+2025-04-06 15:15:00,france/ligue_1,Stade Rennais,Auxerre,2.5,0.5438131158833295,Nao entrar
+2025-04-06 15:15:00,france/ligue_1,Stade de Reims,RC Strasbourg,2.4,0.5697087466575106,Nao entrar
+2025-04-06 18:45:00,france/ligue_1,Olympique de Marseille,Toulouse,2.9,0.4459631985571806,Nao entrar
+2025-04-11 18:45:00,france/ligue_1,RC Lens,Stade de Reims,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-04-12 15:00:00,france/ligue_1,AS Monaco,Olympique de Marseille,2.6,0.5184295759360504,Nao entrar
+2025-04-12 17:00:00,france/ligue_1,Toulouse,Lille,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-04-12 19:05:00,france/ligue_1,RC Strasbourg,Nice,2.8,0.4694536834666827,Nao entrar
+2025-04-13 13:00:00,france/ligue_1,Saint-Étienne,Stade Brestois,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-04-13 15:15:00,france/ligue_1,Angers,Montpellier,2.0,0.6766764161830635,Entrar
+2025-04-13 15:15:00,france/ligue_1,Le Havre,Stade Rennais,2.5,0.5438131158833295,Nao entrar
+2025-04-13 18:45:00,france/ligue_1,Auxerre,Olympique Lyonnais,1.7000000000000002,0.7572232071985849,Entrar
+2025-04-18 18:45:00,france/ligue_1,Stade Rennais,Nantes,2.4,0.5697087466575106,Nao entrar
+2025-04-19 15:00:00,france/ligue_1,Paris Saint-Germain,Le Havre,3.1999999999999997,0.3799037410783732,Nao entrar
+2025-04-19 17:00:00,france/ligue_1,AS Monaco,RC Strasbourg,2.8,0.4694536834666827,Nao entrar
+2025-04-19 19:05:00,france/ligue_1,Olympique de Marseille,Montpellier,2.0999999999999996,0.6496313518820691,Entrar
+2025-04-20 13:00:00,france/ligue_1,Lille,Auxerre,2.2,0.6227137499963165,Entrar
+2025-04-20 15:15:00,france/ligue_1,Nice,Angers,2.5,0.5438131158833295,Nao entrar
+2025-04-20 15:15:00,france/ligue_1,Stade Brestois,RC Lens,3.4,0.33973988819611944,Nao entrar
+2025-04-20 15:15:00,france/ligue_1,Stade de Reims,Toulouse,2.7,0.49362449107346196,Nao entrar
+2025-04-20 18:45:00,france/ligue_1,Saint-Étienne,Olympique Lyonnais,1.8,0.7306210859394126,Entrar
+2025-04-22 18:45:00,france/ligue_1,Nantes,Paris Saint-Germain,3.1,0.4011631473146322,Nao entrar
+2025-04-25 18:45:00,france/ligue_1,Paris Saint-Germain,Nice,3.6,0.30274684471600155,Nao entrar
+2025-04-26 15:00:00,france/ligue_1,RC Strasbourg,Saint-Étienne,2.5,0.5438131158833295,Nao entrar
+2025-04-26 17:00:00,france/ligue_1,Le Havre,AS Monaco,2.4,0.5697087466575106,Nao entrar
+2025-04-26 19:05:00,france/ligue_1,Olympique Lyonnais,Stade Rennais,2.2,0.6227137499963165,Entrar
+2025-04-27 13:00:00,france/ligue_1,Angers,Lille,2.3,0.5960388259320683,Nao entrar
+2025-04-27 15:15:00,france/ligue_1,Montpellier,Stade de Reims,1.9,0.7037203534424978,Entrar
+2025-04-27 15:15:00,france/ligue_1,Nantes,Toulouse,2.6,0.5184295759360504,Nao entrar
+2025-04-27 15:15:00,france/ligue_1,RC Lens,Auxerre,2.9,0.4459631985571806,Nao entrar
+2025-04-27 18:45:00,france/ligue_1,Olympique de Marseille,Stade Brestois,2.7,0.49362449107346196,Nao entrar
+2025-05-02 18:45:00,france/ligue_1,Nice,Stade de Reims,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-05-03 15:00:00,france/ligue_1,RC Strasbourg,Paris Saint-Germain,3.6,0.30274684471600155,Nao entrar
+2025-05-03 17:00:00,france/ligue_1,Toulouse,Stade Rennais,3.2,0.3799037410783731,Nao entrar
+2025-05-03 19:05:00,france/ligue_1,Saint-Étienne,AS Monaco,2.5,0.5438131158833295,Nao entrar
+2025-05-04 13:00:00,france/ligue_1,Nantes,Angers,2.0,0.6766764161830635,Entrar
+2025-05-04 15:15:00,france/ligue_1,Auxerre,Le Havre,1.9999999999999998,0.6766764161830634,Entrar
+2025-05-04 15:15:00,france/ligue_1,Olympique Lyonnais,RC Lens,2.6,0.5184295759360504,Nao entrar
+2025-05-04 15:15:00,france/ligue_1,Stade Brestois,Montpellier,2.4,0.5697087466575106,Nao entrar
+2025-05-04 18:45:00,france/ligue_1,Lille,Olympique de Marseille,2.4,0.5697087466575106,Nao entrar
+2025-05-10 19:00:00,france/ligue_1,AS Monaco,Olympique Lyonnais,2.1,0.6496313518820691,Entrar
+2025-05-10 19:00:00,france/ligue_1,Angers,RC Strasbourg,2.5,0.5438131158833295,Nao entrar
+2025-05-10 19:00:00,france/ligue_1,Auxerre,Nantes,1.9000000000000001,0.7037203534424978,Entrar
+2025-05-10 19:00:00,france/ligue_1,Le Havre,Olympique de Marseille,2.1999999999999997,0.6227137499963165,Entrar
+2025-05-10 19:00:00,france/ligue_1,Montpellier,Paris Saint-Germain,3.0999999999999996,0.4011631473146323,Nao entrar
+2025-05-10 19:00:00,france/ligue_1,Stade Brestois,Lille,2.7,0.49362449107346196,Nao entrar
+2025-05-10 19:00:00,france/ligue_1,Stade Rennais,Nice,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-05-10 19:00:00,france/ligue_1,Stade de Reims,Saint-Étienne,2.1,0.6496313518820691,Entrar
+2025-05-10 19:00:00,france/ligue_1,Toulouse,RC Lens,3.6,0.30274684471600155,Nao entrar
+2025-05-17 19:00:00,france/ligue_1,Lille,Stade de Reims,2.2,0.6227137499963165,Entrar
+2025-05-17 19:00:00,france/ligue_1,Nantes,Montpellier,1.7999999999999998,0.7306210859394126,Entrar
+2025-05-17 19:00:00,france/ligue_1,Nice,Stade Brestois,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-05-17 19:00:00,france/ligue_1,Olympique Lyonnais,Angers,1.8,0.7306210859394126,Entrar
+2025-05-17 19:00:00,france/ligue_1,Olympique de Marseille,Stade Rennais,2.7,0.49362449107346196,Nao entrar
+2025-05-17 19:00:00,france/ligue_1,Paris Saint-Germain,Auxerre,3.2,0.3799037410783731,Nao entrar
+2025-05-17 19:00:00,france/ligue_1,RC Lens,AS Monaco,3.3000000000000003,0.3594264663250838,Nao entrar
+2025-05-17 19:00:00,france/ligue_1,RC Strasbourg,Le Havre,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-05-17 19:00:00,france/ligue_1,Saint-Étienne,Toulouse,2.8,0.4694536834666827,Nao entrar
+2025-08-15 18:45:00,france/ligue_1,Stade Rennais,Olympique de Marseille,2.7,0.49362449107346196,Nao entrar
+2025-08-16 15:00:00,france/ligue_1,RC Lens,Olympique Lyonnais,2.6,0.5184295759360504,Nao entrar
+2025-08-16 17:00:00,france/ligue_1,AS Monaco,Le Havre,2.4,0.5697087466575106,Nao entrar
+2025-08-16 19:05:00,france/ligue_1,Nice,Toulouse,3.1,0.4011631473146322,Nao entrar
+2025-08-17 13:00:00,france/ligue_1,Stade Brestois,Lille,2.7,0.49362449107346196,Nao entrar
+2025-08-17 15:15:00,france/ligue_1,Angers,Paris FC,2.1,0.6496313518820691,Entrar
+2025-08-17 15:15:00,france/ligue_1,Auxerre,Lorient,1.8,0.7306210859394126,Entrar
+2025-08-17 15:15:00,france/ligue_1,Metz,RC Strasbourg,2.5,0.5438131158833295,Nao entrar
+2025-08-17 18:45:00,france/ligue_1,Nantes,Paris Saint-Germain,3.1,0.4011631473146322,Nao entrar
+2025-08-22 18:45:00,france/ligue_1,Paris Saint-Germain,Angers,3.3,0.3594264663250839,Nao entrar
+2025-08-23 15:00:00,france/ligue_1,Olympique de Marseille,Paris FC,2.2,0.6227137499963165,Entrar
+2025-08-23 17:00:00,france/ligue_1,Nice,Auxerre,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-08-23 19:05:00,france/ligue_1,Olympique Lyonnais,Metz,1.8,0.7306210859394126,Entrar
+2025-08-24 13:00:00,france/ligue_1,Lorient,Stade Rennais,2.3,0.5960388259320683,Nao entrar
+2025-08-24 15:15:00,france/ligue_1,Le Havre,RC Lens,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-08-24 15:15:00,france/ligue_1,RC Strasbourg,Nantes,2.3,0.5960388259320683,Nao entrar
+2025-08-24 15:15:00,france/ligue_1,Toulouse,Stade Brestois,3.2,0.3799037410783731,Nao entrar
+2025-08-24 18:45:00,france/ligue_1,Lille,AS Monaco,2.6,0.5184295759360504,Nao entrar
+2025-08-29 18:45:00,france/ligue_1,RC Lens,Stade Brestois,3.4,0.33973988819611944,Nao entrar
+2025-08-30 15:00:00,france/ligue_1,Lorient,Lille,2.0,0.6766764161830635,Entrar
+2025-08-30 17:00:00,france/ligue_1,Nantes,Auxerre,1.9000000000000001,0.7037203534424978,Entrar
+2025-08-30 19:05:00,france/ligue_1,Toulouse,Paris Saint-Germain,3.9,0.25312510262978394,Nao entrar
+2025-08-31 13:00:00,france/ligue_1,Angers,Stade Rennais,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-08-31 15:15:00,france/ligue_1,AS Monaco,RC Strasbourg,2.8,0.4694536834666827,Nao entrar
+2025-08-31 15:15:00,france/ligue_1,Le Havre,Nice,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-08-31 15:15:00,france/ligue_1,Paris FC,Metz,2.0999999999999996,0.6496313518820691,Entrar
+2025-08-31 18:45:00,france/ligue_1,Olympique Lyonnais,Olympique de Marseille,1.9000000000000001,0.7037203534424978,Entrar
+2025-09-12 18:45:00,france/ligue_1,Olympique de Marseille,Lorient,2.0,0.6766764161830635,Entrar
+2025-09-13 15:00:00,france/ligue_1,Nice,Nantes,2.3,0.5960388259320683,Nao entrar
+2025-09-13 19:05:00,france/ligue_1,Auxerre,AS Monaco,2.4,0.5697087466575106,Nao entrar
+2025-09-14 13:00:00,france/ligue_1,Lille,Toulouse,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-09-14 15:15:00,france/ligue_1,Metz,Angers,2.2,0.6227137499963165,Entrar
+2025-09-14 15:15:00,france/ligue_1,Paris Saint-Germain,RC Lens,4.1000000000000005,0.22381398130078553,Nao entrar
+2025-09-14 15:15:00,france/ligue_1,RC Strasbourg,Le Havre,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-09-14 15:15:00,france/ligue_1,Stade Brestois,Paris FC,2.5,0.5438131158833295,Nao entrar
+2025-09-14 18:45:00,france/ligue_1,Stade Rennais,Olympique Lyonnais,2.2,0.6227137499963165,Entrar
+2025-09-19 18:45:00,france/ligue_1,Olympique Lyonnais,Angers,1.8,0.7306210859394126,Entrar
+2025-09-20 15:00:00,france/ligue_1,Nantes,Stade Rennais,2.4,0.5697087466575106,Nao entrar
+2025-09-20 17:00:00,france/ligue_1,Stade Brestois,Nice,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-09-20 19:05:00,france/ligue_1,RC Lens,Lille,3.1,0.4011631473146322,Nao entrar
+2025-09-21 13:00:00,france/ligue_1,Paris FC,RC Strasbourg,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-09-21 15:15:00,france/ligue_1,AS Monaco,Metz,2.5,0.5438131158833295,Nao entrar
+2025-09-21 15:15:00,france/ligue_1,Auxerre,Toulouse,2.7,0.49362449107346196,Nao entrar
+2025-09-21 15:15:00,france/ligue_1,Le Havre,Lorient,1.8,0.7306210859394126,Entrar
+2025-09-22 18:00:00,france/ligue_1,Olympique de Marseille,Paris Saint-Germain,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-09-26 18:45:00,france/ligue_1,RC Strasbourg,Olympique de Marseille,2.6,0.5184295759360504,Nao entrar
+2025-09-27 15:00:00,france/ligue_1,Lorient,AS Monaco,2.2,0.6227137499963165,Entrar
+2025-09-27 17:00:00,france/ligue_1,Toulouse,Nantes,2.6,0.5184295759360504,Nao entrar
+2025-09-27 19:05:00,france/ligue_1,Paris Saint-Germain,Auxerre,3.2,0.3799037410783731,Nao entrar
+2025-09-28 13:00:00,france/ligue_1,Nice,Paris FC,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-09-28 15:15:00,france/ligue_1,Angers,Stade Brestois,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-09-28 15:15:00,france/ligue_1,Lille,Olympique Lyonnais,1.9,0.7037203534424978,Entrar
+2025-09-28 15:15:00,france/ligue_1,Metz,Le Havre,2.1,0.6496313518820691,Entrar
+2025-09-28 18:45:00,france/ligue_1,Stade Rennais,RC Lens,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-10-03 18:45:00,france/ligue_1,Paris FC,Lorient,1.8,0.7306210859394126,Entrar
+2025-10-04 15:00:00,france/ligue_1,Metz,Olympique de Marseille,2.3,0.5960388259320683,Nao entrar
+2025-10-04 17:00:00,france/ligue_1,Stade Brestois,Nantes,2.4,0.5697087466575106,Nao entrar
+2025-10-04 19:05:00,france/ligue_1,Auxerre,RC Lens,2.9,0.4459631985571806,Nao entrar
+2025-10-05 13:00:00,france/ligue_1,Olympique Lyonnais,Toulouse,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-10-05 15:15:00,france/ligue_1,AS Monaco,Nice,2.8000000000000003,0.4694536834666827,Nao entrar
+2025-10-05 15:15:00,france/ligue_1,Le Havre,Stade Rennais,2.5,0.5438131158833295,Nao entrar
+2025-10-05 15:15:00,france/ligue_1,RC Strasbourg,Angers,2.5,0.5438131158833295,Nao entrar
+2025-10-05 18:45:00,france/ligue_1,Lille,Paris Saint-Germain,3.4,0.33973988819611944,Nao entrar
+2025-10-17 18:45:00,france/ligue_1,Paris Saint-Germain,RC Strasbourg,3.6,0.30274684471600155,Nao entrar
+2025-10-18 15:00:00,france/ligue_1,Nice,Olympique Lyonnais,2.1,0.6496313518820691,Entrar
+2025-10-18 17:00:00,france/ligue_1,Angers,AS Monaco,2.5,0.5438131158833295,Nao entrar
+2025-10-18 19:05:00,france/ligue_1,Olympique de Marseille,Le Havre,2.1999999999999997,0.6227137499963165,Entrar
+2025-10-19 13:00:00,france/ligue_1,RC Lens,Paris FC,2.9,0.4459631985571806,Nao entrar
+2025-10-19 15:15:00,france/ligue_1,Lorient,Stade Brestois,2.3,0.5960388259320683,Nao entrar
+2025-10-19 15:15:00,france/ligue_1,Stade Rennais,Auxerre,2.5,0.5438131158833295,Nao entrar
+2025-10-19 15:15:00,france/ligue_1,Toulouse,Metz,2.8,0.4694536834666827,Nao entrar
+2025-10-19 18:45:00,france/ligue_1,Nantes,Lille,2.1,0.6496313518820691,Entrar
+2025-10-24 18:45:00,france/ligue_1,Paris FC,Nantes,1.9000000000000001,0.7037203534424978,Entrar
+2025-10-25 15:00:00,france/ligue_1,Stade Brestois,Paris Saint-Germain,3.7,0.28543311310006825,Nao entrar
+2025-10-25 17:00:00,france/ligue_1,AS Monaco,Toulouse,3.1,0.4011631473146322,Nao entrar
+2025-10-25 19:05:00,france/ligue_1,RC Lens,Olympique de Marseille,3.1,0.4011631473146322,Nao entrar
+2025-10-26 14:00:00,france/ligue_1,Lille,Metz,2.3,0.5960388259320683,Nao entrar
+2025-10-26 16:15:00,france/ligue_1,Angers,Lorient,1.9000000000000001,0.7037203534424978,Entrar
+2025-10-26 16:15:00,france/ligue_1,Auxerre,Le Havre,1.9999999999999998,0.6766764161830634,Entrar
+2025-10-26 16:15:00,france/ligue_1,Stade Rennais,Nice,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-10-26 19:45:00,france/ligue_1,Olympique Lyonnais,RC Strasbourg,2.0999999999999996,0.6496313518820691,Entrar
+2025-10-29 18:00:00,france/ligue_1,Le Havre,Stade Brestois,2.5,0.5438131158833295,Nao entrar
+2025-10-29 18:00:00,france/ligue_1,Lorient,Paris Saint-Germain,3.0,0.42319008112684353,Nao entrar
+2025-10-29 18:00:00,france/ligue_1,Metz,RC Lens,3.0,0.42319008112684353,Nao entrar
+2025-10-29 18:00:00,france/ligue_1,Nice,Lille,2.6,0.5184295759360504,Nao entrar
+2025-10-29 20:05:00,france/ligue_1,Nantes,AS Monaco,2.3,0.5960388259320683,Nao entrar
+2025-10-29 20:05:00,france/ligue_1,Olympique de Marseille,Angers,2.3,0.5960388259320683,Nao entrar
+2025-10-29 20:05:00,france/ligue_1,Paris FC,Olympique Lyonnais,1.7000000000000002,0.7572232071985849,Entrar
+2025-10-29 20:05:00,france/ligue_1,RC Strasbourg,Auxerre,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-10-29 20:05:00,france/ligue_1,Toulouse,Stade Rennais,3.2,0.3799037410783731,Nao entrar
+2025-11-01 16:00:00,france/ligue_1,Paris Saint-Germain,Nice,3.6,0.30274684471600155,Nao entrar
+2025-11-01 18:00:00,france/ligue_1,AS Monaco,Paris FC,2.4,0.5697087466575106,Nao entrar
+2025-11-01 20:05:00,france/ligue_1,Auxerre,Olympique de Marseille,2.2,0.6227137499963165,Entrar
+2025-11-02 14:00:00,france/ligue_1,Stade Rennais,RC Strasbourg,2.9,0.4459631985571806,Nao entrar
+2025-11-02 16:15:00,france/ligue_1,Lille,Angers,2.3,0.5960388259320683,Nao entrar
+2025-11-02 16:15:00,france/ligue_1,Nantes,Metz,2.0,0.6766764161830635,Entrar
+2025-11-02 16:15:00,france/ligue_1,RC Lens,Lorient,2.7,0.49362449107346196,Nao entrar
+2025-11-02 16:15:00,france/ligue_1,Toulouse,Le Havre,2.7,0.49362449107346196,Nao entrar
+2025-11-02 19:45:00,france/ligue_1,Stade Brestois,Olympique Lyonnais,2.2,0.6227137499963165,Entrar
+2025-11-07 19:45:00,france/ligue_1,Paris FC,Stade Rennais,2.5,0.5438131158833295,Nao entrar
+2025-11-08 16:00:00,france/ligue_1,Olympique de Marseille,Stade Brestois,2.7,0.49362449107346196,Nao entrar
+2025-11-08 18:00:00,france/ligue_1,Le Havre,Nantes,1.9000000000000001,0.7037203534424978,Entrar
+2025-11-08 20:05:00,france/ligue_1,AS Monaco,RC Lens,3.3000000000000003,0.3594264663250838,Nao entrar
+2025-11-09 14:00:00,france/ligue_1,Lorient,Toulouse,2.5,0.5438131158833295,Nao entrar
+2025-11-09 16:15:00,france/ligue_1,Angers,Auxerre,2.1,0.6496313518820691,Entrar
+2025-11-09 16:15:00,france/ligue_1,Metz,Nice,2.5,0.5438131158833295,Nao entrar
+2025-11-09 16:15:00,france/ligue_1,RC Strasbourg,Lille,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-11-09 19:45:00,france/ligue_1,Olympique Lyonnais,Paris Saint-Germain,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-11-21 19:45:00,france/ligue_1,Nice,Olympique de Marseille,2.6,0.5184295759360504,Nao entrar
+2025-11-22 16:00:00,france/ligue_1,RC Lens,RC Strasbourg,3.3000000000000003,0.3594264663250838,Nao entrar
+2025-11-22 18:00:00,france/ligue_1,Stade Rennais,AS Monaco,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-11-22 20:05:00,france/ligue_1,Paris Saint-Germain,Le Havre,3.1999999999999997,0.3799037410783732,Nao entrar
+2025-11-23 14:00:00,france/ligue_1,Auxerre,Olympique Lyonnais,1.7000000000000002,0.7572232071985849,Entrar
+2025-11-23 16:15:00,france/ligue_1,Nantes,Lorient,1.7000000000000002,0.7572232071985849,Entrar
+2025-11-23 16:15:00,france/ligue_1,Stade Brestois,Metz,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-11-23 16:15:00,france/ligue_1,Toulouse,Angers,2.8000000000000003,0.4694536834666827,Nao entrar
+2025-11-23 19:45:00,france/ligue_1,Lille,Paris FC,2.2,0.6227137499963165,Entrar
+2025-11-28 19:45:00,france/ligue_1,Metz,Stade Rennais,2.6,0.5184295759360504,Nao entrar
+2025-11-29 16:00:00,france/ligue_1,AS Monaco,Paris Saint-Germain,3.6000000000000005,0.30274684471600144,Nao entrar
+2025-11-29 18:00:00,france/ligue_1,Paris FC,Auxerre,2.0,0.6766764161830635,Entrar
+2025-11-29 20:05:00,france/ligue_1,Olympique de Marseille,Toulouse,2.9,0.4459631985571806,Nao entrar
+2025-11-30 14:00:00,france/ligue_1,RC Strasbourg,Stade Brestois,2.9,0.4459631985571806,Nao entrar
+2025-11-30 16:15:00,france/ligue_1,Angers,RC Lens,3.0,0.42319008112684353,Nao entrar
+2025-11-30 16:15:00,france/ligue_1,Le Havre,Lille,2.2,0.6227137499963165,Entrar
+2025-11-30 16:15:00,france/ligue_1,Lorient,Nice,2.2,0.6227137499963165,Entrar
+2025-11-30 19:45:00,france/ligue_1,Olympique Lyonnais,Nantes,1.6,0.7833584898192629,Entrar
+2025-12-05 18:00:00,france/ligue_1,Stade Brestois,AS Monaco,2.9,0.4459631985571806,Nao entrar
+2025-12-05 20:00:00,france/ligue_1,Lille,Olympique de Marseille,2.4,0.5697087466575106,Nao entrar
+2025-12-06 16:00:00,france/ligue_1,Nantes,RC Lens,2.8000000000000003,0.4694536834666827,Nao entrar
+2025-12-06 18:00:00,france/ligue_1,Toulouse,RC Strasbourg,3.1,0.4011631473146322,Nao entrar
+2025-12-06 20:05:00,france/ligue_1,Paris Saint-Germain,Stade Rennais,3.7,0.28543311310006825,Nao entrar
+2025-12-07 14:00:00,france/ligue_1,Nice,Angers,2.5,0.5438131158833295,Nao entrar
+2025-12-07 16:15:00,france/ligue_1,Auxerre,Metz,2.0999999999999996,0.6496313518820691,Entrar
+2025-12-07 16:15:00,france/ligue_1,Le Havre,Paris FC,1.9999999999999998,0.6766764161830634,Entrar
+2025-12-07 19:45:00,france/ligue_1,Lorient,Olympique Lyonnais,1.5,0.8088468305380581,Entrar
+2025-12-12 19:45:00,france/ligue_1,Angers,Nantes,2.0,0.6766764161830635,Entrar
+2025-12-13 16:00:00,france/ligue_1,Stade Rennais,Stade Brestois,3.0,0.42319008112684353,Nao entrar
+2025-12-13 18:00:00,france/ligue_1,Metz,Paris Saint-Germain,3.3000000000000003,0.3594264663250838,Nao entrar
+2025-12-13 20:05:00,france/ligue_1,Paris FC,Toulouse,2.7,0.49362449107346196,Nao entrar
+2025-12-14 14:00:00,france/ligue_1,Olympique Lyonnais,Le Havre,1.7,0.7572232071985852,Entrar
+2025-12-14 16:15:00,france/ligue_1,Auxerre,Lille,2.2,0.6227137499963165,Entrar
+2025-12-14 16:15:00,france/ligue_1,RC Lens,Nice,3.3000000000000003,0.3594264663250838,Nao entrar
+2025-12-14 16:15:00,france/ligue_1,RC Strasbourg,Lorient,2.2,0.6227137499963165,Entrar
+2025-12-14 19:45:00,france/ligue_1,Olympique de Marseille,AS Monaco,2.6,0.5184295759360504,Nao entrar
+2025-01-10 19:45:00,germany/bundesliga,Borussia Dortmund,Bayer 04 Leverkusen,3.8000000000000003,0.2688966777111104,Nao entrar
+2025-01-11 14:30:00,germany/bundesliga,1. FC Heidenheim,1. FC Union Berlin,3.2,0.3799037410783731,Nao entrar
+2025-01-11 14:30:00,germany/bundesliga,1. FSV Mainz 05,VfL Bochum 1848,3.1,0.4011631473146322,Nao entrar
+2025-01-11 14:30:00,germany/bundesliga,FC St. Pauli,Eintracht Frankfurt,1.8,0.7306210859394126,Entrar
+2025-01-11 14:30:00,germany/bundesliga,SC Freiburg,Holstein Kiel,3.0,0.42319008112684353,Nao entrar
+2025-01-11 14:30:00,germany/bundesliga,TSG Hoffenheim,VfL Wolfsburg,4.3,0.19735469083246257,Nao entrar
+2025-01-11 17:30:00,germany/bundesliga,Borussia M'gladbach,FC Bayern München,4.4,0.18514228573827204,Nao entrar
+2025-01-12 14:30:00,germany/bundesliga,RB Leipzig,SV Werder Bremen,2.8000000000000003,0.4694536834666827,Nao entrar
+2025-01-12 16:30:00,germany/bundesliga,FC Augsburg,VfB Stuttgart,3.0999999999999996,0.4011631473146323,Nao entrar
+2025-01-14 17:30:00,germany/bundesliga,Holstein Kiel,Borussia Dortmund,3.1,0.4011631473146322,Nao entrar
+2025-01-14 19:30:00,germany/bundesliga,Bayer 04 Leverkusen,1. FSV Mainz 05,3.1,0.4011631473146322,Nao entrar
+2025-01-14 19:30:00,germany/bundesliga,Eintracht Frankfurt,SC Freiburg,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-01-14 19:30:00,germany/bundesliga,VfL Wolfsburg,Borussia M'gladbach,4.0,0.2381033055535443,Nao entrar
+2025-01-15 17:30:00,germany/bundesliga,VfL Bochum 1848,FC St. Pauli,2.9,0.4459631985571806,Nao entrar
+2025-01-15 19:30:00,germany/bundesliga,1. FC Union Berlin,FC Augsburg,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-01-15 19:30:00,germany/bundesliga,FC Bayern München,TSG Hoffenheim,4.699999999999999,0.15230041506789654,Nao entrar
+2025-01-15 19:30:00,germany/bundesliga,SV Werder Bremen,1. FC Heidenheim,3.2,0.3799037410783731,Nao entrar
+2025-01-15 19:30:00,germany/bundesliga,VfB Stuttgart,RB Leipzig,3.0,0.42319008112684353,Nao entrar
+2025-01-17 19:30:00,germany/bundesliga,Eintracht Frankfurt,Borussia Dortmund,2.7,0.49362449107346196,Nao entrar
+2025-01-18 14:30:00,germany/bundesliga,1. FC Heidenheim,FC St. Pauli,2.7,0.49362449107346196,Nao entrar
+2025-01-18 14:30:00,germany/bundesliga,FC Bayern München,VfL Wolfsburg,4.2,0.21023798702309743,Nao entrar
+2025-01-18 14:30:00,germany/bundesliga,Holstein Kiel,TSG Hoffenheim,3.8000000000000003,0.2688966777111104,Nao entrar
+2025-01-18 14:30:00,germany/bundesliga,VfB Stuttgart,SC Freiburg,3.1,0.4011631473146322,Nao entrar
+2025-01-18 14:30:00,germany/bundesliga,VfL Bochum 1848,RB Leipzig,3.6,0.30274684471600155,Nao entrar
+2025-01-18 17:30:00,germany/bundesliga,Bayer 04 Leverkusen,Borussia M'gladbach,4.2,0.21023798702309743,Nao entrar
+2025-01-19 14:30:00,germany/bundesliga,1. FC Union Berlin,1. FSV Mainz 05,2.3,0.5960388259320683,Nao entrar
+2025-01-19 16:30:00,germany/bundesliga,SV Werder Bremen,FC Augsburg,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-01-24 19:30:00,germany/bundesliga,VfL Wolfsburg,Holstein Kiel,3.3,0.3594264663250839,Nao entrar
+2025-01-25 14:30:00,germany/bundesliga,1. FSV Mainz 05,VfB Stuttgart,2.5,0.5438131158833295,Nao entrar
+2025-01-25 14:30:00,germany/bundesliga,Borussia Dortmund,SV Werder Bremen,3.0,0.42319008112684353,Nao entrar
+2025-01-25 14:30:00,germany/bundesliga,FC Augsburg,1. FC Heidenheim,3.5,0.3208471988621341,Nao entrar
+2025-01-25 14:30:00,germany/bundesliga,RB Leipzig,Bayer 04 Leverkusen,3.6,0.30274684471600155,Nao entrar
+2025-01-25 14:30:00,germany/bundesliga,SC Freiburg,FC Bayern München,3.9,0.25312510262978394,Nao entrar
+2025-01-25 17:30:00,germany/bundesliga,Borussia M'gladbach,VfL Bochum 1848,4.2,0.21023798702309743,Nao entrar
+2025-01-26 14:30:00,germany/bundesliga,TSG Hoffenheim,Eintracht Frankfurt,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-01-26 16:30:00,germany/bundesliga,FC St. Pauli,1. FC Union Berlin,2.1,0.6496313518820691,Entrar
+2025-01-31 19:30:00,germany/bundesliga,SV Werder Bremen,1. FSV Mainz 05,2.3,0.5960388259320683,Nao entrar
+2025-02-01 14:30:00,germany/bundesliga,1. FC Heidenheim,Borussia Dortmund,3.5999999999999996,0.30274684471600166,Nao entrar
+2025-02-01 14:30:00,germany/bundesliga,FC Bayern München,Holstein Kiel,3.7,0.28543311310006825,Nao entrar
+2025-02-01 14:30:00,germany/bundesliga,FC St. Pauli,FC Augsburg,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-02-01 14:30:00,germany/bundesliga,VfB Stuttgart,Borussia M'gladbach,3.6,0.30274684471600155,Nao entrar
+2025-02-01 14:30:00,germany/bundesliga,VfL Bochum 1848,SC Freiburg,3.6999999999999997,0.28543311310006836,Nao entrar
+2025-02-01 17:30:00,germany/bundesliga,1. FC Union Berlin,RB Leipzig,2.8,0.4694536834666827,Nao entrar
+2025-02-02 14:30:00,germany/bundesliga,Eintracht Frankfurt,VfL Wolfsburg,2.9,0.4459631985571806,Nao entrar
+2025-02-02 16:30:00,germany/bundesliga,Bayer 04 Leverkusen,TSG Hoffenheim,4.5,0.17357807091003602,Nao entrar
+2025-02-07 19:30:00,germany/bundesliga,FC Bayern München,SV Werder Bremen,3.5999999999999996,0.30274684471600166,Nao entrar
+2025-02-08 14:30:00,germany/bundesliga,1. FSV Mainz 05,FC Augsburg,2.6,0.5184295759360504,Nao entrar
+2025-02-08 14:30:00,germany/bundesliga,Borussia Dortmund,VfB Stuttgart,3.2,0.3799037410783731,Nao entrar
+2025-02-08 14:30:00,germany/bundesliga,SC Freiburg,1. FC Heidenheim,3.5,0.3208471988621341,Nao entrar
+2025-02-08 14:30:00,germany/bundesliga,TSG Hoffenheim,1. FC Union Berlin,3.7,0.28543311310006825,Nao entrar
+2025-02-08 14:30:00,germany/bundesliga,VfL Wolfsburg,Bayer 04 Leverkusen,4.0,0.2381033055535443,Nao entrar
+2025-02-08 17:30:00,germany/bundesliga,Borussia M'gladbach,Eintracht Frankfurt,3.1,0.4011631473146322,Nao entrar
+2025-02-09 14:30:00,germany/bundesliga,Holstein Kiel,VfL Bochum 1848,3.5,0.3208471988621341,Nao entrar
+2025-02-09 16:30:00,germany/bundesliga,RB Leipzig,FC St. Pauli,2.3,0.5960388259320683,Nao entrar
+2025-02-14 19:30:00,germany/bundesliga,FC Augsburg,RB Leipzig,3.1,0.4011631473146322,Nao entrar
+2025-02-15 14:30:00,germany/bundesliga,1. FC Union Berlin,Borussia M'gladbach,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-02-15 14:30:00,germany/bundesliga,FC St. Pauli,SC Freiburg,2.4,0.5697087466575106,Nao entrar
+2025-02-15 14:30:00,germany/bundesliga,VfB Stuttgart,VfL Wolfsburg,3.3999999999999995,0.33973988819611967,Nao entrar
+2025-02-15 14:30:00,germany/bundesliga,VfL Bochum 1848,Borussia Dortmund,3.8,0.26889667771111053,Nao entrar
+2025-02-15 17:30:00,germany/bundesliga,Bayer 04 Leverkusen,FC Bayern München,4.4,0.18514228573827204,Nao entrar
+2025-02-16 14:30:00,germany/bundesliga,SV Werder Bremen,TSG Hoffenheim,3.6999999999999997,0.28543311310006836,Nao entrar
+2025-02-16 16:30:00,germany/bundesliga,Eintracht Frankfurt,Holstein Kiel,2.4,0.5697087466575106,Nao entrar
+2025-02-16 18:30:00,germany/bundesliga,1. FC Heidenheim,1. FSV Mainz 05,2.9,0.4459631985571806,Nao entrar
+2025-02-21 19:30:00,germany/bundesliga,SC Freiburg,SV Werder Bremen,2.9,0.4459631985571806,Nao entrar
+2025-02-22 14:30:00,germany/bundesliga,1. FSV Mainz 05,FC St. Pauli,1.8,0.7306210859394126,Entrar
+2025-02-22 14:30:00,germany/bundesliga,Borussia M'gladbach,FC Augsburg,3.7,0.28543311310006825,Nao entrar
+2025-02-22 14:30:00,germany/bundesliga,Holstein Kiel,Bayer 04 Leverkusen,3.5,0.3208471988621341,Nao entrar
+2025-02-22 14:30:00,germany/bundesliga,VfL Wolfsburg,VfL Bochum 1848,3.9999999999999996,0.2381033055535444,Nao entrar
+2025-02-22 17:30:00,germany/bundesliga,Borussia Dortmund,1. FC Union Berlin,3.0,0.42319008112684353,Nao entrar
+2025-02-23 14:30:00,germany/bundesliga,RB Leipzig,1. FC Heidenheim,3.4,0.33973988819611944,Nao entrar
+2025-02-23 16:30:00,germany/bundesliga,FC Bayern München,Eintracht Frankfurt,3.3000000000000003,0.3594264663250838,Nao entrar
+2025-02-23 18:30:00,germany/bundesliga,TSG Hoffenheim,VfB Stuttgart,3.9000000000000004,0.2531251026297838,Nao entrar
+2025-02-28 19:30:00,germany/bundesliga,VfB Stuttgart,FC Bayern München,3.8,0.26889667771111053,Nao entrar
+2025-03-01 14:30:00,germany/bundesliga,1. FC Heidenheim,Borussia M'gladbach,4.0,0.2381033055535443,Nao entrar
+2025-03-01 14:30:00,germany/bundesliga,FC St. Pauli,Borussia Dortmund,2.5,0.5438131158833295,Nao entrar
+2025-03-01 14:30:00,germany/bundesliga,RB Leipzig,1. FSV Mainz 05,2.5,0.5438131158833295,Nao entrar
+2025-03-01 14:30:00,germany/bundesliga,SV Werder Bremen,VfL Wolfsburg,3.2,0.3799037410783731,Nao entrar
+2025-03-01 14:30:00,germany/bundesliga,VfL Bochum 1848,TSG Hoffenheim,4.5,0.17357807091003602,Nao entrar
+2025-03-01 17:30:00,germany/bundesliga,Eintracht Frankfurt,Bayer 04 Leverkusen,3.1,0.4011631473146322,Nao entrar
+2025-03-02 14:30:00,germany/bundesliga,1. FC Union Berlin,Holstein Kiel,2.7,0.49362449107346196,Nao entrar
+2025-03-02 16:30:00,germany/bundesliga,FC Augsburg,SC Freiburg,3.1999999999999997,0.3799037410783732,Nao entrar
+2025-03-07 19:30:00,germany/bundesliga,Borussia M'gladbach,1. FSV Mainz 05,3.1,0.4011631473146322,Nao entrar
+2025-03-08 14:30:00,germany/bundesliga,Bayer 04 Leverkusen,SV Werder Bremen,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-03-08 14:30:00,germany/bundesliga,Borussia Dortmund,FC Augsburg,3.3,0.3594264663250839,Nao entrar
+2025-03-08 14:30:00,germany/bundesliga,FC Bayern München,VfL Bochum 1848,4.4,0.18514228573827204,Nao entrar
+2025-03-08 14:30:00,germany/bundesliga,Holstein Kiel,VfB Stuttgart,2.9,0.4459631985571806,Nao entrar
+2025-03-08 14:30:00,germany/bundesliga,VfL Wolfsburg,FC St. Pauli,2.7,0.49362449107346196,Nao entrar
+2025-03-08 17:30:00,germany/bundesliga,SC Freiburg,RB Leipzig,3.1,0.4011631473146322,Nao entrar
+2025-03-09 14:30:00,germany/bundesliga,Eintracht Frankfurt,1. FC Union Berlin,2.3,0.5960388259320683,Nao entrar
+2025-03-09 16:30:00,germany/bundesliga,TSG Hoffenheim,1. FC Heidenheim,4.300000000000001,0.19735469083246246,Nao entrar
+2025-03-14 19:30:00,germany/bundesliga,FC St. Pauli,TSG Hoffenheim,3.2,0.3799037410783731,Nao entrar
+2025-03-15 14:30:00,germany/bundesliga,1. FC Union Berlin,FC Bayern München,3.5999999999999996,0.30274684471600166,Nao entrar
+2025-03-15 14:30:00,germany/bundesliga,1. FSV Mainz 05,SC Freiburg,2.6,0.5184295759360504,Nao entrar
+2025-03-15 14:30:00,germany/bundesliga,FC Augsburg,VfL Wolfsburg,3.5,0.3208471988621341,Nao entrar
+2025-03-15 14:30:00,germany/bundesliga,SV Werder Bremen,Borussia M'gladbach,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-03-15 17:30:00,germany/bundesliga,RB Leipzig,Borussia Dortmund,3.2,0.3799037410783731,Nao entrar
+2025-03-16 14:30:00,germany/bundesliga,VfL Bochum 1848,Eintracht Frankfurt,3.1,0.4011631473146322,Nao entrar
+2025-03-16 16:30:00,germany/bundesliga,1. FC Heidenheim,Holstein Kiel,3.3,0.3594264663250839,Nao entrar
+2025-03-16 18:30:00,germany/bundesliga,VfB Stuttgart,Bayer 04 Leverkusen,3.6,0.30274684471600155,Nao entrar
+2025-03-28 19:30:00,germany/bundesliga,Bayer 04 Leverkusen,VfL Bochum 1848,4.2,0.21023798702309743,Nao entrar
+2025-03-29 14:30:00,germany/bundesliga,Borussia M'gladbach,RB Leipzig,3.6,0.30274684471600155,Nao entrar
+2025-03-29 14:30:00,germany/bundesliga,FC Bayern München,FC St. Pauli,3.0999999999999996,0.4011631473146323,Nao entrar
+2025-03-29 14:30:00,germany/bundesliga,Holstein Kiel,SV Werder Bremen,2.7,0.49362449107346196,Nao entrar
+2025-03-29 14:30:00,germany/bundesliga,TSG Hoffenheim,FC Augsburg,4.0,0.2381033055535443,Nao entrar
+2025-03-29 14:30:00,germany/bundesliga,VfL Wolfsburg,1. FC Heidenheim,3.8,0.26889667771111053,Nao entrar
+2025-03-29 17:30:00,germany/bundesliga,Eintracht Frankfurt,VfB Stuttgart,2.5,0.5438131158833295,Nao entrar
+2025-03-30 13:30:00,germany/bundesliga,SC Freiburg,1. FC Union Berlin,2.9,0.4459631985571806,Nao entrar
+2025-03-30 15:30:00,germany/bundesliga,Borussia Dortmund,1. FSV Mainz 05,2.7,0.49362449107346196,Nao entrar
+2025-04-04 18:30:00,germany/bundesliga,FC Augsburg,FC Bayern München,3.9,0.25312510262978394,Nao entrar
+2025-04-05 13:30:00,germany/bundesliga,1. FC Heidenheim,Bayer 04 Leverkusen,4.0,0.2381033055535443,Nao entrar
+2025-04-05 13:30:00,germany/bundesliga,1. FSV Mainz 05,Holstein Kiel,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-04-05 13:30:00,germany/bundesliga,RB Leipzig,TSG Hoffenheim,3.9000000000000004,0.2531251026297838,Nao entrar
+2025-04-05 13:30:00,germany/bundesliga,SC Freiburg,Borussia Dortmund,3.3,0.3594264663250839,Nao entrar
+2025-04-05 13:30:00,germany/bundesliga,VfL Bochum 1848,VfB Stuttgart,3.5999999999999996,0.30274684471600166,Nao entrar
+2025-04-05 16:30:00,germany/bundesliga,SV Werder Bremen,Eintracht Frankfurt,2.3000000000000003,0.5960388259320681,Nao entrar
+2025-04-06 13:30:00,germany/bundesliga,FC St. Pauli,Borussia M'gladbach,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-04-06 15:30:00,germany/bundesliga,1. FC Union Berlin,VfL Wolfsburg,3.2,0.3799037410783731,Nao entrar
+2025-04-11 18:30:00,germany/bundesliga,VfL Wolfsburg,RB Leipzig,3.4,0.33973988819611944,Nao entrar
+2025-04-12 13:30:00,germany/bundesliga,Bayer 04 Leverkusen,1. FC Union Berlin,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-04-12 13:30:00,germany/bundesliga,Borussia M'gladbach,SC Freiburg,3.7,0.28543311310006825,Nao entrar
+2025-04-12 13:30:00,germany/bundesliga,Holstein Kiel,FC St. Pauli,2.2,0.6227137499963165,Entrar
+2025-04-12 13:30:00,germany/bundesliga,TSG Hoffenheim,1. FSV Mainz 05,3.4,0.33973988819611944,Nao entrar
+2025-04-12 13:30:00,germany/bundesliga,VfL Bochum 1848,FC Augsburg,3.7,0.28543311310006825,Nao entrar
+2025-04-12 16:30:00,germany/bundesliga,FC Bayern München,Borussia Dortmund,4.0,0.2381033055535443,Nao entrar
+2025-04-13 13:30:00,germany/bundesliga,VfB Stuttgart,SV Werder Bremen,2.8,0.4694536834666827,Nao entrar
+2025-04-13 15:30:00,germany/bundesliga,Eintracht Frankfurt,1. FC Heidenheim,2.9,0.4459631985571806,Nao entrar
+2025-04-19 13:30:00,germany/bundesliga,1. FC Heidenheim,FC Bayern München,4.2,0.21023798702309743,Nao entrar
+2025-04-19 13:30:00,germany/bundesliga,1. FSV Mainz 05,VfL Wolfsburg,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-04-19 13:30:00,germany/bundesliga,RB Leipzig,Holstein Kiel,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-04-19 13:30:00,germany/bundesliga,SC Freiburg,TSG Hoffenheim,4.0,0.2381033055535443,Nao entrar
+2025-04-19 13:30:00,germany/bundesliga,SV Werder Bremen,VfL Bochum 1848,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-04-19 16:30:00,germany/bundesliga,1. FC Union Berlin,VfB Stuttgart,2.8,0.4694536834666827,Nao entrar
+2025-04-20 13:30:00,germany/bundesliga,FC Augsburg,Eintracht Frankfurt,2.6,0.5184295759360504,Nao entrar
+2025-04-20 15:30:00,germany/bundesliga,Borussia Dortmund,Borussia M'gladbach,3.8000000000000003,0.2688966777111104,Nao entrar
+2025-04-20 17:30:00,germany/bundesliga,FC St. Pauli,Bayer 04 Leverkusen,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-04-25 18:30:00,germany/bundesliga,VfB Stuttgart,1. FC Heidenheim,3.4,0.33973988819611944,Nao entrar
+2025-04-26 13:30:00,germany/bundesliga,Bayer 04 Leverkusen,FC Augsburg,3.7,0.28543311310006825,Nao entrar
+2025-04-26 13:30:00,germany/bundesliga,FC Bayern München,1. FSV Mainz 05,3.3,0.3594264663250839,Nao entrar
+2025-04-26 13:30:00,germany/bundesliga,Holstein Kiel,Borussia M'gladbach,3.5,0.3208471988621341,Nao entrar
+2025-04-26 13:30:00,germany/bundesliga,TSG Hoffenheim,Borussia Dortmund,4.1,0.2238139813007857,Nao entrar
+2025-04-26 13:30:00,germany/bundesliga,VfL Wolfsburg,SC Freiburg,3.5,0.3208471988621341,Nao entrar
+2025-04-26 16:30:00,germany/bundesliga,Eintracht Frankfurt,RB Leipzig,2.5,0.5438131158833295,Nao entrar
+2025-04-27 13:30:00,germany/bundesliga,VfL Bochum 1848,1. FC Union Berlin,3.4,0.33973988819611944,Nao entrar
+2025-04-27 15:30:00,germany/bundesliga,SV Werder Bremen,FC St. Pauli,2.1,0.6496313518820691,Entrar
+2025-05-02 18:30:00,germany/bundesliga,1. FC Heidenheim,VfL Bochum 1848,3.9999999999999996,0.2381033055535444,Nao entrar
+2025-05-03 13:30:00,germany/bundesliga,1. FC Union Berlin,SV Werder Bremen,2.6,0.5184295759360504,Nao entrar
+2025-05-03 13:30:00,germany/bundesliga,Borussia M'gladbach,TSG Hoffenheim,4.5,0.17357807091003602,Nao entrar
+2025-05-03 13:30:00,germany/bundesliga,FC St. Pauli,VfB Stuttgart,2.3,0.5960388259320683,Nao entrar
+2025-05-03 13:30:00,germany/bundesliga,RB Leipzig,FC Bayern München,3.8000000000000003,0.2688966777111104,Nao entrar
+2025-05-03 16:30:00,germany/bundesliga,Borussia Dortmund,VfL Wolfsburg,3.6,0.30274684471600155,Nao entrar
+2025-05-04 13:30:00,germany/bundesliga,FC Augsburg,Holstein Kiel,3.0,0.42319008112684353,Nao entrar
+2025-05-04 15:30:00,germany/bundesliga,SC Freiburg,Bayer 04 Leverkusen,3.7,0.28543311310006825,Nao entrar
+2025-05-04 17:30:00,germany/bundesliga,1. FSV Mainz 05,Eintracht Frankfurt,2.0,0.6766764161830635,Entrar
+2025-05-09 18:30:00,germany/bundesliga,VfL Wolfsburg,TSG Hoffenheim,4.3,0.19735469083246257,Nao entrar
+2025-05-10 13:30:00,germany/bundesliga,1. FC Union Berlin,1. FC Heidenheim,3.2,0.3799037410783731,Nao entrar
+2025-05-10 13:30:00,germany/bundesliga,Holstein Kiel,SC Freiburg,3.0,0.42319008112684353,Nao entrar
+2025-05-10 13:30:00,germany/bundesliga,SV Werder Bremen,RB Leipzig,2.8000000000000003,0.4694536834666827,Nao entrar
+2025-05-10 13:30:00,germany/bundesliga,VfL Bochum 1848,1. FSV Mainz 05,3.1,0.4011631473146322,Nao entrar
+2025-05-10 16:30:00,germany/bundesliga,FC Bayern München,Borussia M'gladbach,4.4,0.18514228573827204,Nao entrar
+2025-05-11 13:30:00,germany/bundesliga,Bayer 04 Leverkusen,Borussia Dortmund,3.8000000000000003,0.2688966777111104,Nao entrar
+2025-05-11 15:30:00,germany/bundesliga,Eintracht Frankfurt,FC St. Pauli,1.8,0.7306210859394126,Entrar
+2025-05-11 17:30:00,germany/bundesliga,VfB Stuttgart,FC Augsburg,3.0999999999999996,0.4011631473146323,Nao entrar
+2025-05-17 13:30:00,germany/bundesliga,1. FC Heidenheim,SV Werder Bremen,3.2,0.3799037410783731,Nao entrar
+2025-05-17 13:30:00,germany/bundesliga,1. FSV Mainz 05,Bayer 04 Leverkusen,3.1,0.4011631473146322,Nao entrar
+2025-05-17 13:30:00,germany/bundesliga,Borussia Dortmund,Holstein Kiel,3.1,0.4011631473146322,Nao entrar
+2025-05-17 13:30:00,germany/bundesliga,Borussia M'gladbach,VfL Wolfsburg,4.0,0.2381033055535443,Nao entrar
+2025-05-17 13:30:00,germany/bundesliga,FC Augsburg,1. FC Union Berlin,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-05-17 13:30:00,germany/bundesliga,FC St. Pauli,VfL Bochum 1848,2.9,0.4459631985571806,Nao entrar
+2025-05-17 13:30:00,germany/bundesliga,RB Leipzig,VfB Stuttgart,3.0,0.42319008112684353,Nao entrar
+2025-05-17 13:30:00,germany/bundesliga,SC Freiburg,Eintracht Frankfurt,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-05-17 13:30:00,germany/bundesliga,TSG Hoffenheim,FC Bayern München,4.699999999999999,0.15230041506789654,Nao entrar
+2025-08-22 18:30:00,germany/bundesliga,FC Bayern München,RB Leipzig,3.8000000000000003,0.2688966777111104,Nao entrar
+2025-08-23 13:30:00,germany/bundesliga,1. FC Heidenheim,VfL Wolfsburg,3.8,0.26889667771111053,Nao entrar
+2025-08-23 13:30:00,germany/bundesliga,1. FC Union Berlin,VfB Stuttgart,2.8,0.4694536834666827,Nao entrar
+2025-08-23 13:30:00,germany/bundesliga,Bayer 04 Leverkusen,TSG Hoffenheim,4.5,0.17357807091003602,Nao entrar
+2025-08-23 13:30:00,germany/bundesliga,Eintracht Frankfurt,SV Werder Bremen,2.3000000000000003,0.5960388259320681,Nao entrar
+2025-08-23 13:30:00,germany/bundesliga,SC Freiburg,FC Augsburg,3.1999999999999997,0.3799037410783732,Nao entrar
+2025-08-23 16:30:00,germany/bundesliga,FC St. Pauli,Borussia Dortmund,2.5,0.5438131158833295,Nao entrar
+2025-08-24 13:30:00,germany/bundesliga,1. FSV Mainz 05,1. FC Köln,2.7,0.49362449107346196,Nao entrar
+2025-08-24 15:30:00,germany/bundesliga,Borussia M'gladbach,Hamburger SV,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-08-29 18:30:00,germany/bundesliga,Hamburger SV,FC St. Pauli,2.1,0.6496313518820691,Entrar
+2025-08-30 13:30:00,germany/bundesliga,RB Leipzig,1. FC Heidenheim,3.4,0.33973988819611944,Nao entrar
+2025-08-30 13:30:00,germany/bundesliga,SV Werder Bremen,Bayer 04 Leverkusen,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-08-30 13:30:00,germany/bundesliga,TSG Hoffenheim,Eintracht Frankfurt,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-08-30 13:30:00,germany/bundesliga,VfB Stuttgart,Borussia M'gladbach,3.6,0.30274684471600155,Nao entrar
+2025-08-30 16:30:00,germany/bundesliga,FC Augsburg,FC Bayern München,3.9,0.25312510262978394,Nao entrar
+2025-08-31 13:30:00,germany/bundesliga,VfL Wolfsburg,1. FSV Mainz 05,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-08-31 15:30:00,germany/bundesliga,Borussia Dortmund,1. FC Union Berlin,3.0,0.42319008112684353,Nao entrar
+2025-08-31 17:30:00,germany/bundesliga,1. FC Köln,SC Freiburg,3.3,0.3594264663250839,Nao entrar
+2025-09-12 18:30:00,germany/bundesliga,Bayer 04 Leverkusen,Eintracht Frankfurt,3.1,0.4011631473146322,Nao entrar
+2025-09-13 13:30:00,germany/bundesliga,1. FC Heidenheim,Borussia Dortmund,3.5999999999999996,0.30274684471600166,Nao entrar
+2025-09-13 13:30:00,germany/bundesliga,1. FC Union Berlin,TSG Hoffenheim,3.7,0.28543311310006825,Nao entrar
+2025-09-13 13:30:00,germany/bundesliga,1. FSV Mainz 05,RB Leipzig,2.5,0.5438131158833295,Nao entrar
+2025-09-13 13:30:00,germany/bundesliga,SC Freiburg,VfB Stuttgart,3.1,0.4011631473146322,Nao entrar
+2025-09-13 13:30:00,germany/bundesliga,VfL Wolfsburg,1. FC Köln,3.5999999999999996,0.30274684471600166,Nao entrar
+2025-09-13 16:30:00,germany/bundesliga,FC Bayern München,Hamburger SV,3.6,0.30274684471600155,Nao entrar
+2025-09-14 13:30:00,germany/bundesliga,FC St. Pauli,FC Augsburg,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-09-14 15:30:00,germany/bundesliga,Borussia M'gladbach,SV Werder Bremen,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-09-19 18:30:00,germany/bundesliga,VfB Stuttgart,FC St. Pauli,2.3,0.5960388259320683,Nao entrar
+2025-09-20 13:30:00,germany/bundesliga,FC Augsburg,1. FSV Mainz 05,2.6,0.5184295759360504,Nao entrar
+2025-09-20 13:30:00,germany/bundesliga,Hamburger SV,1. FC Heidenheim,3.1999999999999997,0.3799037410783732,Nao entrar
+2025-09-20 13:30:00,germany/bundesliga,SV Werder Bremen,SC Freiburg,2.9,0.4459631985571806,Nao entrar
+2025-09-20 13:30:00,germany/bundesliga,TSG Hoffenheim,FC Bayern München,4.699999999999999,0.15230041506789654,Nao entrar
+2025-09-20 16:30:00,germany/bundesliga,RB Leipzig,1. FC Köln,3.2,0.3799037410783731,Nao entrar
+2025-09-21 13:30:00,germany/bundesliga,Eintracht Frankfurt,1. FC Union Berlin,2.3,0.5960388259320683,Nao entrar
+2025-09-21 15:30:00,germany/bundesliga,Bayer 04 Leverkusen,Borussia M'gladbach,4.2,0.21023798702309743,Nao entrar
+2025-09-21 17:30:00,germany/bundesliga,Borussia Dortmund,VfL Wolfsburg,3.6,0.30274684471600155,Nao entrar
+2025-09-26 18:30:00,germany/bundesliga,FC Bayern München,SV Werder Bremen,3.5999999999999996,0.30274684471600166,Nao entrar
+2025-09-27 13:30:00,germany/bundesliga,1. FC Heidenheim,FC Augsburg,3.5,0.3208471988621341,Nao entrar
+2025-09-27 13:30:00,germany/bundesliga,1. FSV Mainz 05,Borussia Dortmund,2.7,0.49362449107346196,Nao entrar
+2025-09-27 13:30:00,germany/bundesliga,FC St. Pauli,Bayer 04 Leverkusen,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-09-27 13:30:00,germany/bundesliga,VfL Wolfsburg,RB Leipzig,3.4,0.33973988819611944,Nao entrar
+2025-09-27 16:30:00,germany/bundesliga,Borussia M'gladbach,Eintracht Frankfurt,3.1,0.4011631473146322,Nao entrar
+2025-09-28 13:30:00,germany/bundesliga,SC Freiburg,TSG Hoffenheim,4.0,0.2381033055535443,Nao entrar
+2025-09-28 15:30:00,germany/bundesliga,1. FC Köln,VfB Stuttgart,3.2,0.3799037410783731,Nao entrar
+2025-09-28 17:30:00,germany/bundesliga,1. FC Union Berlin,Hamburger SV,2.6,0.5184295759360504,Nao entrar
+2025-10-03 18:30:00,germany/bundesliga,TSG Hoffenheim,1. FC Köln,4.1,0.2238139813007857,Nao entrar
+2025-10-04 13:30:00,germany/bundesliga,Bayer 04 Leverkusen,1. FC Union Berlin,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-10-04 13:30:00,germany/bundesliga,Borussia Dortmund,RB Leipzig,3.2,0.3799037410783731,Nao entrar
+2025-10-04 13:30:00,germany/bundesliga,FC Augsburg,VfL Wolfsburg,3.5,0.3208471988621341,Nao entrar
+2025-10-04 13:30:00,germany/bundesliga,SV Werder Bremen,FC St. Pauli,2.1,0.6496313518820691,Entrar
+2025-10-04 16:30:00,germany/bundesliga,Eintracht Frankfurt,FC Bayern München,3.3000000000000003,0.3594264663250838,Nao entrar
+2025-10-05 13:30:00,germany/bundesliga,VfB Stuttgart,1. FC Heidenheim,3.4,0.33973988819611944,Nao entrar
+2025-10-05 15:30:00,germany/bundesliga,Hamburger SV,1. FSV Mainz 05,2.3,0.5960388259320683,Nao entrar
+2025-10-05 17:30:00,germany/bundesliga,Borussia M'gladbach,SC Freiburg,3.7,0.28543311310006825,Nao entrar
+2025-10-17 18:30:00,germany/bundesliga,1. FC Union Berlin,Borussia M'gladbach,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-10-18 13:30:00,germany/bundesliga,1. FC Heidenheim,SV Werder Bremen,3.2,0.3799037410783731,Nao entrar
+2025-10-18 13:30:00,germany/bundesliga,1. FC Köln,FC Augsburg,3.3,0.3594264663250839,Nao entrar
+2025-10-18 13:30:00,germany/bundesliga,1. FSV Mainz 05,Bayer 04 Leverkusen,3.1,0.4011631473146322,Nao entrar
+2025-10-18 13:30:00,germany/bundesliga,RB Leipzig,Hamburger SV,2.8,0.4694536834666827,Nao entrar
+2025-10-18 13:30:00,germany/bundesliga,VfL Wolfsburg,VfB Stuttgart,3.3999999999999995,0.33973988819611967,Nao entrar
+2025-10-18 16:30:00,germany/bundesliga,FC Bayern München,Borussia Dortmund,4.0,0.2381033055535443,Nao entrar
+2025-10-19 13:30:00,germany/bundesliga,SC Freiburg,Eintracht Frankfurt,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-10-19 15:30:00,germany/bundesliga,FC St. Pauli,TSG Hoffenheim,3.2,0.3799037410783731,Nao entrar
+2025-10-24 18:30:00,germany/bundesliga,SV Werder Bremen,1. FC Union Berlin,2.6,0.5184295759360504,Nao entrar
+2025-10-25 13:30:00,germany/bundesliga,Eintracht Frankfurt,FC St. Pauli,1.8,0.7306210859394126,Entrar
+2025-10-25 13:30:00,germany/bundesliga,FC Augsburg,RB Leipzig,3.1,0.4011631473146322,Nao entrar
+2025-10-25 13:30:00,germany/bundesliga,Hamburger SV,VfL Wolfsburg,3.2,0.3799037410783731,Nao entrar
+2025-10-25 13:30:00,germany/bundesliga,TSG Hoffenheim,1. FC Heidenheim,4.300000000000001,0.19735469083246246,Nao entrar
+2025-10-25 13:45:00,germany/bundesliga,Borussia M'gladbach,FC Bayern München,4.4,0.18514228573827204,Nao entrar
+2025-10-25 16:30:00,germany/bundesliga,Borussia Dortmund,1. FC Köln,3.4,0.33973988819611944,Nao entrar
+2025-10-26 14:30:00,germany/bundesliga,Bayer 04 Leverkusen,SC Freiburg,3.7,0.28543311310006825,Nao entrar
+2025-10-26 16:30:00,germany/bundesliga,VfB Stuttgart,1. FSV Mainz 05,2.5,0.5438131158833295,Nao entrar
+2025-10-31 19:30:00,germany/bundesliga,FC Augsburg,Borussia Dortmund,3.3,0.3594264663250839,Nao entrar
+2025-11-01 14:30:00,germany/bundesliga,1. FC Heidenheim,Eintracht Frankfurt,2.9,0.4459631985571806,Nao entrar
+2025-11-01 14:30:00,germany/bundesliga,1. FC Union Berlin,SC Freiburg,2.9,0.4459631985571806,Nao entrar
+2025-11-01 14:30:00,germany/bundesliga,1. FSV Mainz 05,SV Werder Bremen,2.3,0.5960388259320683,Nao entrar
+2025-11-01 14:30:00,germany/bundesliga,FC St. Pauli,Borussia M'gladbach,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-11-01 14:30:00,germany/bundesliga,RB Leipzig,VfB Stuttgart,3.0,0.42319008112684353,Nao entrar
+2025-11-01 17:30:00,germany/bundesliga,FC Bayern München,Bayer 04 Leverkusen,4.4,0.18514228573827204,Nao entrar
+2025-11-02 14:30:00,germany/bundesliga,1. FC Köln,Hamburger SV,3.0,0.42319008112684353,Nao entrar
+2025-11-02 16:30:00,germany/bundesliga,VfL Wolfsburg,TSG Hoffenheim,4.3,0.19735469083246257,Nao entrar
+2025-11-07 19:30:00,germany/bundesliga,SV Werder Bremen,VfL Wolfsburg,3.2,0.3799037410783731,Nao entrar
+2025-11-08 14:30:00,germany/bundesliga,1. FC Union Berlin,FC Bayern München,3.5999999999999996,0.30274684471600166,Nao entrar
+2025-11-08 14:30:00,germany/bundesliga,Bayer 04 Leverkusen,1. FC Heidenheim,4.0,0.2381033055535443,Nao entrar
+2025-11-08 14:30:00,germany/bundesliga,Hamburger SV,Borussia Dortmund,3.0,0.42319008112684353,Nao entrar
+2025-11-08 14:30:00,germany/bundesliga,TSG Hoffenheim,RB Leipzig,3.9000000000000004,0.2531251026297838,Nao entrar
+2025-11-08 17:30:00,germany/bundesliga,Borussia M'gladbach,1. FC Köln,3.8,0.26889667771111053,Nao entrar
+2025-11-09 14:30:00,germany/bundesliga,SC Freiburg,FC St. Pauli,2.4,0.5697087466575106,Nao entrar
+2025-11-09 16:30:00,germany/bundesliga,VfB Stuttgart,FC Augsburg,3.0999999999999996,0.4011631473146323,Nao entrar
+2025-11-09 18:30:00,germany/bundesliga,Eintracht Frankfurt,1. FSV Mainz 05,2.0,0.6766764161830635,Entrar
+2025-11-21 19:30:00,germany/bundesliga,1. FSV Mainz 05,TSG Hoffenheim,3.4,0.33973988819611944,Nao entrar
+2025-11-22 14:30:00,germany/bundesliga,1. FC Heidenheim,Borussia M'gladbach,4.0,0.2381033055535443,Nao entrar
+2025-11-22 14:30:00,germany/bundesliga,Borussia Dortmund,VfB Stuttgart,3.2,0.3799037410783731,Nao entrar
+2025-11-22 14:30:00,germany/bundesliga,FC Augsburg,Hamburger SV,2.9,0.4459631985571806,Nao entrar
+2025-11-22 14:30:00,germany/bundesliga,FC Bayern München,SC Freiburg,3.9,0.25312510262978394,Nao entrar
+2025-11-22 14:30:00,germany/bundesliga,VfL Wolfsburg,Bayer 04 Leverkusen,4.0,0.2381033055535443,Nao entrar
+2025-11-22 17:30:00,germany/bundesliga,1. FC Köln,Eintracht Frankfurt,2.7,0.49362449107346196,Nao entrar
+2025-11-23 14:30:00,germany/bundesliga,RB Leipzig,SV Werder Bremen,2.8000000000000003,0.4694536834666827,Nao entrar
+2025-11-23 16:30:00,germany/bundesliga,FC St. Pauli,1. FC Union Berlin,2.1,0.6496313518820691,Entrar
+2025-11-28 19:30:00,germany/bundesliga,Borussia M'gladbach,RB Leipzig,3.6,0.30274684471600155,Nao entrar
+2025-11-29 14:30:00,germany/bundesliga,1. FC Union Berlin,1. FC Heidenheim,3.2,0.3799037410783731,Nao entrar
+2025-11-29 14:30:00,germany/bundesliga,FC Bayern München,FC St. Pauli,3.0999999999999996,0.4011631473146323,Nao entrar
+2025-11-29 14:30:00,germany/bundesliga,SV Werder Bremen,1. FC Köln,3.0,0.42319008112684353,Nao entrar
+2025-11-29 14:30:00,germany/bundesliga,TSG Hoffenheim,FC Augsburg,4.0,0.2381033055535443,Nao entrar
+2025-11-29 17:30:00,germany/bundesliga,Bayer 04 Leverkusen,Borussia Dortmund,3.8000000000000003,0.2688966777111104,Nao entrar
+2025-11-30 14:30:00,germany/bundesliga,Hamburger SV,VfB Stuttgart,2.8,0.4694536834666827,Nao entrar
+2025-11-30 16:30:00,germany/bundesliga,Eintracht Frankfurt,VfL Wolfsburg,2.9,0.4459631985571806,Nao entrar
 2025-11-30 18:30:00,germany/bundesliga,SC Freiburg,1. FSV Mainz 05,2.6,0.5184295759360504,Nao entrar
-2025-11-30 14:00:00,france/ligue_1,RC Strasbourg,Stade Brestois,2.2,0.6227137499963165,Entrar
-2025-11-30 16:15:00,france/ligue_1,Angers,RC Lens,2.3,0.5960388259320683,Nao entrar
-2025-11-30 16:15:00,france/ligue_1,Le Havre,Lille,2,0.6766764161830635,Entrar
-2025-11-30 16:15:00,france/ligue_1,Lorient,Nice,2.9,0.4459631985571806,Nao entrar
-2025-11-30 19:45:00,france/ligue_1,Olympique Lyonnais,Nantes,2.7,0.49362449107346196,Nao entrar
-2025-11-30 15:30:00,portugal/primeira_liga,Rio Ave,Santa Clara,2.4,0.5697087466575106,Nao entrar
-2025-11-30 18:00:00,portugal/primeira_liga,Sporting CP,CF Estrela Amadora,3.7,0.28543311310006825,Nao entrar
-2025-11-30 20:30:00,portugal/primeira_liga,FC Porto,Estoril Praia,3.4,0.33973988819611944,Nao entrar
-2025-11-30 13:30:00,netherlands/eredivisie,Go Ahead Eagles,FC Utrecht,3.5,0.3208471988621341,Nao entrar
-2025-11-30 13:30:00,netherlands/eredivisie,SC Telstar,Feyenoord,3.4,0.33973988819611944,Nao entrar
-2025-11-30 15:45:00,netherlands/eredivisie,FC Twente,AZ Alkmaar,2.1,0.6496313518820691,Entrar
-2025-11-30 13:30:00,austria/bundesliga,SC Rheindorf Altach,Red Bull Salzburg,2.6,0.5184295759360504,Nao entrar
-2025-11-30 13:30:00,austria/bundesliga,TSV Hartberg,SK Sturm Graz,2.8000000000000003,0.4694536834666827,Nao entrar
-2025-11-30 16:00:00,austria/bundesliga,LASK,SK Rapid Wien,2.9000000000000004,0.4459631985571805,Nao entrar
-2025-11-30 18:00:00,england/premier_league,Ashdod SC,Maccabi Tel Aviv,4.1,0.2238139813007857,Nao entrar
-2025-11-30 18:30:00,england/premier_league,Beitar Jerusalem,Maccabi Netanya,4.5,0.17357807091003602,Nao entrar
-2025-11-30 13:30:00,england/premier_league,Akhmat Grozny,Dynamo Moscow,2.2,0.6227137499963165,Entrar
-2025-11-30 13:30:00,england/premier_league,FC Rostov,Lokomotiv Moscow,3.1,0.4011631473146322,Nao entrar
-2025-11-30 16:00:00,england/premier_league,Zenit St. Petersburg,Rubin Kazan,1.2,0.8794870987836302,Entrar
-2025-11-30 12:30:00,england/premier_league,Qəbələ FK,Araz Naxçıvan,2.3,0.5960388259320683,Nao entrar
-2025-11-30 18:00:00,italy/serie_a,Aucas,Deportivo Cuenca,3.5,0.3208471988621341,Nao entrar
-2025-11-30 20:30:00,italy/serie_a,Macará,El Nacional,3.2,0.3799037410783731,Nao entrar
-2025-11-30 23:00:00,italy/serie_a,Delfín,Emelec,2.4000000000000004,0.5697087466575104,Nao entrar
-2025-11-30 15:00:00,england/premier_league,Basake Holy Stars FC,Nations FC,2.5,0.5438131158833295,Nao entrar
-2025-11-30 15:00:00,england/premier_league,Bechem United,Hohoe United FC,2.2,0.6227137499963165,Entrar
-2025-11-30 15:00:00,england/premier_league,Berekum Chelsea,Samartex,1.7000000000000002,0.7572232071985849,Entrar
-2025-11-30 15:00:00,england/premier_league,Bibiani Gold Stars FC,Aduana Stars FC,1.5,0.8088468305380581,Entrar
-2025-11-30 15:00:00,england/premier_league,Heart of Lions,Karela United,2,0.6766764161830635,Entrar
-2025-11-30 15:00:00,england/premier_league,Swedru All Blacks United FC,Young Apostles FC,1.3,0.8571124890919696,Entrar
-2025-11-30 16:00:00,england/premier_league,Asante Kotoko SC,Medeama SC,2.1,0.6496313518820691,Entrar
-2025-11-30 14:00:00,portugal/segunda_liga,Portimonense SAD,Marítimo,2.2,0.6227137499963165,Entrar
-2025-11-30 15:30:00,portugal/segunda_liga,Sporting CP B U21,SC Farense,2.3,0.5960388259320683,Nao entrar
-2025-11-30 15:30:00,portugal/segunda_liga,União de Leiria,Benfica B U21,2.6999999999999997,0.4936244910734621,Nao entrar
-2025-11-30 13:30:00,england/premier_league,FC Epicentr Dunaivtsi,Metalist 1925,2.5,0.5438131158833295,Nao entrar
-2025-11-30 16:00:00,england/premier_league,Polissya Zhytomyr,Zorya Luhansk,1.7999999999999998,0.7306210859394126,Entrar
+2025-12-05 19:30:00,germany/bundesliga,1. FSV Mainz 05,Borussia M'gladbach,3.1,0.4011631473146322,Nao entrar
+2025-12-06 14:30:00,germany/bundesliga,1. FC Heidenheim,SC Freiburg,3.5,0.3208471988621341,Nao entrar
+2025-12-06 14:30:00,germany/bundesliga,1. FC Köln,FC St. Pauli,2.5,0.5438131158833295,Nao entrar
+2025-12-06 14:30:00,germany/bundesliga,FC Augsburg,Bayer 04 Leverkusen,3.7,0.28543311310006825,Nao entrar
+2025-12-06 14:30:00,germany/bundesliga,VfB Stuttgart,FC Bayern München,3.8,0.26889667771111053,Nao entrar
+2025-12-06 14:30:00,germany/bundesliga,VfL Wolfsburg,1. FC Union Berlin,3.2,0.3799037410783731,Nao entrar
+2025-12-06 17:30:00,germany/bundesliga,RB Leipzig,Eintracht Frankfurt,2.5,0.5438131158833295,Nao entrar
+2025-12-07 14:30:00,germany/bundesliga,Hamburger SV,SV Werder Bremen,2.6,0.5184295759360504,Nao entrar
+2025-12-07 16:30:00,germany/bundesliga,Borussia Dortmund,TSG Hoffenheim,4.1,0.2238139813007857,Nao entrar
+2025-12-12 19:30:00,germany/bundesliga,1. FC Union Berlin,RB Leipzig,2.8,0.4694536834666827,Nao entrar
+2025-12-13 14:30:00,germany/bundesliga,Borussia M'gladbach,VfL Wolfsburg,4.0,0.2381033055535443,Nao entrar
+2025-12-13 14:30:00,germany/bundesliga,Eintracht Frankfurt,FC Augsburg,2.6,0.5184295759360504,Nao entrar
+2025-12-13 14:30:00,germany/bundesliga,FC St. Pauli,1. FC Heidenheim,2.7,0.49362449107346196,Nao entrar
+2025-12-13 14:30:00,germany/bundesliga,TSG Hoffenheim,Hamburger SV,3.7,0.28543311310006825,Nao entrar
+2025-12-13 17:30:00,germany/bundesliga,Bayer 04 Leverkusen,1. FC Köln,3.8,0.26889667771111053,Nao entrar
+2025-12-14 14:30:00,germany/bundesliga,SC Freiburg,Borussia Dortmund,3.3,0.3594264663250839,Nao entrar
+2025-12-14 16:30:00,germany/bundesliga,FC Bayern München,1. FSV Mainz 05,3.3,0.3594264663250839,Nao entrar
+2025-12-14 18:30:00,germany/bundesliga,SV Werder Bremen,VfB Stuttgart,2.8,0.4694536834666827,Nao entrar
+2025-12-19 19:30:00,germany/bundesliga,Borussia Dortmund,Borussia M'gladbach,3.8000000000000003,0.2688966777111104,Nao entrar
+2025-12-20 14:30:00,germany/bundesliga,1. FC Köln,1. FC Union Berlin,3.0,0.42319008112684353,Nao entrar
+2025-12-20 14:30:00,germany/bundesliga,FC Augsburg,SV Werder Bremen,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-12-20 14:30:00,germany/bundesliga,Hamburger SV,Eintracht Frankfurt,2.3,0.5960388259320683,Nao entrar
+2025-12-20 14:30:00,germany/bundesliga,VfB Stuttgart,TSG Hoffenheim,3.9000000000000004,0.2531251026297838,Nao entrar
+2025-12-20 14:30:00,germany/bundesliga,VfL Wolfsburg,SC Freiburg,3.5,0.3208471988621341,Nao entrar
+2025-12-20 17:30:00,germany/bundesliga,RB Leipzig,Bayer 04 Leverkusen,3.6,0.30274684471600155,Nao entrar
+2025-12-21 14:30:00,germany/bundesliga,1. FSV Mainz 05,FC St. Pauli,1.8,0.7306210859394126,Entrar
+2025-12-21 16:30:00,germany/bundesliga,1. FC Heidenheim,FC Bayern München,4.2,0.21023798702309743,Nao entrar
+2025-01-03 20:00:00,spain/la_liga,Valencia,Real Madrid,3.3,0.3594264663250839,Nao entrar
+2025-01-10 20:00:00,spain/la_liga,Rayo Vallecano,Celta Vigo,2.7,0.49362449107346196,Nao entrar
+2025-01-11 13:00:00,spain/la_liga,Deportivo Alavés,Girona FC,3.3,0.3594264663250839,Nao entrar
+2025-01-11 15:15:00,spain/la_liga,Real Valladolid,Real Betis,2.3,0.5960388259320683,Nao entrar
+2025-01-11 17:30:00,spain/la_liga,Espanyol,Leganés,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-01-11 20:00:00,spain/la_liga,Sevilla,Valencia,3.0,0.42319008112684353,Nao entrar
+2025-01-12 13:00:00,spain/la_liga,Las Palmas,Getafe,2.1999999999999997,0.6227137499963165,Entrar
+2025-01-12 15:15:00,spain/la_liga,Atlético Madrid,Osasuna,3.5,0.3208471988621341,Nao entrar
+2025-01-13 20:00:00,spain/la_liga,Real Sociedad,Villarreal,3.3000000000000003,0.3594264663250838,Nao entrar
+2025-01-17 20:00:00,spain/la_liga,Espanyol,Real Valladolid,2.5,0.5438131158833295,Nao entrar
+2025-01-18 13:00:00,spain/la_liga,Girona FC,Sevilla,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-01-18 15:15:00,spain/la_liga,Leganés,Atlético Madrid,3.8,0.26889667771111053,Nao entrar
+2025-01-18 17:30:00,spain/la_liga,Real Betis,Deportivo Alavés,3.0,0.42319008112684353,Nao entrar
+2025-01-18 20:00:00,spain/la_liga,Getafe,FC Barcelona,3.0999999999999996,0.4011631473146323,Nao entrar
+2025-01-19 13:00:00,spain/la_liga,Celta Vigo,Athletic Club,2.8,0.4694536834666827,Nao entrar
+2025-01-19 15:15:00,spain/la_liga,Real Madrid,Las Palmas,3.1999999999999997,0.3799037410783732,Nao entrar
+2025-01-19 17:30:00,spain/la_liga,Osasuna,Rayo Vallecano,2.3,0.5960388259320683,Nao entrar
+2025-01-19 20:00:00,spain/la_liga,Valencia,Real Sociedad,3.0,0.42319008112684353,Nao entrar
+2025-01-20 20:00:00,spain/la_liga,Villarreal,Mallorca,3.1,0.4011631473146322,Nao entrar
+2025-01-24 20:00:00,spain/la_liga,Las Palmas,Osasuna,2.7,0.49362449107346196,Nao entrar
+2025-01-25 13:00:00,spain/la_liga,Mallorca,Real Betis,2.4,0.5697087466575106,Nao entrar
+2025-01-25 15:15:00,spain/la_liga,Atlético Madrid,Villarreal,3.8,0.26889667771111053,Nao entrar
+2025-01-25 17:30:00,spain/la_liga,Sevilla,Espanyol,2.8,0.4694536834666827,Nao entrar
+2025-01-25 20:00:00,spain/la_liga,Real Valladolid,Real Madrid,3.1999999999999997,0.3799037410783732,Nao entrar
+2025-01-26 13:00:00,spain/la_liga,Rayo Vallecano,Girona FC,2.2,0.6227137499963165,Entrar
+2025-01-26 15:15:00,spain/la_liga,Real Sociedad,Getafe,2.5,0.5438131158833295,Nao entrar
+2025-01-26 17:30:00,spain/la_liga,Athletic Club,Leganés,2.7,0.49362449107346196,Nao entrar
+2025-01-26 20:00:00,spain/la_liga,FC Barcelona,Valencia,3.6,0.30274684471600155,Nao entrar
+2025-01-27 20:00:00,spain/la_liga,Deportivo Alavés,Celta Vigo,3.8000000000000003,0.2688966777111104,Nao entrar
+2025-01-31 20:00:00,spain/la_liga,Leganés,Rayo Vallecano,2.6,0.5184295759360504,Nao entrar
+2025-02-01 13:00:00,spain/la_liga,Getafe,Sevilla,2.5,0.5438131158833295,Nao entrar
+2025-02-01 15:15:00,spain/la_liga,Villarreal,Real Valladolid,3.0,0.42319008112684353,Nao entrar
+2025-02-01 17:30:00,spain/la_liga,Atlético Madrid,Mallorca,3.5,0.3208471988621341,Nao entrar
+2025-02-01 20:00:00,spain/la_liga,Espanyol,Real Madrid,3.1,0.4011631473146322,Nao entrar
+2025-02-02 13:00:00,spain/la_liga,FC Barcelona,Deportivo Alavés,4.2,0.21023798702309743,Nao entrar
+2025-02-02 15:15:00,spain/la_liga,Valencia,Celta Vigo,3.2,0.3799037410783731,Nao entrar
+2025-02-02 17:30:00,spain/la_liga,Osasuna,Real Sociedad,3.0,0.42319008112684353,Nao entrar
+2025-02-02 20:00:00,spain/la_liga,Real Betis,Athletic Club,2.0,0.6766764161830635,Entrar
+2025-02-03 20:00:00,spain/la_liga,Girona FC,Las Palmas,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-02-07 20:00:00,spain/la_liga,Rayo Vallecano,Real Valladolid,2.2,0.6227137499963165,Entrar
+2025-02-08 13:00:00,spain/la_liga,Celta Vigo,Real Betis,2.8,0.4694536834666827,Nao entrar
+2025-02-08 15:15:00,spain/la_liga,Athletic Club,Girona FC,2.3,0.5960388259320683,Nao entrar
+2025-02-08 17:30:00,spain/la_liga,Las Palmas,Villarreal,3.0,0.42319008112684353,Nao entrar
+2025-02-08 20:00:00,spain/la_liga,Real Madrid,Atlético Madrid,4.0,0.2381033055535443,Nao entrar
+2025-02-09 13:00:00,spain/la_liga,Deportivo Alavés,Getafe,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-02-09 15:15:00,spain/la_liga,Valencia,Leganés,3.1,0.4011631473146322,Nao entrar
+2025-02-09 17:30:00,spain/la_liga,Real Sociedad,Espanyol,2.8,0.4694536834666827,Nao entrar
+2025-02-09 20:00:00,spain/la_liga,Sevilla,FC Barcelona,3.8000000000000003,0.2688966777111104,Nao entrar
+2025-02-10 20:00:00,spain/la_liga,Mallorca,Osasuna,2.8,0.4694536834666827,Nao entrar
+2025-02-14 20:00:00,spain/la_liga,Girona FC,Getafe,2.1999999999999997,0.6227137499963165,Entrar
+2025-02-15 13:00:00,spain/la_liga,Leganés,Deportivo Alavés,3.7,0.28543311310006825,Nao entrar
+2025-02-15 15:15:00,spain/la_liga,Osasuna,Real Madrid,3.3,0.3594264663250839,Nao entrar
+2025-02-15 17:30:00,spain/la_liga,Atlético Madrid,Celta Vigo,3.9000000000000004,0.2531251026297838,Nao entrar
+2025-02-15 20:00:00,spain/la_liga,Villarreal,Valencia,3.1,0.4011631473146322,Nao entrar
+2025-02-16 13:00:00,spain/la_liga,Espanyol,Athletic Club,2.2,0.6227137499963165,Entrar
+2025-02-16 15:15:00,spain/la_liga,Real Valladolid,Sevilla,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-02-16 17:30:00,spain/la_liga,Mallorca,Las Palmas,2.6999999999999997,0.4936244910734621,Nao entrar
+2025-02-16 20:00:00,spain/la_liga,Real Betis,Real Sociedad,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-02-17 20:00:00,spain/la_liga,FC Barcelona,Rayo Vallecano,3.1,0.4011631473146322,Nao entrar
+2025-02-21 20:00:00,spain/la_liga,Celta Vigo,Osasuna,3.2,0.3799037410783731,Nao entrar
+2025-02-22 13:00:00,spain/la_liga,Deportivo Alavés,Espanyol,3.2,0.3799037410783731,Nao entrar
+2025-02-22 15:15:00,spain/la_liga,Rayo Vallecano,Villarreal,2.6,0.5184295759360504,Nao entrar
+2025-02-22 17:30:00,spain/la_liga,Valencia,Atlético Madrid,3.5,0.3208471988621341,Nao entrar
+2025-02-22 20:00:00,spain/la_liga,Las Palmas,FC Barcelona,3.5,0.3208471988621341,Nao entrar
+2025-02-23 13:00:00,spain/la_liga,Athletic Club,Real Valladolid,2.3,0.5960388259320683,Nao entrar
+2025-02-23 15:15:00,spain/la_liga,Real Madrid,Girona FC,3.1999999999999997,0.3799037410783732,Nao entrar
+2025-02-23 17:30:00,spain/la_liga,Getafe,Real Betis,1.9000000000000001,0.7037203534424978,Entrar
+2025-02-23 20:00:00,spain/la_liga,Real Sociedad,Leganés,3.3000000000000003,0.3594264663250838,Nao entrar
+2025-02-24 20:00:00,spain/la_liga,Sevilla,Mallorca,3.0,0.42319008112684353,Nao entrar
+2025-02-28 20:00:00,spain/la_liga,Real Valladolid,Las Palmas,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-03-01 13:00:00,spain/la_liga,Girona FC,Celta Vigo,3.1,0.4011631473146322,Nao entrar
+2025-03-01 15:15:00,spain/la_liga,Rayo Vallecano,Sevilla,2.5,0.5438131158833295,Nao entrar
+2025-03-01 17:30:00,spain/la_liga,Real Betis,Real Madrid,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-03-01 20:00:00,spain/la_liga,Atlético Madrid,Athletic Club,3.1,0.4011631473146322,Nao entrar
+2025-03-02 13:00:00,spain/la_liga,Leganés,Getafe,2.6,0.5184295759360504,Nao entrar
+2025-03-02 15:15:00,spain/la_liga,FC Barcelona,Real Sociedad,3.8,0.26889667771111053,Nao entrar
+2025-03-02 17:30:00,spain/la_liga,Mallorca,Deportivo Alavés,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-03-02 20:00:00,spain/la_liga,Osasuna,Valencia,2.8,0.4694536834666827,Nao entrar
+2025-03-08 13:00:00,spain/la_liga,Celta Vigo,Leganés,3.5,0.3208471988621341,Nao entrar
+2025-03-08 15:15:00,spain/la_liga,Deportivo Alavés,Villarreal,3.7,0.28543311310006825,Nao entrar
+2025-03-08 17:30:00,spain/la_liga,Valencia,Real Valladolid,2.6999999999999997,0.4936244910734621,Nao entrar
+2025-03-09 13:00:00,spain/la_liga,Getafe,Atlético Madrid,3.0,0.42319008112684353,Nao entrar
+2025-03-09 15:15:00,spain/la_liga,Real Madrid,Rayo Vallecano,2.8000000000000003,0.4694536834666827,Nao entrar
+2025-03-09 17:30:00,spain/la_liga,Athletic Club,Mallorca,2.4,0.5697087466575106,Nao entrar
+2025-03-09 17:30:00,spain/la_liga,Real Betis,Las Palmas,2.3,0.5960388259320683,Nao entrar
+2025-03-09 20:00:00,spain/la_liga,Real Sociedad,Sevilla,3.2,0.3799037410783731,Nao entrar
+2025-03-10 20:00:00,spain/la_liga,Espanyol,Girona FC,2.5,0.5438131158833295,Nao entrar
+2025-03-14 20:00:00,spain/la_liga,Las Palmas,Deportivo Alavés,3.3,0.3594264663250839,Nao entrar
+2025-03-15 13:00:00,spain/la_liga,Real Valladolid,Celta Vigo,3.1,0.4011631473146322,Nao entrar
+2025-03-15 15:15:00,spain/la_liga,Mallorca,Espanyol,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-03-15 17:30:00,spain/la_liga,Villarreal,Real Madrid,3.6,0.30274684471600155,Nao entrar
+2025-03-15 20:00:00,spain/la_liga,Girona FC,Valencia,2.6999999999999997,0.4936244910734621,Nao entrar
+2025-03-16 13:00:00,spain/la_liga,Leganés,Real Betis,2.7,0.49362449107346196,Nao entrar
+2025-03-16 15:15:00,spain/la_liga,Sevilla,Athletic Club,2.6,0.5184295759360504,Nao entrar
+2025-03-16 17:30:00,spain/la_liga,Osasuna,Getafe,2.3,0.5960388259320683,Nao entrar
+2025-03-16 17:30:00,spain/la_liga,Rayo Vallecano,Real Sociedad,2.5,0.5438131158833295,Nao entrar
+2025-03-16 20:00:00,spain/la_liga,Atlético Madrid,FC Barcelona,4.300000000000001,0.19735469083246246,Nao entrar
+2025-03-27 20:00:00,spain/la_liga,FC Barcelona,Osasuna,3.6000000000000005,0.30274684471600144,Nao entrar
+2025-03-29 13:00:00,spain/la_liga,Real Sociedad,Real Valladolid,2.9,0.4459631985571806,Nao entrar
+2025-03-29 15:15:00,spain/la_liga,Espanyol,Atlético Madrid,3.3,0.3594264663250839,Nao entrar
+2025-03-29 17:30:00,spain/la_liga,Deportivo Alavés,Rayo Vallecano,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-03-29 20:00:00,spain/la_liga,Real Madrid,Leganés,3.6,0.30274684471600155,Nao entrar
+2025-03-30 12:00:00,spain/la_liga,Getafe,Villarreal,2.6,0.5184295759360504,Nao entrar
+2025-03-30 14:15:00,spain/la_liga,FC Barcelona,Girona FC,3.5,0.3208471988621341,Nao entrar
+2025-03-30 16:30:00,spain/la_liga,Athletic Club,Osasuna,2.4,0.5697087466575106,Nao entrar
+2025-03-30 16:30:00,spain/la_liga,Valencia,Mallorca,2.8,0.4694536834666827,Nao entrar
+2025-03-30 19:00:00,spain/la_liga,Real Betis,Sevilla,2.6,0.5184295759360504,Nao entrar
+2025-03-31 19:00:00,spain/la_liga,Celta Vigo,Las Palmas,3.1,0.4011631473146322,Nao entrar
+2025-04-04 19:00:00,spain/la_liga,Rayo Vallecano,Espanyol,2.1,0.6496313518820691,Entrar
+2025-04-05 12:00:00,spain/la_liga,Girona FC,Deportivo Alavés,3.3,0.3594264663250839,Nao entrar
+2025-04-05 14:15:00,spain/la_liga,Real Madrid,Valencia,3.3,0.3594264663250839,Nao entrar
+2025-04-05 16:30:00,spain/la_liga,Mallorca,Celta Vigo,3.2,0.3799037410783731,Nao entrar
+2025-04-05 19:00:00,spain/la_liga,FC Barcelona,Real Betis,3.2,0.3799037410783731,Nao entrar
+2025-04-06 12:00:00,spain/la_liga,Las Palmas,Real Sociedad,2.9,0.4459631985571806,Nao entrar
+2025-04-06 14:15:00,spain/la_liga,Sevilla,Atlético Madrid,3.7,0.28543311310006825,Nao entrar
+2025-04-06 16:30:00,spain/la_liga,Real Valladolid,Getafe,2.1999999999999997,0.6227137499963165,Entrar
+2025-04-06 19:00:00,spain/la_liga,Villarreal,Athletic Club,2.7,0.49362449107346196,Nao entrar
+2025-04-07 19:00:00,spain/la_liga,Leganés,Osasuna,3.1,0.4011631473146322,Nao entrar
+2025-04-11 19:00:00,spain/la_liga,Valencia,Sevilla,3.0,0.42319008112684353,Nao entrar
+2025-04-12 12:00:00,spain/la_liga,Real Sociedad,Mallorca,3.0,0.42319008112684353,Nao entrar
+2025-04-12 14:15:00,spain/la_liga,Getafe,Las Palmas,2.1999999999999997,0.6227137499963165,Entrar
+2025-04-12 16:30:00,spain/la_liga,Celta Vigo,Espanyol,3.0,0.42319008112684353,Nao entrar
+2025-04-12 19:00:00,spain/la_liga,Leganés,FC Barcelona,3.9000000000000004,0.2531251026297838,Nao entrar
+2025-04-13 12:00:00,spain/la_liga,Osasuna,Girona FC,2.7,0.49362449107346196,Nao entrar
+2025-04-13 14:15:00,spain/la_liga,Deportivo Alavés,Real Madrid,3.9000000000000004,0.2531251026297838,Nao entrar
+2025-04-13 16:30:00,spain/la_liga,Real Betis,Villarreal,2.7,0.49362449107346196,Nao entrar
+2025-04-13 19:00:00,spain/la_liga,Athletic Club,Rayo Vallecano,1.9000000000000001,0.7037203534424978,Entrar
+2025-04-14 19:00:00,spain/la_liga,Atlético Madrid,Real Valladolid,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-04-18 19:00:00,spain/la_liga,Espanyol,Getafe,2.0999999999999996,0.6496313518820691,Entrar
+2025-04-19 12:00:00,spain/la_liga,Rayo Vallecano,Valencia,2.3000000000000003,0.5960388259320681,Nao entrar
+2025-04-19 14:15:00,spain/la_liga,FC Barcelona,Celta Vigo,4.0,0.2381033055535443,Nao entrar
+2025-04-19 16:30:00,spain/la_liga,Mallorca,Leganés,3.1,0.4011631473146322,Nao entrar
+2025-04-19 19:00:00,spain/la_liga,Las Palmas,Atlético Madrid,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-04-20 12:00:00,spain/la_liga,Real Valladolid,Osasuna,2.7,0.49362449107346196,Nao entrar
+2025-04-20 14:15:00,spain/la_liga,Villarreal,Real Sociedad,3.3000000000000003,0.3594264663250838,Nao entrar
+2025-04-20 16:30:00,spain/la_liga,Sevilla,Deportivo Alavés,3.6,0.30274684471600155,Nao entrar
+2025-04-20 19:00:00,spain/la_liga,Real Madrid,Athletic Club,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-04-21 19:00:00,spain/la_liga,Girona FC,Real Betis,2.3,0.5960388259320683,Nao entrar
+2025-04-22 17:00:00,spain/la_liga,Valencia,Espanyol,2.6,0.5184295759360504,Nao entrar
+2025-04-22 19:30:00,spain/la_liga,FC Barcelona,Mallorca,3.5999999999999996,0.30274684471600166,Nao entrar
+2025-04-23 17:00:00,spain/la_liga,Athletic Club,Las Palmas,2.3,0.5960388259320683,Nao entrar
+2025-04-23 17:00:00,spain/la_liga,Celta Vigo,Villarreal,3.5,0.3208471988621341,Nao entrar
+2025-04-23 19:30:00,spain/la_liga,Deportivo Alavés,Real Sociedad,3.6,0.30274684471600155,Nao entrar
+2025-04-23 19:30:00,spain/la_liga,Getafe,Real Madrid,2.8,0.4694536834666827,Nao entrar
+2025-04-24 17:00:00,spain/la_liga,Leganés,Girona FC,3.0,0.42319008112684353,Nao entrar
+2025-04-24 17:00:00,spain/la_liga,Osasuna,Sevilla,3.0,0.42319008112684353,Nao entrar
+2025-04-24 19:30:00,spain/la_liga,Atlético Madrid,Rayo Vallecano,3.0,0.42319008112684353,Nao entrar
+2025-04-24 19:30:00,spain/la_liga,Real Betis,Real Valladolid,2.3,0.5960388259320683,Nao entrar
+2025-04-27 14:15:00,spain/la_liga,Villarreal,Espanyol,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-05-02 19:00:00,spain/la_liga,Rayo Vallecano,Getafe,1.8,0.7306210859394126,Entrar
+2025-05-03 12:00:00,spain/la_liga,Deportivo Alavés,Atlético Madrid,4.1,0.2238139813007857,Nao entrar
+2025-05-03 14:15:00,spain/la_liga,Villarreal,Osasuna,3.1,0.4011631473146322,Nao entrar
+2025-05-03 16:30:00,spain/la_liga,Las Palmas,Valencia,2.6999999999999997,0.4936244910734621,Nao entrar
+2025-05-03 19:00:00,spain/la_liga,Real Valladolid,FC Barcelona,3.5,0.3208471988621341,Nao entrar
+2025-05-04 12:00:00,spain/la_liga,Real Madrid,Celta Vigo,3.7,0.28543311310006825,Nao entrar
+2025-05-04 14:15:00,spain/la_liga,Sevilla,Leganés,3.3,0.3594264663250839,Nao entrar
+2025-05-04 16:30:00,spain/la_liga,Espanyol,Real Betis,2.1999999999999997,0.6227137499963165,Entrar
+2025-05-04 19:00:00,spain/la_liga,Real Sociedad,Athletic Club,2.6,0.5184295759360504,Nao entrar
+2025-05-05 19:00:00,spain/la_liga,Girona FC,Mallorca,2.6999999999999997,0.4936244910734621,Nao entrar
+2025-05-09 19:00:00,spain/la_liga,Las Palmas,Rayo Vallecano,2.2,0.6227137499963165,Entrar
+2025-05-10 12:00:00,spain/la_liga,Valencia,Getafe,2.3,0.5960388259320683,Nao entrar
+2025-05-10 14:15:00,spain/la_liga,Celta Vigo,Sevilla,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-05-10 16:30:00,spain/la_liga,Girona FC,Villarreal,3.0,0.42319008112684353,Nao entrar
+2025-05-10 16:30:00,spain/la_liga,Mallorca,Real Valladolid,2.6999999999999997,0.4936244910734621,Nao entrar
+2025-05-10 19:00:00,spain/la_liga,Atlético Madrid,Real Sociedad,3.7,0.28543311310006825,Nao entrar
+2025-05-11 12:00:00,spain/la_liga,Leganés,Espanyol,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-05-11 14:15:00,spain/la_liga,FC Barcelona,Real Madrid,4.1,0.2238139813007857,Nao entrar
+2025-05-11 16:30:00,spain/la_liga,Athletic Club,Deportivo Alavés,3.0,0.42319008112684353,Nao entrar
+2025-05-11 19:00:00,spain/la_liga,Real Betis,Osasuna,2.4,0.5697087466575106,Nao entrar
+2025-05-13 17:00:00,spain/la_liga,Real Valladolid,Girona FC,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-05-13 18:00:00,spain/la_liga,Real Sociedad,Celta Vigo,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-05-13 19:30:00,spain/la_liga,Sevilla,Las Palmas,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-05-14 17:00:00,spain/la_liga,Deportivo Alavés,Valencia,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-05-14 17:00:00,spain/la_liga,Villarreal,Leganés,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-05-14 19:30:00,spain/la_liga,Real Madrid,Mallorca,3.3,0.3594264663250839,Nao entrar
+2025-05-15 17:00:00,spain/la_liga,Osasuna,Atlético Madrid,3.5,0.3208471988621341,Nao entrar
+2025-05-15 17:00:00,spain/la_liga,Rayo Vallecano,Real Betis,1.9,0.7037203534424978,Entrar
+2025-05-15 19:30:00,spain/la_liga,Espanyol,FC Barcelona,3.4,0.33973988819611944,Nao entrar
+2025-05-15 19:30:00,spain/la_liga,Getafe,Athletic Club,1.9,0.7037203534424978,Entrar
+2025-05-18 17:00:00,spain/la_liga,Atlético Madrid,Real Betis,3.1,0.4011631473146322,Nao entrar
+2025-05-18 17:00:00,spain/la_liga,Celta Vigo,Rayo Vallecano,2.7,0.49362449107346196,Nao entrar
+2025-05-18 17:00:00,spain/la_liga,FC Barcelona,Villarreal,3.9000000000000004,0.2531251026297838,Nao entrar
+2025-05-18 17:00:00,spain/la_liga,Las Palmas,Leganés,3.0,0.42319008112684353,Nao entrar
+2025-05-18 17:00:00,spain/la_liga,Mallorca,Getafe,2.3,0.5960388259320683,Nao entrar
+2025-05-18 17:00:00,spain/la_liga,Osasuna,Espanyol,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-05-18 17:00:00,spain/la_liga,Real Sociedad,Girona FC,2.9,0.4459631985571806,Nao entrar
+2025-05-18 17:00:00,spain/la_liga,Real Valladolid,Deportivo Alavés,3.3,0.3594264663250839,Nao entrar
+2025-05-18 17:00:00,spain/la_liga,Sevilla,Real Madrid,3.5000000000000004,0.320847198862134,Nao entrar
+2025-05-18 17:00:00,spain/la_liga,Valencia,Athletic Club,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-05-23 19:00:00,spain/la_liga,Real Betis,Valencia,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-05-24 14:15:00,spain/la_liga,Real Madrid,Real Sociedad,3.5,0.3208471988621341,Nao entrar
+2025-05-24 16:30:00,spain/la_liga,Espanyol,Las Palmas,2.5,0.5438131158833295,Nao entrar
+2025-05-24 16:30:00,spain/la_liga,Leganés,Real Valladolid,3.0,0.42319008112684353,Nao entrar
+2025-05-24 19:00:00,spain/la_liga,Deportivo Alavés,Osasuna,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-05-24 19:00:00,spain/la_liga,Getafe,Celta Vigo,2.7,0.49362449107346196,Nao entrar
+2025-05-24 19:00:00,spain/la_liga,Rayo Vallecano,Mallorca,2.3,0.5960388259320683,Nao entrar
+2025-05-25 12:00:00,spain/la_liga,Girona FC,Atlético Madrid,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-05-25 14:15:00,spain/la_liga,Villarreal,Sevilla,3.3,0.3594264663250839,Nao entrar
+2025-05-25 19:00:00,spain/la_liga,Athletic Club,FC Barcelona,3.2,0.3799037410783731,Nao entrar
+2025-08-15 17:00:00,spain/la_liga,Girona FC,Rayo Vallecano,2.2,0.6227137499963165,Entrar
+2025-08-15 19:30:00,spain/la_liga,Villarreal,Real Oviedo,3.0,0.42319008112684353,Nao entrar
+2025-08-16 17:30:00,spain/la_liga,Mallorca,FC Barcelona,3.5999999999999996,0.30274684471600166,Nao entrar
+2025-08-16 19:30:00,spain/la_liga,Deportivo Alavés,Levante UD,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-08-16 19:30:00,spain/la_liga,Valencia,Real Sociedad,3.0,0.42319008112684353,Nao entrar
+2025-08-17 15:00:00,spain/la_liga,Celta Vigo,Getafe,2.7,0.49362449107346196,Nao entrar
+2025-08-17 17:30:00,spain/la_liga,Athletic Club,Sevilla,2.6,0.5184295759360504,Nao entrar
+2025-08-17 19:30:00,spain/la_liga,Espanyol,Atlético Madrid,3.3,0.3594264663250839,Nao entrar
+2025-08-18 19:00:00,spain/la_liga,Elche,Real Betis,2.5,0.5438131158833295,Nao entrar
+2025-08-19 19:00:00,spain/la_liga,Real Madrid,Osasuna,3.3,0.3594264663250839,Nao entrar
+2025-08-22 19:30:00,spain/la_liga,Real Betis,Deportivo Alavés,3.0,0.42319008112684353,Nao entrar
+2025-08-23 15:00:00,spain/la_liga,Mallorca,Celta Vigo,3.2,0.3799037410783731,Nao entrar
+2025-08-23 17:30:00,spain/la_liga,Atlético Madrid,Elche,3.6,0.30274684471600155,Nao entrar
+2025-08-23 19:30:00,spain/la_liga,Levante UD,FC Barcelona,3.6,0.30274684471600155,Nao entrar
+2025-08-24 15:00:00,spain/la_liga,Osasuna,Valencia,2.8,0.4694536834666827,Nao entrar
+2025-08-24 17:30:00,spain/la_liga,Real Sociedad,Espanyol,2.8,0.4694536834666827,Nao entrar
+2025-08-24 17:30:00,spain/la_liga,Villarreal,Girona FC,3.0,0.42319008112684353,Nao entrar
+2025-08-24 19:30:00,spain/la_liga,Real Oviedo,Real Madrid,3.2,0.3799037410783731,Nao entrar
+2025-08-25 17:30:00,spain/la_liga,Athletic Club,Rayo Vallecano,1.9000000000000001,0.7037203534424978,Entrar
+2025-08-25 19:30:00,spain/la_liga,Sevilla,Getafe,2.5,0.5438131158833295,Nao entrar
+2025-08-27 19:00:00,spain/la_liga,Celta Vigo,Real Betis,2.8,0.4694536834666827,Nao entrar
+2025-08-29 17:30:00,spain/la_liga,Elche,Levante UD,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-08-29 19:30:00,spain/la_liga,Valencia,Getafe,2.3,0.5960388259320683,Nao entrar
+2025-08-30 15:00:00,spain/la_liga,Deportivo Alavés,Atlético Madrid,4.1,0.2238139813007857,Nao entrar
+2025-08-30 17:00:00,spain/la_liga,Real Oviedo,Real Sociedad,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-08-30 17:30:00,spain/la_liga,Girona FC,Sevilla,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-08-30 19:30:00,spain/la_liga,Real Madrid,Mallorca,3.3,0.3594264663250839,Nao entrar
+2025-08-31 15:00:00,spain/la_liga,Celta Vigo,Villarreal,3.5,0.3208471988621341,Nao entrar
+2025-08-31 17:00:00,spain/la_liga,Real Betis,Athletic Club,2.0,0.6766764161830635,Entrar
+2025-08-31 17:30:00,spain/la_liga,Espanyol,Osasuna,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-08-31 19:30:00,spain/la_liga,Rayo Vallecano,FC Barcelona,3.1,0.4011631473146322,Nao entrar
+2025-09-12 19:00:00,spain/la_liga,Sevilla,Elche,3.1,0.4011631473146322,Nao entrar
+2025-09-13 12:00:00,spain/la_liga,Getafe,Real Oviedo,2.2,0.6227137499963165,Entrar
+2025-09-13 14:15:00,spain/la_liga,Real Sociedad,Real Madrid,3.5,0.3208471988621341,Nao entrar
+2025-09-13 16:30:00,spain/la_liga,Athletic Club,Deportivo Alavés,3.0,0.42319008112684353,Nao entrar
+2025-09-13 19:00:00,spain/la_liga,Atlético Madrid,Villarreal,3.8,0.26889667771111053,Nao entrar
+2025-09-14 12:00:00,spain/la_liga,Celta Vigo,Girona FC,3.1,0.4011631473146322,Nao entrar
+2025-09-14 14:15:00,spain/la_liga,Levante UD,Real Betis,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-09-14 16:30:00,spain/la_liga,Osasuna,Rayo Vallecano,2.3,0.5960388259320683,Nao entrar
+2025-09-14 19:00:00,spain/la_liga,FC Barcelona,Valencia,3.6,0.30274684471600155,Nao entrar
+2025-09-15 19:00:00,spain/la_liga,Espanyol,Mallorca,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-09-19 19:00:00,spain/la_liga,Real Betis,Real Sociedad,2.5999999999999996,0.5184295759360505,Nao entrar
+2025-09-20 12:00:00,spain/la_liga,Girona FC,Levante UD,2.6999999999999997,0.4936244910734621,Nao entrar
+2025-09-20 14:15:00,spain/la_liga,Real Madrid,Espanyol,3.1,0.4011631473146322,Nao entrar
+2025-09-20 16:30:00,spain/la_liga,Deportivo Alavés,Sevilla,3.6,0.30274684471600155,Nao entrar
+2025-09-20 16:30:00,spain/la_liga,Villarreal,Osasuna,3.1,0.4011631473146322,Nao entrar
+2025-09-20 19:00:00,spain/la_liga,Valencia,Athletic Club,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-09-21 12:00:00,spain/la_liga,Rayo Vallecano,Celta Vigo,2.7,0.49362449107346196,Nao entrar
+2025-09-21 14:15:00,spain/la_liga,Mallorca,Atlético Madrid,3.5,0.3208471988621341,Nao entrar
+2025-09-21 16:30:00,spain/la_liga,Elche,Real Oviedo,2.8,0.4694536834666827,Nao entrar
+2025-09-21 19:00:00,spain/la_liga,FC Barcelona,Getafe,3.0999999999999996,0.4011631473146323,Nao entrar
+2025-09-23 17:00:00,spain/la_liga,Athletic Club,Girona FC,2.3,0.5960388259320683,Nao entrar
+2025-09-23 17:00:00,spain/la_liga,Espanyol,Valencia,2.6,0.5184295759360504,Nao entrar
+2025-09-23 19:30:00,spain/la_liga,Levante UD,Real Madrid,3.3,0.3594264663250839,Nao entrar
+2025-09-23 19:30:00,spain/la_liga,Sevilla,Villarreal,3.3,0.3594264663250839,Nao entrar
+2025-09-24 17:00:00,spain/la_liga,Getafe,Deportivo Alavés,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-09-24 19:30:00,spain/la_liga,Atlético Madrid,Rayo Vallecano,3.0,0.42319008112684353,Nao entrar
+2025-09-24 19:30:00,spain/la_liga,Real Sociedad,Mallorca,3.0,0.42319008112684353,Nao entrar
+2025-09-25 17:30:00,spain/la_liga,Osasuna,Elche,2.9,0.4459631985571806,Nao entrar
+2025-09-25 19:30:00,spain/la_liga,Real Oviedo,FC Barcelona,3.5000000000000004,0.320847198862134,Nao entrar
+2025-09-26 19:00:00,spain/la_liga,Girona FC,Espanyol,2.5,0.5438131158833295,Nao entrar
+2025-09-27 12:00:00,spain/la_liga,Getafe,Levante UD,2.3,0.5960388259320683,Nao entrar
+2025-09-27 14:15:00,spain/la_liga,Atlético Madrid,Real Madrid,4.0,0.2381033055535443,Nao entrar
+2025-09-27 16:30:00,spain/la_liga,Mallorca,Deportivo Alavés,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-09-27 19:00:00,spain/la_liga,Villarreal,Athletic Club,2.7,0.49362449107346196,Nao entrar
+2025-09-28 12:00:00,spain/la_liga,Rayo Vallecano,Sevilla,2.5,0.5438131158833295,Nao entrar
+2025-09-28 14:15:00,spain/la_liga,Elche,Celta Vigo,3.3,0.3594264663250839,Nao entrar
+2025-09-28 16:30:00,spain/la_liga,FC Barcelona,Real Sociedad,3.8,0.26889667771111053,Nao entrar
+2025-09-28 19:00:00,spain/la_liga,Real Betis,Osasuna,2.4,0.5697087466575106,Nao entrar
+2025-09-30 18:00:00,spain/la_liga,Valencia,Real Oviedo,2.7,0.49362449107346196,Nao entrar
+2025-10-03 19:00:00,spain/la_liga,Osasuna,Getafe,2.3,0.5960388259320683,Nao entrar
+2025-10-04 12:00:00,spain/la_liga,Real Oviedo,Levante UD,2.7,0.49362449107346196,Nao entrar
+2025-10-04 14:15:00,spain/la_liga,Girona FC,Valencia,2.6999999999999997,0.4936244910734621,Nao entrar
+2025-10-04 16:30:00,spain/la_liga,Athletic Club,Mallorca,2.4,0.5697087466575106,Nao entrar
+2025-10-04 19:00:00,spain/la_liga,Real Madrid,Villarreal,3.6,0.30274684471600155,Nao entrar
+2025-10-05 12:00:00,spain/la_liga,Deportivo Alavés,Elche,3.5,0.3208471988621341,Nao entrar
+2025-10-05 14:15:00,spain/la_liga,Sevilla,FC Barcelona,3.8000000000000003,0.2688966777111104,Nao entrar
+2025-10-05 16:30:00,spain/la_liga,Espanyol,Real Betis,2.1999999999999997,0.6227137499963165,Entrar
+2025-10-05 16:30:00,spain/la_liga,Real Sociedad,Rayo Vallecano,2.5,0.5438131158833295,Nao entrar
+2025-10-05 19:00:00,spain/la_liga,Celta Vigo,Atlético Madrid,3.9000000000000004,0.2531251026297838,Nao entrar
+2025-10-17 19:00:00,spain/la_liga,Real Oviedo,Espanyol,2.5,0.5438131158833295,Nao entrar
+2025-10-18 12:00:00,spain/la_liga,Sevilla,Mallorca,3.0,0.42319008112684353,Nao entrar
+2025-10-18 14:15:00,spain/la_liga,FC Barcelona,Girona FC,3.5,0.3208471988621341,Nao entrar
+2025-10-18 16:30:00,spain/la_liga,Villarreal,Real Betis,2.7,0.49362449107346196,Nao entrar
+2025-10-18 19:00:00,spain/la_liga,Atlético Madrid,Osasuna,3.5,0.3208471988621341,Nao entrar
+2025-10-19 12:00:00,spain/la_liga,Elche,Athletic Club,2.5,0.5438131158833295,Nao entrar
+2025-10-19 14:15:00,spain/la_liga,Celta Vigo,Real Sociedad,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-10-19 16:30:00,spain/la_liga,Levante UD,Rayo Vallecano,2.3000000000000003,0.5960388259320681,Nao entrar
+2025-10-19 19:00:00,spain/la_liga,Getafe,Real Madrid,2.8,0.4694536834666827,Nao entrar
+2025-10-20 19:00:00,spain/la_liga,Deportivo Alavés,Valencia,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-10-24 19:00:00,spain/la_liga,Real Sociedad,Sevilla,3.2,0.3799037410783731,Nao entrar
+2025-10-25 12:00:00,spain/la_liga,Girona FC,Real Oviedo,2.6,0.5184295759360504,Nao entrar
+2025-10-25 14:15:00,spain/la_liga,Espanyol,Elche,2.6999999999999997,0.4936244910734621,Nao entrar
+2025-10-25 16:30:00,spain/la_liga,Athletic Club,Getafe,1.9,0.7037203534424978,Entrar
+2025-10-25 19:00:00,spain/la_liga,Valencia,Villarreal,3.1,0.4011631473146322,Nao entrar
+2025-10-26 13:00:00,spain/la_liga,Mallorca,Levante UD,2.8,0.4694536834666827,Nao entrar
+2025-10-26 15:15:00,spain/la_liga,Real Madrid,FC Barcelona,4.1,0.2238139813007857,Nao entrar
+2025-10-26 17:30:00,spain/la_liga,Osasuna,Celta Vigo,3.2,0.3799037410783731,Nao entrar
+2025-10-26 20:00:00,spain/la_liga,Rayo Vallecano,Deportivo Alavés,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-10-27 20:00:00,spain/la_liga,Real Betis,Atlético Madrid,3.1,0.4011631473146322,Nao entrar
+2025-10-31 20:00:00,spain/la_liga,Getafe,Girona FC,2.1999999999999997,0.6227137499963165,Entrar
+2025-11-01 13:00:00,spain/la_liga,Villarreal,Rayo Vallecano,2.6,0.5184295759360504,Nao entrar
+2025-11-01 15:15:00,spain/la_liga,Atlético Madrid,Sevilla,3.7,0.28543311310006825,Nao entrar
+2025-11-01 17:30:00,spain/la_liga,Real Sociedad,Athletic Club,2.6,0.5184295759360504,Nao entrar
+2025-11-01 20:00:00,spain/la_liga,Real Madrid,Valencia,3.3,0.3594264663250839,Nao entrar
+2025-11-02 13:00:00,spain/la_liga,Levante UD,Celta Vigo,3.2,0.3799037410783731,Nao entrar
+2025-11-02 15:15:00,spain/la_liga,Deportivo Alavés,Espanyol,3.2,0.3799037410783731,Nao entrar
+2025-11-02 17:30:00,spain/la_liga,FC Barcelona,Elche,3.7,0.28543311310006825,Nao entrar
+2025-11-02 20:00:00,spain/la_liga,Real Betis,Mallorca,2.4,0.5697087466575106,Nao entrar
+2025-11-03 20:00:00,spain/la_liga,Real Oviedo,Osasuna,2.7,0.49362449107346196,Nao entrar
+2025-11-07 20:00:00,spain/la_liga,Elche,Real Sociedad,3.0999999999999996,0.4011631473146323,Nao entrar
+2025-11-08 13:00:00,spain/la_liga,Girona FC,Deportivo Alavés,3.3,0.3594264663250839,Nao entrar
+2025-11-08 15:15:00,spain/la_liga,Sevilla,Osasuna,3.0,0.42319008112684353,Nao entrar
+2025-11-08 17:30:00,spain/la_liga,Atlético Madrid,Levante UD,3.5,0.3208471988621341,Nao entrar
+2025-11-08 20:00:00,spain/la_liga,Espanyol,Villarreal,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-11-09 13:00:00,spain/la_liga,Athletic Club,Real Oviedo,2.3,0.5960388259320683,Nao entrar
+2025-11-09 15:15:00,spain/la_liga,Rayo Vallecano,Real Madrid,2.8000000000000003,0.4694536834666827,Nao entrar
+2025-11-09 17:30:00,spain/la_liga,Mallorca,Getafe,2.3,0.5960388259320683,Nao entrar
+2025-11-09 17:30:00,spain/la_liga,Valencia,Real Betis,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-11-09 20:00:00,spain/la_liga,Celta Vigo,FC Barcelona,4.0,0.2381033055535443,Nao entrar
+2025-11-21 20:00:00,spain/la_liga,Valencia,Levante UD,2.8,0.4694536834666827,Nao entrar
+2025-11-22 13:00:00,spain/la_liga,Deportivo Alavés,Celta Vigo,3.8000000000000003,0.2688966777111104,Nao entrar
+2025-11-22 15:15:00,spain/la_liga,FC Barcelona,Athletic Club,3.2,0.3799037410783731,Nao entrar
+2025-11-22 17:30:00,spain/la_liga,Osasuna,Real Sociedad,3.0,0.42319008112684353,Nao entrar
+2025-11-22 20:00:00,spain/la_liga,Villarreal,Mallorca,3.1,0.4011631473146322,Nao entrar
+2025-11-23 13:00:00,spain/la_liga,Real Oviedo,Rayo Vallecano,2.2,0.6227137499963165,Entrar
+2025-11-23 15:15:00,spain/la_liga,Real Betis,Girona FC,2.3,0.5960388259320683,Nao entrar
+2025-11-23 17:30:00,spain/la_liga,Getafe,Atlético Madrid,3.0,0.42319008112684353,Nao entrar
+2025-11-23 20:00:00,spain/la_liga,Elche,Real Madrid,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-11-24 20:00:00,spain/la_liga,Espanyol,Sevilla,2.8,0.4694536834666827,Nao entrar
+2025-11-28 20:00:00,spain/la_liga,Getafe,Elche,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-11-29 13:00:00,spain/la_liga,Mallorca,Osasuna,2.8,0.4694536834666827,Nao entrar
+2025-11-29 15:15:00,spain/la_liga,FC Barcelona,Deportivo Alavés,4.2,0.21023798702309743,Nao entrar
+2025-11-29 17:30:00,spain/la_liga,Levante UD,Athletic Club,2.4000000000000004,0.5697087466575104,Nao entrar
+2025-11-29 20:00:00,spain/la_liga,Atlético Madrid,Real Oviedo,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-11-30 13:00:00,spain/la_liga,Real Sociedad,Villarreal,3.3000000000000003,0.3594264663250838,Nao entrar
+2025-11-30 15:15:00,spain/la_liga,Sevilla,Real Betis,2.6,0.5184295759360504,Nao entrar
+2025-11-30 17:30:00,spain/la_liga,Celta Vigo,Espanyol,3.0,0.42319008112684353,Nao entrar
+2025-11-30 20:00:00,spain/la_liga,Girona FC,Real Madrid,3.1999999999999997,0.3799037410783732,Nao entrar
+2025-12-01 20:00:00,spain/la_liga,Rayo Vallecano,Valencia,2.3000000000000003,0.5960388259320681,Nao entrar
+2025-12-02 20:00:00,spain/la_liga,FC Barcelona,Atlético Madrid,4.300000000000001,0.19735469083246246,Nao entrar
+2025-12-03 18:00:00,spain/la_liga,Athletic Club,Real Madrid,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-12-05 20:00:00,spain/la_liga,Real Oviedo,Mallorca,2.7,0.49362449107346196,Nao entrar
+2025-12-06 13:00:00,spain/la_liga,Villarreal,Getafe,2.6,0.5184295759360504,Nao entrar
+2025-12-06 15:15:00,spain/la_liga,Deportivo Alavés,Real Sociedad,3.6,0.30274684471600155,Nao entrar
+2025-12-06 17:30:00,spain/la_liga,Real Betis,FC Barcelona,3.2,0.3799037410783731,Nao entrar
+2025-12-06 20:00:00,spain/la_liga,Athletic Club,Atlético Madrid,3.1,0.4011631473146322,Nao entrar
+2025-12-07 13:00:00,spain/la_liga,Elche,Girona FC,2.8,0.4694536834666827,Nao entrar
+2025-12-07 15:15:00,spain/la_liga,Valencia,Sevilla,3.0,0.42319008112684353,Nao entrar
+2025-12-07 17:30:00,spain/la_liga,Espanyol,Rayo Vallecano,2.1,0.6496313518820691,Entrar
+2025-12-07 20:00:00,spain/la_liga,Real Madrid,Celta Vigo,3.7,0.28543311310006825,Nao entrar
+2025-12-08 20:00:00,spain/la_liga,Osasuna,Levante UD,2.8,0.4694536834666827,Nao entrar
+2025-12-12 20:00:00,spain/la_liga,Real Sociedad,Girona FC,2.9,0.4459631985571806,Nao entrar
+2025-12-13 13:00:00,spain/la_liga,Atlético Madrid,Valencia,3.5,0.3208471988621341,Nao entrar
+2025-12-13 15:15:00,spain/la_liga,Mallorca,Elche,2.9,0.4459631985571806,Nao entrar
+2025-12-13 17:30:00,spain/la_liga,FC Barcelona,Osasuna,3.6000000000000005,0.30274684471600144,Nao entrar
+2025-12-13 20:00:00,spain/la_liga,Getafe,Espanyol,2.0999999999999996,0.6496313518820691,Entrar
+2025-12-14 13:00:00,spain/la_liga,Sevilla,Real Oviedo,2.9000000000000004,0.4459631985571805,Nao entrar
+2025-12-14 15:15:00,spain/la_liga,Celta Vigo,Athletic Club,2.8,0.4694536834666827,Nao entrar
+2025-12-14 20:00:00,spain/la_liga,Deportivo Alavés,Real Madrid,3.9000000000000004,0.2531251026297838,Nao entrar
+2025-12-15 20:00:00,spain/la_liga,Rayo Vallecano,Real Betis,1.9,0.7037203534424978,Entrar
+2025-12-19 20:00:00,spain/la_liga,Valencia,Mallorca,2.8,0.4694536834666827,Nao entrar
+2025-12-20 13:00:00,spain/la_liga,Real Oviedo,Celta Vigo,3.1,0.4011631473146322,Nao entrar
+2025-12-20 15:15:00,spain/la_liga,Levante UD,Real Sociedad,3.0,0.42319008112684353,Nao entrar
+2025-12-20 17:30:00,spain/la_liga,Osasuna,Deportivo Alavés,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-12-20 20:00:00,spain/la_liga,Real Madrid,Sevilla,3.5000000000000004,0.320847198862134,Nao entrar
+2025-12-21 13:00:00,spain/la_liga,Girona FC,Atlético Madrid,3.4000000000000004,0.3397398881961194,Nao entrar
+2025-12-21 15:15:00,spain/la_liga,Villarreal,FC Barcelona,3.9000000000000004,0.2531251026297838,Nao entrar
+2025-12-21 17:30:00,spain/la_liga,Elche,Rayo Vallecano,2.4,0.5697087466575106,Nao entrar
+2025-12-21 20:00:00,spain/la_liga,Real Betis,Getafe,1.9000000000000001,0.7037203534424978,Entrar
+2025-12-22 20:00:00,spain/la_liga,Athletic Club,Espanyol,2.2,0.6227137499963165,Entrar

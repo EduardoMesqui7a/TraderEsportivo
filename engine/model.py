@@ -264,10 +264,6 @@ def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
             np.nan,
         )
         merged.loc[legacy_mask, "selection_ok"] = merged.loc[legacy_mask, "legacy_entry_under25"].astype(str).eq("Entrar")
-        merged.loc[legacy_mask, "prob_market"] = merged.loc[legacy_mask, "prob_market"].astype(float)
-        merged.loc[legacy_mask, "delta_p"] = (
-            (merged.loc[legacy_mask, "p_under25"] - merged.loc[legacy_mask, "prob_market"]) * 100.0
-        )
         if "legacy_lambda_total" in merged.columns:
             merged.loc[legacy_mask, "lambda_total"] = merged.loc[legacy_mask, "legacy_lambda_total"].astype(float)
         merged.loc[legacy_mask, "lambda_ok"] = (
@@ -276,7 +272,7 @@ def _apply_legacy_excel_reference(scored: pd.DataFrame) -> pd.DataFrame:
             merged.loc[legacy_mask, "lambda_total"] <= merged.loc[legacy_mask, "lambda_max"]
         )
         merged.loc[legacy_mask, "cv_ok"] = merged.loc[legacy_mask, "defense_cv_10"] <= merged.loc[legacy_mask, "cv_max"]
-        merged.loc[legacy_mask, "edge_ok"] = merged.loc[legacy_mask, "prob_market"].notna()
+        merged.loc[legacy_mask, "edge_ok"] = merged.loc[legacy_mask, "under25_odds"].notna()
         merged.loc[legacy_mask, "bet_eligible"] = (
             merged.loc[legacy_mask, "features_ready"]
             & merged.loc[legacy_mask, "league_history_ready"]
